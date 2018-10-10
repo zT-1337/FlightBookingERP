@@ -6305,7 +6305,7 @@
 											"top": 304,
 											"width": 190.49951171875,
 											"height": 13,
-											"text": "(from IFlightBookingViewModels)"
+											"text": "(from FlightBookingViewModels)"
 										},
 										{
 											"_type": "LabelView",
@@ -8938,6 +8938,29 @@
 											]
 										}
 									]
+								},
+								{
+									"_type": "UMLClass",
+									"_id": "AAAAAAFmXko6KtktLZU=",
+									"_parent": {
+										"$ref": "AAAAAAFmWcueHn37JmM="
+									},
+									"name": "UserDataViewModelImpl",
+									"ownedElements": [
+										{
+											"_type": "UMLGeneralization",
+											"_id": "AAAAAAFmXkqulNowtSI=",
+											"_parent": {
+												"$ref": "AAAAAAFmXko6KtktLZU="
+											},
+											"source": {
+												"$ref": "AAAAAAFmXko6KtktLZU="
+											},
+											"target": {
+												"$ref": "AAAAAAFmWdhp14Nr9bg="
+											}
+										}
+									]
 								}
 							]
 						},
@@ -8947,7 +8970,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFmWbpXcXkavi0="
 							},
-							"name": "IFlightBookingViewModels",
+							"name": "FlightBookingViewModels",
 							"ownedElements": [
 								{
 									"_type": "UMLClass",
