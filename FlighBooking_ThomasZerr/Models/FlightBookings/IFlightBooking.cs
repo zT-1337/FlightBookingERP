@@ -8,5 +8,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
     interface IFlightBooking
     {
+        FlightBookingData FlightBookingData { get; set; }
+
+        void Confirm();
+        void Cancel();
     }
 }
