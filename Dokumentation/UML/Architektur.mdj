@@ -6276,7 +6276,7 @@
 											"font": "Arial;13;0",
 											"left": 901,
 											"top": 445,
-											"width": 276.7451171875,
+											"width": 444.77392578125,
 											"height": 13,
 											"text": "«interface»"
 										},
@@ -6289,7 +6289,7 @@
 											"font": "Arial;13;1",
 											"left": 901,
 											"top": 460,
-											"width": 276.7451171875,
+											"width": 444.77392578125,
 											"height": 13,
 											"text": "IFlightBookingViewModel"
 										},
@@ -6324,7 +6324,7 @@
 									"font": "Arial;13;0",
 									"left": 896,
 									"top": 440,
-									"width": 286.7451171875,
+									"width": 454.77392578125,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFmWdPDXX+wb38="
@@ -6348,64 +6348,11 @@
 									"model": {
 										"$ref": "AAAAAAFmWdHUjX+gWRo="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFmWdPxYIAJm/c=",
-											"_parent": {
-												"$ref": "AAAAAAFmWdPDXX+04xU="
-											},
-											"model": {
-												"$ref": "AAAAAAFmWdPxH4ADY6M="
-											},
-											"font": "Arial;13;0",
-											"left": 901,
-											"top": 483,
-											"width": 276.7451171875,
-											"height": 13,
-											"text": "-chosenFlightBooking: IFlightBooking",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFmWdVFVYDpo18=",
-											"_parent": {
-												"$ref": "AAAAAAFmWdPDXX+04xU="
-											},
-											"model": {
-												"$ref": "AAAAAAFmWdVFGYDjvLk="
-											},
-											"font": "Arial;13;0",
-											"left": 901,
-											"top": 498,
-											"width": 276.7451171875,
-											"height": 13,
-											"text": "-flightBookingFactory: IFlightBookingFactory",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFmWdaAeYFmDE0=",
-											"_parent": {
-												"$ref": "AAAAAAFmWdPDXX+04xU="
-											},
-											"model": {
-												"$ref": "AAAAAAFmWdaANoFgoDM="
-											},
-											"font": "Arial;13;0",
-											"left": 901,
-											"top": 513,
-											"width": 276.7451171875,
-											"height": 13,
-											"text": "-retrievedFactoryBookings: List<IFlightBooking>",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"left": 896,
 									"top": 478,
-									"width": 286.7451171875,
-									"height": 53
+									"width": 454.77392578125,
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -6416,11 +6363,64 @@
 									"model": {
 										"$ref": "AAAAAAFmWdHUjX+gWRo="
 									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFmXltLNOrQuLo=",
+											"_parent": {
+												"$ref": "AAAAAAFmWdPDXX+1qgM="
+											},
+											"model": {
+												"$ref": "AAAAAAFmXltLAerKy6c="
+											},
+											"font": "Arial;13;0",
+											"left": 901,
+											"top": 493,
+											"width": 444.77392578125,
+											"height": 13,
+											"text": "+SetChosenFlightBooking(chosenFlightBooking: IFlightBooking): void",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFmXlve3eyBlXo=",
+											"_parent": {
+												"$ref": "AAAAAAFmWdPDXX+1qgM="
+											},
+											"model": {
+												"$ref": "AAAAAAFmXlvequx3hso="
+											},
+											"font": "Arial;13;0",
+											"left": 901,
+											"top": 508,
+											"width": 444.77392578125,
+											"height": 13,
+											"text": "+GetChosenFlightBooking(): IFlightBooking",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFmXlyb7e/SO3A=",
+											"_parent": {
+												"$ref": "AAAAAAFmWdPDXX+1qgM="
+											},
+											"model": {
+												"$ref": "AAAAAAFmXlybu+/K8Oo="
+											},
+											"font": "Arial;13;0",
+											"left": 901,
+											"top": 523,
+											"width": 444.77392578125,
+											"height": 13,
+											"text": "+GetRetrievedFlightBookings(): List<IFlightBooking>",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
 									"left": 896,
-									"top": 531,
-									"width": 286.7451171875,
-									"height": 10
+									"top": 488,
+									"width": 454.77392578125,
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -6459,8 +6459,8 @@
 							"containerChangeable": true,
 							"left": 896,
 							"top": 440,
-							"width": 286.7451171875,
-							"height": 101,
+							"width": 454.77392578125,
+							"height": 105,
 							"nameCompartment": {
 								"$ref": "AAAAAAFmWdPDXH+vRO8="
 							},
@@ -6963,8 +6963,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 944,
-									"top": 396,
+									"left": 978,
+									"top": 395,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -6983,8 +6983,8 @@
 										"$ref": "AAAAAAFmWd0ppoizF0o="
 									},
 									"font": "Arial;13;0",
-									"left": 939,
-									"top": 404,
+									"left": 974,
+									"top": 399,
 									"width": 57.0908203125,
 									"height": 13,
 									"alpha": 0.7795233999441284,
@@ -7006,8 +7006,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 927,
-									"top": 421,
+									"left": 965,
+									"top": 422,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -7027,8 +7027,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 933,
-									"top": 388,
+									"left": 954,
+									"top": 383,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -7048,8 +7048,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 943,
-									"top": 379,
+									"left": 963,
+									"top": 372,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -7069,8 +7069,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 913,
-									"top": 407,
+									"left": 938,
+									"top": 405,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -7090,8 +7090,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 957,
-									"top": 405,
+									"left": 1002,
+									"top": 407,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -7110,8 +7110,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 963,
-									"top": 393,
+									"left": 1006,
+									"top": 394,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -7130,8 +7130,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 944,
-									"top": 430,
+									"left": 994,
+									"top": 434,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -7176,7 +7176,7 @@
 								"$ref": "AAAAAAFmWdhp2INtLZ8="
 							},
 							"lineStyle": 1,
-							"points": "904:391;969:439",
+							"points": "925:391;1019:439",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFmWd0ppoi4rsE="
@@ -9010,42 +9010,105 @@
 										}
 									],
 									"stereotype": "interface",
-									"attributes": [
+									"operations": [
 										{
-											"_type": "UMLAttribute",
-											"_id": "AAAAAAFmWdPxH4ADY6M=",
+											"_type": "UMLOperation",
+											"_id": "AAAAAAFmXltLAerKy6c=",
 											"_parent": {
 												"$ref": "AAAAAAFmWdHUjX+gWRo="
 											},
-											"name": "chosenFlightBooking",
-											"visibility": "private",
-											"type": {
-												"$ref": "AAAAAAFmWVkEElIa9ic="
-											}
+											"name": "SetChosenFlightBooking",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAFmXlt6ous9VaA=",
+													"_parent": {
+														"$ref": "AAAAAAFmXltLAerKy6c="
+													},
+													"name": "chosenFlightBooking",
+													"type": {
+														"$ref": "AAAAAAFmWVkEElIa9ic="
+													}
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAFmXluwiuu67iw=",
+													"_parent": {
+														"$ref": "AAAAAAFmXltLAerKy6c="
+													},
+													"name": "return",
+													"type": "void",
+													"direction": "return"
+												}
+											]
 										},
 										{
-											"_type": "UMLAttribute",
-											"_id": "AAAAAAFmWdVFGYDjvLk=",
+											"_type": "UMLOperation",
+											"_id": "AAAAAAFmXlvequx3hso=",
 											"_parent": {
 												"$ref": "AAAAAAFmWdHUjX+gWRo="
 											},
-											"name": "flightBookingFactory",
-											"visibility": "private",
-											"type": {
-												"$ref": "AAAAAAFmWVrmuVJdj/Q="
-											}
+											"name": "GetChosenFlightBooking",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAFmXlvequx5xMQ=",
+													"_parent": {
+														"$ref": "AAAAAAFmXlvequx3hso="
+													},
+													"name": "return",
+													"type": {
+														"$ref": "AAAAAAFmWVkEElIa9ic="
+													},
+													"direction": "return"
+												}
+											]
 										},
 										{
-											"_type": "UMLAttribute",
-											"_id": "AAAAAAFmWdaANoFgoDM=",
+											"_type": "UMLOperation",
+											"_id": "AAAAAAFmXlybu+/K8Oo=",
 											"_parent": {
 												"$ref": "AAAAAAFmWdHUjX+gWRo="
 											},
-											"name": "retrievedFactoryBookings",
-											"visibility": "private",
-											"type": "List<IFlightBooking>"
+											"name": "GetRetrievedFlightBookings",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAFmXlybu+/Lsio=",
+													"_parent": {
+														"$ref": "AAAAAAFmXlybu+/K8Oo="
+													},
+													"name": "return",
+													"type": "List<IFlightBooking>",
+													"direction": "return"
+												}
+											]
 										}
 									]
+								},
+								{
+									"_type": "UMLClass",
+									"_id": "AAAAAAFmXkw5utzZpg0=",
+									"_parent": {
+										"$ref": "AAAAAAFmWdC1QH9aIxY="
+									},
+									"name": "FlightBookingViewModelImpl",
+									"ownedElements": [
+										{
+											"_type": "UMLGeneralization",
+											"_id": "AAAAAAFmXky9ZeEHoC4=",
+											"_parent": {
+												"$ref": "AAAAAAFmXkw5utzZpg0="
+											},
+											"source": {
+												"$ref": "AAAAAAFmXkw5utzZpg0="
+											},
+											"target": {
+												"$ref": "AAAAAAFmWdHUjX+gWRo="
+											}
+										}
+									],
+									"stereotype": ""
 								}
 							]
 						}
