@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
 {
-    class UserDataViewModelImpl
+    class UserDataViewModelImpl : IUserDataViewModel
     {
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
