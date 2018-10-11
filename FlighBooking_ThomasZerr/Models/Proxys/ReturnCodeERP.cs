@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys
 {
-    class ReturnCodeERP
+    enum ReturnCodeERP
     {
     }
 }
