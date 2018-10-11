@@ -31,7 +31,6 @@
             Name="UsernameBox"
             Grid.Row="0"
             Grid.Column="1"
-            HorizontalAlignment="Stretch"
             Text="{Binding Username, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <Label
             Grid.Row="1"
@@ -41,7 +40,6 @@
             Name="PasswordBox"
             Grid.Row="1"
             Grid.Column="1"
-            HorizontalAlignment="Stretch"
             Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <Button
             Grid.Row="0"
