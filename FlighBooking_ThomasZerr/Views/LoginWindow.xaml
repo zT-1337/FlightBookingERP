@@ -15,27 +15,30 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel
+        <Label
             Grid.Row="0"
             Grid.Column="0"
-            Orientation="Horizontal">
-            <Label Content="Benutzername: " />
-            <TextBox />
-        </StackPanel>
-        <StackPanel
+            Content="Benutzername: " />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch" />
+        <Label
             Grid.Row="1"
             Grid.Column="0"
-            Orientation="Horizontal">
-            <Label Content="Passwort: " />
-            <PasswordBox />
-        </StackPanel>
+            Content="Passwort: " />
+        <PasswordBox
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch" />
         <Button
             Grid.Row="0"
             Grid.RowSpan="2"
-            Grid.Column="1"
+            Grid.Column="2"
             Content="Login" />
     </Grid>
 </Window>
