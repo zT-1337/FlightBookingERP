@@ -23,5 +23,10 @@ namespace FlighBooking_ThomasZerr.Views
         {
             InitializeComponent();
         }
+
+        private void DoLogin(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
