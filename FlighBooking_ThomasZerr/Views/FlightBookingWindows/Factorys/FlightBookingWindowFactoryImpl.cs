@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
 {
-    class FlightBookingWindowFactoryImpl
+    class FlightBookingWindowFactoryImpl : IFlightBookingWindowFactory
     {
+        public FlightBookingWindow Create(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
