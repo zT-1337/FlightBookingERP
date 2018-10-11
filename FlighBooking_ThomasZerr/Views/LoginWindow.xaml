@@ -36,10 +36,11 @@
             Grid.Row="1"
             Grid.Column="0"
             Content="Passwort: " />
-        <PasswordBox
+        <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            HorizontalAlignment="Stretch" />
+            HorizontalAlignment="Stretch"
+            Text="{Binding Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
         <Button
             Grid.Row="0"
             Grid.RowSpan="2"
