@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 
@@ -26,14 +22,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingConfirm(FlightBookingData args)
         {
-            var flightBookingConfirm = new FlightBookingConfirm
+            var confirm = new FlightBookingConfirm
             {
                 AirlineID = args.AirlineId,
                 BookingNumber = args.BookingNumber,
                 TestRun = args.TestRun
             };
 
-            FlightBookingConfirmResponse flightBookingResponse = sapClient.FlightBookingConfirm(flightBookingConfirm);
+            FlightBookingConfirmResponse response = sapClient.FlightBookingConfirm(confirm);
 
             //TODO ProxyResponseERP aus Response bauen
 
@@ -42,14 +38,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingCancel(FlightBookingData args)
         {
-            var flightBookingCancel = new FlightBookingCancel
+            var cancel = new FlightBookingCancel
             {
                 AirlineID = args.AirlineId,
                 BookingNumber = args.BookingNumber,
                 TestRun = args.TestRun
             };
 
-            FlightBookingCancelResponse flightBookingCancelResponse = sapClient.FlightBookingCancel(flightBookingCancel);
+            FlightBookingCancelResponse response = sapClient.FlightBookingCancel(cancel);
 
             //TODO ProxyResponseERP aus Response bauen
 
@@ -58,11 +54,48 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingCreateFromData(FlightBookingData args)
         {
+            //TODO Initialisieren der Variablen
+            Bapisbonew bookingData = null;
+            Bapiparex[] extensionIn = null;
+            
+            var createFromData = new FlightBookingCreateFromData
+            {
+                BookingData = bookingData,
+                ExtensionIn = extensionIn,
+                ReserveOnly = args.ReserveOnly,
+                TestRun = args.TestRun
+            };
+
+            FlightBookingCreateFromDataResponse response = sapClient.FlightBookingCreateFromData(createFromData);
+
+            //TODO ProxyResponseERP aus Response bauen
+
             throw new NotImplementedException();
         }
 
         public ProxyResponseERP FlightBookingGetList(FlightBookingData args)
         {
+            //TODO initialisieren
+            Bapisfldra[] bookingDateRange = null;
+            Bapiparex[] extensionIn = null;
+            Bapisfldra[] flightDateRange = null;
+
+            var getList = new FlightBookingGetList
+            {
+                Airline = args.Airline,
+                BookingDateRange = bookingDateRange,
+                CustomerNumber = args.CustomerNumber,
+                ExtensionIn = extensionIn,
+                FlightDateRange = flightDateRange,
+                MaxRows = args.MaxRows,
+                MaxRowsSpecified = args.MaxRowsSpecified,
+                TravelAgency = args.TravelAgency
+            };
+
+            FlightBookingGetListResponse response = sapClient.FlightBookingGetList(getList);
+
+            //TODO ProxyResponseERP aus Response bauen
+
             throw new NotImplementedException();
         }
     }
