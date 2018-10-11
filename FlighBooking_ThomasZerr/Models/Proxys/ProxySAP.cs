@@ -42,6 +42,17 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingCancel(FlightBookingData args)
         {
+            var flightBookingCancel = new FlightBookingCancel
+            {
+                AirlineID = args.AirlineId,
+                BookingNumber = args.BookingNumber,
+                TestRun = args.TestRun
+            };
+
+            FlightBookingCancelResponse flightBookingCancelResponse = sapClient.FlightBookingCancel(flightBookingCancel);
+
+            //TODO ProxyResponseERP aus Response bauen
+
             throw new NotImplementedException();
         }
 
