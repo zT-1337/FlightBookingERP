@@ -6,18 +6,18 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 {
     class ProxySAP : IProxyERP
     {
-        private Z_HH_FlightBooking_MT_01Client sapClient;
+        private Z_HH_FlightBooking_MT_01Client sapClient_;
 
         public string Username
         {
-            get => sapClient.ClientCredentials.UserName.UserName;
-            set { sapClient.ClientCredentials.UserName.UserName = value; }
+            get => sapClient_.ClientCredentials.UserName.UserName;
+            set { sapClient_.ClientCredentials.UserName.UserName = value; }
         }
 
         public string Password
         {
-            get => sapClient.ClientCredentials.UserName.Password;
-            set { sapClient.ClientCredentials.UserName.Password = value; }
+            get => sapClient_.ClientCredentials.UserName.Password;
+            set { sapClient_.ClientCredentials.UserName.Password = value; }
         }
 
         public ProxyResponseERP FlightBookingConfirm(FlightBookingData args)
@@ -29,7 +29,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 TestRun = args.TestRun
             };
 
-            FlightBookingConfirmResponse response = sapClient.FlightBookingConfirm(confirm);
+            FlightBookingConfirmResponse response = sapClient_.FlightBookingConfirm(confirm);
 
             //TODO ProxyResponseERP aus Response bauen
 
@@ -45,7 +45,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 TestRun = args.TestRun
             };
 
-            FlightBookingCancelResponse response = sapClient.FlightBookingCancel(cancel);
+            FlightBookingCancelResponse response = sapClient_.FlightBookingCancel(cancel);
 
             //TODO ProxyResponseERP aus Response bauen
 
@@ -66,7 +66,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 TestRun = args.TestRun
             };
 
-            FlightBookingCreateFromDataResponse response = sapClient.FlightBookingCreateFromData(createFromData);
+            FlightBookingCreateFromDataResponse response = sapClient_.FlightBookingCreateFromData(createFromData);
 
             //TODO ProxyResponseERP aus Response bauen
 
@@ -92,7 +92,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 TravelAgency = args.TravelAgency
             };
 
-            FlightBookingGetListResponse response = sapClient.FlightBookingGetList(getList);
+            FlightBookingGetListResponse response = sapClient_.FlightBookingGetList(getList);
 
             //TODO ProxyResponseERP aus Response bauen
 
