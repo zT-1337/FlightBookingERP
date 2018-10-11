@@ -8,5 +8,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
     class FlightBookingData
     {
+        public string AirlineId { get; set; }
+        public string BookingNumber { get; set; }
+        public string TestRun { get; set; }
+
     }
 }
