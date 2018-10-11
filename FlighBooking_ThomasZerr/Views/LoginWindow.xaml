@@ -28,6 +28,7 @@
             Grid.Column="0"
             Content="Benutzername: " />
         <TextBox
+            Name="UsernameBox"
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Stretch"
@@ -37,6 +38,7 @@
             Grid.Column="0"
             Content="Passwort: " />
         <TextBox
+            Name="PasswordBox"
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Stretch"
