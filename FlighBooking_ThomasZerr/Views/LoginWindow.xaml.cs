@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys;
 
 namespace FlighBooking_ThomasZerr.Views
 {
@@ -19,14 +20,20 @@ namespace FlighBooking_ThomasZerr.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private IFlightBookingWindowFactory flightBookingWindowFactory;
+
         public LoginWindow()
         {
             InitializeComponent();
+            flightBookingWindowFactory = new FlightBookingWindowFactoryImpl();
         }
 
         private void DoLogin(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            string username = UsernameBox.Text;
+            string password = PasswordBox.Text;
+
+            flightBookingWindowFactory.Create(username, password).Show();
         }
     }
 }
