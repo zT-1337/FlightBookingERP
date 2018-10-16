@@ -77,7 +77,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
         {
             //TODO initialisieren
             Bapisfldra[] bookingDateRange = null;
-            Bapiparex[] extensionIn = null;
             Bapisfldra[] flightDateRange = null;
 
             var getList = new FlightBookingGetList
@@ -85,7 +84,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 Airline = args.Airline,
                 BookingDateRange = bookingDateRange,
                 CustomerNumber = args.CustomerNumber,
-                ExtensionIn = extensionIn,
                 FlightDateRange = flightDateRange,
                 MaxRows = args.MaxRows,
                 MaxRowsSpecified = args.MaxRowsSpecified,
