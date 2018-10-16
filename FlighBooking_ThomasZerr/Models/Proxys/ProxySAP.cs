@@ -68,11 +68,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
         public ProxyResponseERP FlightBookingCreateFromData(FlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
+            string reserved = ConvertBoolToStringForSAP(args.Reserved);
             
             var createFromData = new FlightBookingCreateFromData
             {
                 BookingData = bookingData,
-                ReserveOnly = args.Reserved,
+                ReserveOnly = reserved
             };
 
             FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createFromData);
@@ -107,6 +108,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 Flightdate = args.Flightdate,
                 Passname = args.PassagierName
             };
+        }
+
+        private string ConvertBoolToStringForSAP(bool toConvert)
+        {
+            if (toConvert)
+                return "X";
+            else
+                return "";
         }
 
         public ProxyResponseERP FlightBookingGetList(FlightBookingData args)
@@ -210,13 +219,18 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                     Bookdate = booking.Bookdate,
                     Counter = booking.Counter,
                     AgencyId = booking.Agencynum,
-                    Reserved = booking.Reserved,
-                    Cancelled = booking.Cancelled,
+                    Reserved = ConvertStringOfSAPToBool(booking.Reserved),
+                    Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
             }
 
             return flightBookingDatas;
+        }
+
+        private bool ConvertStringOfSAPToBool(string toConvert)
+        {
+            return toConvert.Equals("X");
         }
     }
 }
