@@ -46,9 +46,16 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
         {
             ProxyResponseERP responses = proxyERP_.FlightBookingGetList(args);
 
-            //TODO FlightBookingERP Objekte erstellen und zurückliefern
+            HandleIsError(responses.ReturnCode, responses.Message);
+            HandleIsWarning(responses.ReturnCode, responses.Message);
 
-            throw new NotImplementedException();
+            List<IFlightBooking> flightBookings = new List<IFlightBooking>();
+            foreach (var flightBookingData in responses.FlightBookingDatas)
+            {
+                flightBookings.Add(new FlightBookingERP(proxyERP_, flightBookingData));
+            }
+
+            return flightBookings.ToArray();
         }
     }
 }
