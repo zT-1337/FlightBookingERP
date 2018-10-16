@@ -1,4 +1,6 @@
-﻿namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
+﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+
+namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
     class FlightBookingData
     {
