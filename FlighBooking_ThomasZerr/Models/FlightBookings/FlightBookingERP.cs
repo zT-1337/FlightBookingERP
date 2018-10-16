@@ -25,25 +25,33 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
         {
             ProxyResponseERP response = proxyERP_.FlightBookingConfirm(FlightBookingData);
 
-            if (response.ReturnCode == ReturnCodeERP.Error || response.ReturnCode == ReturnCodeERP.Abort)
-                throw new InvalidOperationException(response.Message);
-            if (response.ReturnCode == ReturnCodeERP.Success)
-                FlightBookingData.ConfirmFlight();
-            else
-                throw new WarningException(response.Message);
+            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsWarning(response.ReturnCode, response.Message);
 
+            FlightBookingData.ConfirmFlight();
+
+        }
+
+        private void HandleIsError(ReturnCodeERP returnCode, string message)
+        {
+            if (returnCode == ReturnCodeERP.Error || returnCode == ReturnCodeERP.Abort)
+                throw new InvalidOperationException(message);
+        }
+
+        private void HandleIsWarning(ReturnCodeERP returnCode, string message)
+        {
+            if (returnCode == ReturnCodeERP.Warning)
+                throw new WarningException(message);
         }
 
         public void Cancel()
         {
             ProxyResponseERP response = proxyERP_.FlightBookingCancel(FlightBookingData);
 
-            if (response.ReturnCode == ReturnCodeERP.Error || response.ReturnCode == ReturnCodeERP.Abort)
-                throw new InvalidOperationException(response.Message);
-            if (response.ReturnCode == ReturnCodeERP.Success)
-                FlightBookingData.Cancelled = true;
-            else
-                throw new WarningException(response.Message);
+            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsWarning(response.ReturnCode, response.Message);
+
+            FlightBookingData.Cancelled = true;
         }
     }
 }
