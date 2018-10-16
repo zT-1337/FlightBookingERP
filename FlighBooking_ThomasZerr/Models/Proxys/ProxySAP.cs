@@ -67,22 +67,46 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingCreateFromData(FlightBookingData args)
         {
-            //TODO Initialisieren der Variablen
-            Bapisbonew bookingData = null;
-            Bapiparex[] extensionIn = null;
+            Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
             
             var createFromData = new FlightBookingCreateFromData
             {
                 BookingData = bookingData,
-                ExtensionIn = extensionIn,
-                ReserveOnly = args.ReserveOnly
+                ReserveOnly = args.Reserved,
             };
 
-            FlightBookingCreateFromDataResponse response = sapClient_.FlightBookingCreateFromData(createFromData);
+            FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createFromData);
 
-            //TODO ProxyResponseERP aus Response bauen
+            ReturnCodeERP returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            string message = sapResponse.Return[0].Message;
+            FlightBookingData flightBookingData = new FlightBookingData
+            {
+                AirlineId = sapResponse.AirlineID,
+                BookingId = sapResponse.BookingNumber
+            };
+            ProxyResponseERP result = new ProxyResponseERP
+            {
+                ReturnCode = returnCode,
+                Message = message,
+                FlightBookingData = flightBookingData
+            };
 
-            throw new NotImplementedException();
+            return result;
+        }
+
+        private Bapisbonew ConvertFlightBookingDataToBapisbonew(FlightBookingData args)
+        {
+            return new Bapisbonew
+            {
+                Agencynum = args.AgencyId,
+                Airlineid = args.AirlineId,
+                Class = args.Class,
+                Connectid = args.ConnectId,
+                Counter = args.Counter,
+                Customerid = args.CustomerId,
+                Flightdate = args.Flightdate,
+                Passname = args.PassagierName
+            };
         }
 
         public ProxyResponseERP FlightBookingGetList(FlightBookingData args)
