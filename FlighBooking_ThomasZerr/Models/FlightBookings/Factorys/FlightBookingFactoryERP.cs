@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,24 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
         {
             ProxyResponseERP response = proxyERP_.FlightBookingCreateFromData(args);
 
-            //TODO FlightBookingERP Objekt erstellen und zurückliefern
+            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsWarning(response.ReturnCode, response.Message);
 
-            throw new NotImplementedException();
+            args.AirlineId = response.FlightBookingData.AirlineId;
+            args.BookingId = response.FlightBookingData.BookingId;
+            return new FlightBookingERP(proxyERP_, args);
+        }
+
+        private void HandleIsError(ReturnCodeERP returnCode, string message)
+        {
+            if (returnCode == ReturnCodeERP.Error || returnCode == ReturnCodeERP.Abort)
+                throw new InvalidOperationException(message);
+        }
+
+        private void HandleIsWarning(ReturnCodeERP returnCode, string message)
+        {
+            if (returnCode == ReturnCodeERP.Warning)
+                throw new WarningException(message);
         }
 
         public IFlightBooking[] RetrieveAll(FlightBookingData args)
