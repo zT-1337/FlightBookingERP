@@ -13,11 +13,12 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
     {
         private IProxyERP proxyERP_;
 
-        public FlightBookingData FlightBookingData { get; set; }
+        public FlightBookingData FlightBookingData { get; }
 
-        public FlightBookingERP(IProxyERP proxyERP)
+        public FlightBookingERP(IProxyERP proxyERP, FlightBookingData flightBookingData)
         {
             proxyERP_ = proxyERP;
+            FlightBookingData = flightBookingData;
         }
 
         public void Confirm()

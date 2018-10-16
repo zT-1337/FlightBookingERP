@@ -9,7 +9,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
     interface IFlightBooking
     {
-        FlightBookingData FlightBookingData { get; set; }
+        FlightBookingData FlightBookingData { get; }
 
         void Confirm();
         void Cancel();
