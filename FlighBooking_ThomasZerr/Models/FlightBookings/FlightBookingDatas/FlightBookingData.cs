@@ -19,7 +19,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         public string Reserved { get; set; }
         public string Cancelled { get; set; }
 
-        public string Airline { get; set; }
+        public string AirlineName { get; set; }
         public string BookingNumber { get; set; }
         public string TestRun { get; set; }
         public string ReserveOnly { get; set; }
