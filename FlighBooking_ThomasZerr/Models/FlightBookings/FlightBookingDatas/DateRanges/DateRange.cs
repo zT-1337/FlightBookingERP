@@ -4,6 +4,6 @@
     {
         public string EarlierDate { get; set; }
         public string LaterDate { get; set; }
-        public DateRangeOptions Options { get; set; }
+        public DateRangeOption Option { get; set; }
     }
 }
