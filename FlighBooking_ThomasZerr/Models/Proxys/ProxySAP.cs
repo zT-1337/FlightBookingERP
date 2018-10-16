@@ -23,6 +23,11 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             set { sapClient_.ClientCredentials.UserName.Password = value; }
         }
 
+        public ProxySAP()
+        {
+            sapClient_ = new Z_HH_FlightBooking_MT_01Client();
+        }
+
         public ProxyResponseERP FlightBookingConfirm(FlightBookingData args)
         {
             var confirm = new FlightBookingConfirm
