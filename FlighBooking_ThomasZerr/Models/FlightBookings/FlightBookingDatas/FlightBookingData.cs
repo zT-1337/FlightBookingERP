@@ -15,9 +15,12 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         public string Counter { get; set; }
         public string AgencyId { get; set; }
         public string PassagierName { get; set; }
-        //TODO in bool ändern
-        public string Reserved { get; set; }
-        public string Cancelled { get; set; }
+        public bool Reserved { get; set; }
+        public bool Cancelled { get; set; }
+        public bool Confirmed
+        {
+            get => !Reserved && !Cancelled;
+        }
 
         public string AirlineName { get; set; }
         public string TravelAgency { get; set; }
@@ -25,5 +28,10 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         public DateRange BookingDateRange { get; set; }
         public DateRange FlightDateRange { get; set; }
 
+        public void ConfirmFlight()
+        {
+            Reserved = false;
+            Cancelled = false;
+        }
     }
 }
