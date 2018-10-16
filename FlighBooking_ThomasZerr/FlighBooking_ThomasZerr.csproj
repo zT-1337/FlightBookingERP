@@ -56,6 +56,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRange.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeOption.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
@@ -97,7 +99,7 @@
   <ItemGroup>
     <Compile Include="Models\FlightBookings\Factorys\FlightBookingFactoryERP.cs" />
     <Compile Include="Models\FlightBookings\Factorys\IFlightBookingFactory.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingData.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\FlightBookingData.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingERP.cs" />
     <Compile Include="Models\FlightBookings\IFlightBooking.cs" />
     <Compile Include="Models\Proxys\IProxyERP.cs" />
