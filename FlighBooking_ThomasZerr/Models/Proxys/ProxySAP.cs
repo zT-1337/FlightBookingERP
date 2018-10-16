@@ -1,6 +1,9 @@
 ﻿using System;
+using System.CodeDom;
 using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys
 {
@@ -75,9 +78,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
         public ProxyResponseERP FlightBookingGetList(FlightBookingData args)
         {
-            //TODO initialisieren
-            Bapisfldra[] bookingDateRange = null;
-            Bapisfldra[] flightDateRange = null;
+            Bapisfldra[] bookingDateRange = {ConvertFromDateRangeToBapisfldra(args.BookingDateRange)};
+            Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
 
             var getList = new FlightBookingGetList
             {
@@ -88,11 +90,100 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 FlightDateRange = flightDateRange,
             };
 
-            FlightBookingGetListResponse response = sapClient_.FlightBookingGetList(getList);
+            FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getList);
 
-            //TODO ProxyResponseERP aus Response bauen
+            //TODO Warum hier ein Array von Returns?
+            ReturnCodeERP returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            FlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
+            string message = sapResponse.Return[0].Message;
+
+            ProxyResponseERP result = new ProxyResponseERP
+            {
+                ReturnCode = returnCode,
+                FlightBookingDatas = flightBookingDatas,
+                Message = message,
+            };
+
+            return result;
+        }
+
+        private Bapisfldra ConvertFromDateRangeToBapisfldra(DateRange dateRange)
+        {
+            string option = ConvertDateRangeOptionToString(dateRange.Option);
+
+            Bapisfldra result = new Bapisfldra
+            {
+                Sign = "I",
+                Option = option,
+                Low = dateRange.EarlierDate,
+                High = dateRange.LaterDate
+
+            };
 
             throw new NotImplementedException();
+        }
+
+        private string ConvertDateRangeOptionToString(DateRangeOption option)
+        {
+            switch (option)
+            {
+                case DateRangeOption.Equal:
+                    return "EQ";
+                case DateRangeOption.NotEqual:
+                    return "NE";
+                case DateRangeOption.Between:
+                    return "BT";
+                case DateRangeOption.NotBetween:
+                    return "NB";
+            }
+
+            throw new InvalidOperationException($"Gegebene DateRangeOption nicht bekannt: {option:G}");
+        }
+
+        private ReturnCodeERP ConvertTypeToReturnCode(string type)
+        {
+            switch (type)
+            {
+                case "S":
+                    return ReturnCodeERP.Success;
+                case "E":
+                    return ReturnCodeERP.Error;
+                case "W":
+                    return ReturnCodeERP.Warning;
+                case "I":
+                    return ReturnCodeERP.Information;
+                case "A":
+                    return ReturnCodeERP.Abort;
+            }
+
+            throw new InvalidOperationException($"Gegebener Type unbekannt: {type}");
+        }
+
+        private FlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
+        {
+            FlightBookingData[] flightBookingDatas = new FlightBookingData[bookingList.Length];
+
+            for (int i = 0; i < bookingList.Length; ++i)
+            {
+                var booking = bookingList[i];
+                var flightBookingData = new FlightBookingData
+                {
+                    AirlineId = booking.Airlineid,
+                    BookingId = booking.Bookingid,
+                    ConnectId = booking.Connectid,
+                    Flightdate = booking.Flightdate,
+                    CustomerId = booking.Customerid,
+                    Class = booking.Class,
+                    Bookdate = booking.Bookdate,
+                    Counter = booking.Counter,
+                    AgencyId = booking.Agencynum,
+                    Reserved = booking.Reserved,
+                    Cancelled = booking.Cancelled,
+                    PassagierName = booking.Passname
+                };
+            }
+
+            return flightBookingDatas;
         }
     }
 }
