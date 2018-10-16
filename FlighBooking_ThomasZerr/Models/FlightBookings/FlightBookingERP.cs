@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,18 +24,25 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
         {
             ProxyResponseERP response = proxyERP_.FlightBookingConfirm(FlightBookingData);
 
-            //TODO response verarbeiten
+            if (response.ReturnCode == ReturnCodeERP.Error || response.ReturnCode == ReturnCodeERP.Abort)
+                throw new InvalidOperationException(response.Message);
+            if (response.ReturnCode == ReturnCodeERP.Success)
+                FlightBookingData.ConfirmFlight();
+            else
+                throw new WarningException(response.Message);
 
-            throw new NotImplementedException();
         }
 
         public void Cancel()
         {
             ProxyResponseERP response = proxyERP_.FlightBookingCancel(FlightBookingData);
 
-            //TODO response verarbeiten
-
-            throw new NotImplementedException();
+            if (response.ReturnCode == ReturnCodeERP.Error || response.ReturnCode == ReturnCodeERP.Abort)
+                throw new InvalidOperationException(response.Message);
+            if (response.ReturnCode == ReturnCodeERP.Success)
+                FlightBookingData.Cancelled = true;
+            else
+                throw new WarningException(response.Message);
         }
     }
 }
