@@ -10,6 +10,8 @@
         public string ReserveOnly { get; set; }
         public string CustomerNumber { get; set; }
         public string TravelAgency { get; set; }
+        public DateRange BookingDateRange { get; set; }
+        public DateRange FlightDateRange { get; set; }
 
     }
 }
