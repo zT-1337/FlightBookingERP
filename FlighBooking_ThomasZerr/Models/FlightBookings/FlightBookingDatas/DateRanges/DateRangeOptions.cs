@@ -2,5 +2,9 @@
 {
     enum DateRangeOptions
     {
+        Equal,
+        NotEqual,
+        Between,
+        NotBetween,
     }
 }
