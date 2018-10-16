@@ -9,8 +9,6 @@
         public string TestRun { get; set; }
         public string ReserveOnly { get; set; }
         public string CustomerNumber { get; set; }
-        public int MaxRows { get; set; }
-        public bool MaxRowsSpecified { get; set; }
         public string TravelAgency { get; set; }
 
     }
