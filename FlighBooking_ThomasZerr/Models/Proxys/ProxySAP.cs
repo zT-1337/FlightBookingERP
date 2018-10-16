@@ -28,15 +28,20 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             var confirm = new FlightBookingConfirm
             {
                 AirlineID = args.AirlineId,
-                BookingNumber = args.BookingNumber,
-                TestRun = args.TestRun
+                BookingNumber = args.BookingNumber
             };
 
-            FlightBookingConfirmResponse response = sapClient_.FlightBookingConfirm(confirm);
+            FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirm);
 
-            //TODO ProxyResponseERP aus Response bauen
+            ReturnCodeERP returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            string message = sapResponse.Return[0].Message;
+            ProxyResponseERP result = new ProxyResponseERP
+            {
+                ReturnCode = returnCode,
+                Message = message
+            };
 
-            throw new NotImplementedException();
+            return result;
         }
 
         public ProxyResponseERP FlightBookingCancel(FlightBookingData args)
@@ -83,7 +88,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
             var getList = new FlightBookingGetList
             {
-                Airline = args.Airline,
+                Airline = args.AirlineName,
                 TravelAgency = args.TravelAgency,
                 CustomerNumber = args.CustomerNumber,
                 BookingDateRange = bookingDateRange,
