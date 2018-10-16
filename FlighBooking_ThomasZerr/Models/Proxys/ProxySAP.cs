@@ -118,7 +118,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             {
                 Airline = args.AirlineName,
                 TravelAgency = args.TravelAgency,
-                CustomerNumber = args.CustomerNumber,
+                CustomerNumber = args.CustomerId,
                 BookingDateRange = bookingDateRange,
                 FlightDateRange = flightDateRange,
             };
