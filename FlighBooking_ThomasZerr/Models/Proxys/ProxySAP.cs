@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using FlighBooking_ThomasZerr.FlightBookingReference;
-using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 
@@ -210,9 +208,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
         {
             FlightBookingData[] flightBookingDatas = new FlightBookingData[bookingList.Length];
 
-            for (int i = 0; i < bookingList.Length; ++i)
+            foreach (var booking in bookingList)
             {
-                var booking = bookingList[i];
                 var flightBookingData = new FlightBookingData
                 {
                     AirlineId = booking.Airlineid,
