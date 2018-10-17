@@ -20,6 +20,14 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         IDateRange BookingDateRange { get; }
         IDateRange FlightDateRange { get; }
 
+        string AgencyId { get; set; }
+        string AirlineId { get; set; }
+        string Class { get; set; }
+        string ConnectId { get; set; }
+        string Counter { get; set; }
+        string Flightdate { get; set; }
+        string PassagierName { get; set; }
+
         void DoFlightBookingSearch();
         void DoChooseFlightBooking(int index);
         void DoCreateFlightBooking();
