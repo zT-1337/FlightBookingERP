@@ -15,7 +15,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
     {
         private IFlightBookingFactory flightBookingFactory_;
 
-        public IFlightBooking ChosenFlightBooking { get; }
+        public IFlightBooking ChosenFlightBooking { get; private set; }
         public ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
 
         private FlightBookingData args_;
@@ -52,6 +52,11 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             {
                 RetrievedFlightBookings.Add(flightBooking);
             }
+        }
+
+        public void DoChooseFlightBooking(int index)
+        {
+            ChosenFlightBooking = RetrievedFlightBookings[index];
         }
     }
 }
