@@ -4,7 +4,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
     class FlightBookingData
     {
-        //TODO Eventuell in bessere Datentypen umwandeln
+        //TODO Flightdate eventuell in besseren Datentypen umwandeln
         public string AirlineId { get; set; }
         public string BookingId { get; set; }
         public string ConnectId { get; set; }
