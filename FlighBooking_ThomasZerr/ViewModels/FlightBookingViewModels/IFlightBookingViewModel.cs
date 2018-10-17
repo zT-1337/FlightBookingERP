@@ -11,6 +11,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
     interface IFlightBookingViewModel
     {
         IFlightBooking ChosenFlightBooking { get; set; }
-        List<IFlightBooking> RetrievedFlightBookings { get; }
+        ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
     }
 }
