@@ -165,7 +165,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
             };
 
-            throw new NotImplementedException();
+            return result;
         }
 
         private string ConvertDateRangeOptionToString(DateRangeOption option)
@@ -208,8 +208,9 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
         {
             FlightBookingData[] flightBookingDatas = new FlightBookingData[bookingList.Length];
 
-            foreach (var booking in bookingList)
+            for(int i = 0; i < bookingList.Length; ++i)
             {
+                var booking = bookingList[i];
                 var flightBookingData = new FlightBookingData
                 {
                     AirlineId = booking.Airlineid,
@@ -225,6 +226,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                     Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
+                flightBookingDatas[i] = flightBookingData;
             }
 
             return flightBookingDatas;
