@@ -37,8 +37,12 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 
         public void DoFlightBookingSearch()
         {
+            //TODO Exceptionhandling
             IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(args_);
-            throw new NotImplementedException();
+            foreach (var flightBooking in flightBookings)
+            {
+                RetrievedFlightBookings.Add(flightBooking);
+            }
         }
     }
 }
