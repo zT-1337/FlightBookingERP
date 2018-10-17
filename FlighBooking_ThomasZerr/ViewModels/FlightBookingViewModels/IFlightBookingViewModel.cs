@@ -13,6 +13,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
     {
         IFlightBooking ChosenFlightBooking { get; }
         ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
+        ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
         string AirlineName { get; set; }
         string TravelAgency { get; set; }
