@@ -12,11 +12,8 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateR
 
         public string EarlierDate
         {
-            get { return ConvertDateTimeToString(EarlierDateTime); }
-            set
-            {
-
-            }
+            get => ConvertDateTimeToString(EarlierDateTime);
+            set => EarlierDateTime = ConvertStringToDateTime(value);
         }
 
         public DateTime LaterDateTime { get; set; }
@@ -28,9 +25,13 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateR
             return dateTime.ToString("yyyyMMdd");
         }
 
-        private string ConvertStringToDateTime(string date)
+        private DateTime ConvertStringToDateTime(string date)
         {
-            int year = Int32.Parse(date.Substring(0, ));
+            int year = Int32.Parse(date.Substring(0, 4));
+            int month = Int32.Parse(date.Substring(4, 2));
+            int day = Int32.Parse(date.Substring(6, 2));
+
+            return new DateTime(year, month, day);
         }
     }
 }
