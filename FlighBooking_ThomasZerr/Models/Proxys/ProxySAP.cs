@@ -154,7 +154,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             return result;
         }
 
-        private Bapisfldra ConvertFromDateRangeToBapisfldra(DateRange dateRange)
+        private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
         {
             string option = ConvertDateRangeOptionToString(dateRange.Option);
 
