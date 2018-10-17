@@ -9,7 +9,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateR
     class DateRangeSAP : IDateRange
     {
         public DateTime EarlierDateTime { get; set; }
-
         public string EarlierDate
         {
             get => ConvertDateTimeToString(EarlierDateTime);
@@ -18,6 +17,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateR
 
         public DateTime LaterDateTime { get; set; }
         public string LaterDate { get; set; }
+
         public DateRangeOption Option { get; set; }
 
         private string ConvertDateTimeToString(DateTime dateTime)
