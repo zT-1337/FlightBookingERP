@@ -21,5 +21,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         IDateRange FlightDateRange { get; }
 
         void DoFlightBookingSearch();
+        void DoChooseFlightBooking(int index);
     }
 }
