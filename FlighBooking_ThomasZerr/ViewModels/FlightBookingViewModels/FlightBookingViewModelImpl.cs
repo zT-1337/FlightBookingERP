@@ -17,6 +17,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 
         public IFlightBooking ChosenFlightBooking { get; private set; }
         public ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
+        public ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
         private FlightBookingData args_;
         public string AirlineName
@@ -72,11 +73,13 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             set => args_.PassagierName = value;
         }
 
-        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings)
+        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
+                                            ObservableCollection<IFlightBooking> createdFlightBookings)
         {
             args_ = defaultArgs;
             flightBookingFactory_ = flightBookingFactory;
             RetrievedFlightBookings = retrievedFlightBookings;
+            CreatedFlightBookings = createdFlightBookings;
         }
 
         public void DoFlightBookingSearch()
@@ -97,7 +100,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         public void DoCreateFlightBooking()
         {
             //TODO Exceptionhandling
-            throw new NotImplementedException();
+            IFlightBooking flightBooking = flightBookingFactory_.Create(args_);
+            CreatedFlightBookings.Add(flightBooking);
         }
 
         public void DoConfirmFlightBooking()
