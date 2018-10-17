@@ -72,6 +72,11 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             get => args_.PassagierName;
             set => args_.PassagierName = value;
         }
+        public bool Reserved
+        {
+            get => args_.Reserved;
+            set => args_.Reserved = value;
+        }
 
         public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
                                             ObservableCollection<IFlightBooking> createdFlightBookings)

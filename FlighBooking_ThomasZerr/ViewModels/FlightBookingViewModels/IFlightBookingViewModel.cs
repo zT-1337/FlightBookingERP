@@ -28,6 +28,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         string Counter { get; set; }
         string Flightdate { get; set; }
         string PassagierName { get; set; }
+        bool Reserved { get; set; }
 
         void DoFlightBookingSearch();
         void DoChooseFlightBooking(int index);
