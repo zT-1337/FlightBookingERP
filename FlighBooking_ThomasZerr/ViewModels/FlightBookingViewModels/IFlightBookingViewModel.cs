@@ -11,14 +11,14 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
     interface IFlightBookingViewModel
     {
-        IFlightBooking ChosenFlightBooking { get; set; }
+        IFlightBooking ChosenFlightBooking { get; }
         ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
 
         string AirlineName { get; set; }
         string TravelAgency { get; set; }
         string CustomerNumber { get; set; }
-        IDateRange BookingDateRange { get; set; }
-        IDateRange FlightDateRange { get; set; }
+        IDateRange BookingDateRange { get; }
+        IDateRange FlightDateRange { get; }
 
         void DoFlightBookingSearch();
     }
