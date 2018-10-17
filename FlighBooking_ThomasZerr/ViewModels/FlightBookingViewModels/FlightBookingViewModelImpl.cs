@@ -19,20 +19,29 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         public ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
 
         private FlightBookingData args_;
-        public string AirlineName { get; set; }
-        public string TravelAgency { get; set; }
-        public string CustomerNumber { get; set; }
-        public IDateRange BookingDateRange { get; }
-        public IDateRange FlightDateRange { get; }
+        public string AirlineName
+        {
+            get => args_.AirlineName;
+            set { args_.AirlineName = value; } 
+        }
+        public string TravelAgency
+        {
+            get => args_.TravelAgency;
+            set => args_.TravelAgency = value;
+        }
+        public string CustomerId
+        {
+            get => args_.CustomerId;
+            set => args_.CustomerId = value;
+        }
+        public IDateRange BookingDateRange => args_.BookingDateRange;
+        public IDateRange FlightDateRange => args_.FlightDateRange;
 
-        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
-                                          IDateRange bookingDateRange, IDateRange flightDateRange)
+        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings)
         {
             args_ = defaultArgs;
             flightBookingFactory_ = flightBookingFactory;
             RetrievedFlightBookings = retrievedFlightBookings;
-            BookingDateRange = bookingDateRange;
-            FlightDateRange = flightDateRange;
         }
 
         public void DoFlightBookingSearch()
