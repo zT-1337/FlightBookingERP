@@ -58,5 +58,20 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         {
             ChosenFlightBooking = RetrievedFlightBookings[index];
         }
+
+        public void DoCreateFlightBooking()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoConfirmFlightBooking()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DoCancelFlightBooking()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
