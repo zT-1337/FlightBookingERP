@@ -24,7 +24,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 
         public string AirlineName { get; set; }
         public string TravelAgency { get; set; }
-        //TODO aus dieser Klasse schmeißen
         public IDateRange BookingDateRange { get; set; }
         public IDateRange FlightDateRange { get; set; }
 
