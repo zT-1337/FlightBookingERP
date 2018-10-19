@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 
@@ -6,6 +7,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
     interface IFlightBookingViewModel
     {
+        Exception CaughtException { get; }
+
         IFlightBooking ChosenFlightBooking { get; }
         ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
         ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
