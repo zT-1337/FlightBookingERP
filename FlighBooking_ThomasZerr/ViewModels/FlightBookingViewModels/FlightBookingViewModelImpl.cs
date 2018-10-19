@@ -16,7 +16,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         public ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
         public ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
-        private FlightBookingData args_;
+        private IFlightBookingData args_;
         public string AirlineName
         {
             get => args_.AirlineName;
@@ -75,7 +75,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             set => args_.Reserved = value;
         }
 
-        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
+        public FlightBookingViewModelImpl(IFlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
                                             ObservableCollection<IFlightBooking> createdFlightBookings)
         {
             args_ = defaultArgs;
