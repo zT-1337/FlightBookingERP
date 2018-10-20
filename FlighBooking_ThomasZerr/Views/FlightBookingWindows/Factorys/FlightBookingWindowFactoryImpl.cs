@@ -28,9 +28,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             var defaultArgs = CreateDefaultArgsSAP();
             var flightBookingViewModel = CreateFlightBookingViewModelImpl(defaultArgs, flightBookingFactory);
 
-            var flightBookingWindow = new FlightBookingWindow();
-
-            throw new NotImplementedException();
+            return new FlightBookingWindow(flightBookingViewModel);
         }
 
         private IProxyERP CreateProxySAP(string username, string password)
