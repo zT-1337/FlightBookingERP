@@ -5,7 +5,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRange
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
-    interface IFlightBookingViewModel
+    public interface IFlightBookingViewModel
     {
         Exception CaughtException { get; }
 

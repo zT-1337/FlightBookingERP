@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.Proxys
 {
-    class ProxyResponseERP
+    public class ProxyResponseERP
     {
         public IFlightBookingData FlightBookingData { get; set; }
         public IFlightBookingData[] FlightBookingDatas { get; set; }

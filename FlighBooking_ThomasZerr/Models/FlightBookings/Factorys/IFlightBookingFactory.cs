@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
-    interface IFlightBookingFactory
+    public interface IFlightBookingFactory
     {
         IFlightBooking Create(IFlightBookingData args);
         IFlightBooking[] RetrieveAll(IFlightBookingData args);

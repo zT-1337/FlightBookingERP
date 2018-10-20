@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
-    interface IFlightBooking
+    public interface IFlightBooking
     {
         IFlightBookingData FlightBookingData { get; }
 

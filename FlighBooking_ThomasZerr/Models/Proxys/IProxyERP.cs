@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.Proxys
 {
-    interface IProxyERP
+    public interface IProxyERP
     {
         string Username { get; set; }
         string Password { set; }
