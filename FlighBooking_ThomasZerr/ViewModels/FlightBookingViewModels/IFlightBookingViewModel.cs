@@ -29,7 +29,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         bool Reserved { get; set; }
 
         void DoFlightBookingSearch();
-        void DoChooseFlightBooking(int index);
         void DoCreateFlightBooking();
         void DoConfirmFlightBooking();
         void DoCancelFlightBooking();
