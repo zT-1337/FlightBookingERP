@@ -9,7 +9,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
     {
         Exception CaughtException { get; }
 
-        IFlightBooking ChosenFlightBooking { get; }
+        IFlightBooking ChosenFlightBooking { get; set; }
         ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
         ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
