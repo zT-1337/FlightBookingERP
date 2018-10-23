@@ -128,11 +128,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
             var getList = new FlightBookingGetList
             {
+                //TODO zu entfernen
+                MaxRowsSpecified = true,
+                MaxRows = 100,
                 Airline = args.AirlineName,
                 TravelAgency = args.TravelAgency,
                 CustomerNumber = args.CustomerId,
                 BookingDateRange = bookingDateRange,
-                FlightDateRange = flightDateRange,
+                FlightDateRange = flightDateRange
             };
 
             FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getList);
