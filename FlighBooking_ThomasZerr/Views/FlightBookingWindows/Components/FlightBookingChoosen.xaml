@@ -114,9 +114,18 @@
         <Label
             Grid.Row="10"
             Grid.Column="0"
+            Content="Bestätigt" />
+        <CheckBox
+            Grid.Row="10"
+            Grid.Column="1"
+            IsChecked="{Binding ChosenFlightBooking.FlightBookingData.Confirmed, Mode=OneWay}"
+            IsEnabled="False" />
+        <Label
+            Grid.Row="11"
+            Grid.Column="0"
             Content="Passagiername" />
         <Label
-            Grid.Row="10"
+            Grid.Row="11"
             Grid.Column="1"
             Content="{Binding ChosenFlightBooking.FlightBookingData.PassagierName, Mode=OneWay}" />
     </Grid>
