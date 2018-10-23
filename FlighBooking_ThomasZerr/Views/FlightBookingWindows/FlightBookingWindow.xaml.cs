@@ -17,10 +17,5 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows
             flightBookingViewModel_ = flightBookingViewModel;
             InitializeComponent();
         }
-
-        private void GetListButton(object sender, RoutedEventArgs e)
-        {
-            flightBookingViewModel_.DoFlightBookingSearch();
-        }
     }
 }
