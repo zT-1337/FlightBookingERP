@@ -17,16 +17,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         public ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
         private IFlightBookingData args_;
-        public string AirlineName
-        {
-            get => args_.AirlineName;
-            set => args_.AirlineName = value;
-        }
-        public string TravelAgency
-        {
-            get => args_.TravelAgency;
-            set => args_.TravelAgency = value;
-        }
         public string CustomerId
         {
             get => args_.CustomerId;
