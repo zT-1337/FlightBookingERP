@@ -18,7 +18,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateR
 
         private string ConvertDateTimeToString(DateTime dateTime)
         {
-            return dateTime.ToString("yyyyMMdd");
+            return dateTime.ToString("yyyy-MM-dd");
         }
 
         private DateTime ConvertStringToDateTime(string date)
