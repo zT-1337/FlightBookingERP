@@ -4,6 +4,7 @@ using System.Configuration;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Models.Proxys;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
@@ -67,9 +68,11 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
 
             flightBookingData.BookingDateRange.EarlierDateTime = DateTime.Now;
             flightBookingData.BookingDateRange.LaterDateTime = DateTime.Now;
+            flightBookingData.BookingDateRange.Option = DateRangeOption.Between;
 
             flightBookingData.FlightDateRange.EarlierDateTime = DateTime.Now;
             flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
+            flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
 
             return flightBookingData;
         }
