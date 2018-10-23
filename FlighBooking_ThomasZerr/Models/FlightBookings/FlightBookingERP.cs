@@ -22,7 +22,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
             ProxyResponseERP response = proxyERP_.FlightBookingConfirm(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
-            HandleIsWarning(response.ReturnCode, response.Message);
 
             FlightBookingData.ConfirmFlight();
 
@@ -34,18 +33,11 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
                 throw new InvalidOperationException(message);
         }
 
-        private void HandleIsWarning(ReturnCodeERP returnCode, string message)
-        {
-            if (returnCode == ReturnCodeERP.Warning)
-                throw new WarningException(message);
-        }
-
         public void Cancel()
         {
             ProxyResponseERP response = proxyERP_.FlightBookingCancel(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
-            HandleIsWarning(response.ReturnCode, response.Message);
 
             FlightBookingData.Cancelled = true;
         }

@@ -20,7 +20,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
             ProxyResponseERP response = proxyERP_.FlightBookingCreateFromData(args);
 
             HandleIsError(response.ReturnCode, response.Message);
-            HandleIsWarning(response.ReturnCode, response.Message);
 
             args.AirlineId = response.FlightBookingData.AirlineId;
             args.BookingId = response.FlightBookingData.BookingId;
@@ -33,18 +32,11 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
                 throw new InvalidOperationException(message);
         }
 
-        private void HandleIsWarning(ReturnCodeERP returnCode, string message)
-        {
-            if (returnCode == ReturnCodeERP.Warning)
-                throw new WarningException(message);
-        }
-
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
             ProxyResponseERP responses = proxyERP_.FlightBookingGetList(args);
 
             HandleIsError(responses.ReturnCode, responses.Message);
-            HandleIsWarning(responses.ReturnCode, responses.Message);
 
             List<IFlightBooking> flightBookings = new List<IFlightBooking>();
             foreach (var flightBookingData in responses.FlightBookingDatas)
