@@ -62,7 +62,6 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
                 PassagierName = "",
                 Reserved = false,
                 Cancelled = false,
-                AirlineName = "",
                 TravelAgency = "",
             };
 

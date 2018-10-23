@@ -131,7 +131,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 //TODO zu entfernen
                 MaxRowsSpecified = true,
                 MaxRows = 100,
-                Airline = args.AirlineName,
+                Airline = args.AirlineId,
                 TravelAgency = args.TravelAgency,
                 CustomerNumber = args.CustomerId,
                 BookingDateRange = bookingDateRange,

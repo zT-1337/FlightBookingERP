@@ -19,7 +19,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         bool Cancelled { get; set; }
         bool Confirmed { get; }
 
-        string AirlineName { get; set; }
         string TravelAgency { get; set; }
         IDateRange BookingDateRange { get; }
         IDateRange FlightDateRange { get; }
