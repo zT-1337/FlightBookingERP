@@ -65,6 +65,9 @@
     <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\UserDataViewModelImpl.cs" />
+    <Compile Include="Views\FlightBookingWindows\Components\FlightBookingSearch.xaml.cs">
+      <DependentUpon>FlightBookingSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FlightBookingWindows\Factorys\FlightBookingWindowFactoryImpl.cs" />
     <Compile Include="Views\FlightBookingWindows\Factorys\IFlightBookingWindowFactory.cs" />
     <Compile Include="Views\FlightBookingWindows\FlightBookingWindow.xaml.cs">
@@ -82,6 +85,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="Views\FlightBookingWindows\Components\FlightBookingSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FlightBookingWindows\FlightBookingWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
