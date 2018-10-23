@@ -116,11 +116,13 @@
             Grid.Row="10"
             Grid.Column="0"
             Grid.ColumnSpan="2"
+            MaxHeight="200"
             ItemsSource="{Binding RetrievedFlightBookings, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="True">
-                        <Label Content="{Binding FlightBookingData.AirlineId, Mode=OneWay}" />
+                        <Label Content="{Binding FlightBookingData.AirlineId, Mode=OneWay}" DockPanel.Dock="Left" />
+                        <Label Content="{Binding FlightBookingData.Flightdate, Mode=OneWay}" DockPanel.Dock="Left" />
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
