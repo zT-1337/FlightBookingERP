@@ -89,6 +89,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             try
             {
                 IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(args_);
+                RetrievedFlightBookings.Clear();
                 foreach (var flightBooking in flightBookings)
                 {
                     RetrievedFlightBookings.Add(flightBooking);
