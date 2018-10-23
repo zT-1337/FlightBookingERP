@@ -117,7 +117,8 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             MaxHeight="200"
-            ItemsSource="{Binding RetrievedFlightBookings, Mode=OneWay}">
+            ItemsSource="{Binding RetrievedFlightBookings, Mode=OneWay}"
+            SelectedItem="{Binding ChosenFlightBooking, Mode=OneWayToSource}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="True">
