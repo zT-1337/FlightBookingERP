@@ -15,7 +15,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
             proxyERP_ = proxyERP;
         }
 
-        public IFlightBooking Create(FlightBookingData args)
+        public IFlightBooking Create(IFlightBookingData args)
         {
             ProxyResponseERP response = proxyERP_.FlightBookingCreateFromData(args);
 
@@ -39,7 +39,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
                 throw new WarningException(message);
         }
 
-        public IFlightBooking[] RetrieveAll(FlightBookingData args)
+        public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
             ProxyResponseERP responses = proxyERP_.FlightBookingGetList(args);
 

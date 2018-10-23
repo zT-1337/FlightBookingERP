@@ -1,6 +1,6 @@
 ﻿namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges
 {
-    enum DateRangeOption
+    public enum DateRangeOption
     {
         Equal,
         NotEqual,

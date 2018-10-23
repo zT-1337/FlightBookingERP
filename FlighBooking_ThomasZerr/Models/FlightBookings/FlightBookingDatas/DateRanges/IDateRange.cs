@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges
 {
-    interface IDateRange
+    public interface IDateRange
     {
         DateTime EarlierDateTime { get; set; }
         string EarlierDate { get; set; }

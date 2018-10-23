@@ -1,10 +1,14 @@
-﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
-    class FlightBookingData
+    class FlightBookingDataSAP : IFlightBookingData
     {
-        //TODO Flightdate eventuell in besseren Datentypen umwandeln
         public string AirlineId { get; set; }
         public string BookingId { get; set; }
         public string ConnectId { get; set; }
@@ -21,8 +25,14 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 
         public string AirlineName { get; set; }
         public string TravelAgency { get; set; }
-        public IDateRange BookingDateRange { get; set; }
-        public IDateRange FlightDateRange { get; set; }
+        public IDateRange BookingDateRange { get; }
+        public IDateRange FlightDateRange { get; }
+
+        public FlightBookingDataSAP()
+        {
+            BookingDateRange = new DateRangeSAP();
+            FlightDateRange = new DateRangeSAP();
+        }
 
         public void ConfirmFlight()
         {

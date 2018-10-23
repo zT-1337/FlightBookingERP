@@ -26,7 +26,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
         }
 
-        public ProxyResponseERP FlightBookingConfirm(FlightBookingData args)
+        public ProxyResponseERP FlightBookingConfirm(IFlightBookingData args)
         {
             var confirm = new FlightBookingConfirm
             {
@@ -47,7 +47,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             return result;
         }
 
-        public ProxyResponseERP FlightBookingCancel(FlightBookingData args)
+        public ProxyResponseERP FlightBookingCancel(IFlightBookingData args)
         {
             var cancel = new FlightBookingCancel
             {
@@ -68,7 +68,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             return result;
         }
 
-        public ProxyResponseERP FlightBookingCreateFromData(FlightBookingData args)
+        public ProxyResponseERP FlightBookingCreateFromData(IFlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
             string reserved = ConvertBoolToStringForSAP(args.Reserved);
@@ -83,7 +83,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
             ReturnCodeERP returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
-            FlightBookingData flightBookingData = new FlightBookingData
+            IFlightBookingData flightBookingData = new FlightBookingDataSAP()
             {
                 AirlineId = sapResponse.AirlineID,
                 BookingId = sapResponse.BookingNumber
@@ -98,7 +98,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             return result;
         }
 
-        private Bapisbonew ConvertFlightBookingDataToBapisbonew(FlightBookingData args)
+        private Bapisbonew ConvertFlightBookingDataToBapisbonew(IFlightBookingData args)
         {
             return new Bapisbonew
             {
@@ -121,7 +121,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 return "";
         }
 
-        public ProxyResponseERP FlightBookingGetList(FlightBookingData args)
+        public ProxyResponseERP FlightBookingGetList(IFlightBookingData args)
         {
             Bapisfldra[] bookingDateRange = {ConvertFromDateRangeToBapisfldra(args.BookingDateRange)};
             Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
@@ -139,7 +139,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
 
             //TODO Warum hier ein Array von Returns?
             ReturnCodeERP returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
-            FlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
+            IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
             string message = sapResponse.Return[0].Message;
 
             ProxyResponseERP result = new ProxyResponseERP
@@ -204,14 +204,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
             throw new InvalidOperationException($"Gegebener Type unbekannt: {type}");
         }
 
-        private FlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
+        private IFlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
         {
-            FlightBookingData[] flightBookingDatas = new FlightBookingData[bookingList.Length];
+            IFlightBookingData[] flightBookingDatas = new IFlightBookingData[bookingList.Length];
 
             for(int i = 0; i < bookingList.Length; ++i)
             {
                 var booking = bookingList[i];
-                var flightBookingData = new FlightBookingData
+                var flightBookingData = new FlightBookingDataSAP()
                 {
                     AirlineId = booking.Airlineid,
                     BookingId = booking.Bookingid,

@@ -22,6 +22,7 @@ namespace FlighBooking_ThomasZerr.Views
             string password = PasswordBox.Text;
 
             flightBookingWindowFactory.Create(username, password).Show();
+            Close();
         }
     }
 }

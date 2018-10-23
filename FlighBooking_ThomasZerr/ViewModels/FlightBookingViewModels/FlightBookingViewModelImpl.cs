@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
@@ -10,11 +11,12 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
     {
         private IFlightBookingFactory flightBookingFactory_;
 
+        public Exception CaughtException { get; private set; }
         public IFlightBooking ChosenFlightBooking { get; private set; }
         public ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
         public ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
-        private FlightBookingData args_;
+        private IFlightBookingData args_;
         public string AirlineName
         {
             get => args_.AirlineName;
@@ -73,7 +75,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             set => args_.Reserved = value;
         }
 
-        public FlightBookingViewModelImpl(FlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
+        public FlightBookingViewModelImpl(IFlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory, ObservableCollection<IFlightBooking> retrievedFlightBookings, 
                                             ObservableCollection<IFlightBooking> createdFlightBookings)
         {
             args_ = defaultArgs;
@@ -84,11 +86,17 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 
         public void DoFlightBookingSearch()
         {
-            //TODO Exceptionhandling
-            IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(args_);
-            foreach (var flightBooking in flightBookings)
+            try
             {
-                RetrievedFlightBookings.Add(flightBooking);
+                IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(args_);
+                foreach (var flightBooking in flightBookings)
+                {
+                    RetrievedFlightBookings.Add(flightBooking);
+                }
+            }
+            catch (Exception e)
+            {
+                CaughtException = e;
             }
         }
 
@@ -99,21 +107,39 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 
         public void DoCreateFlightBooking()
         {
-            //TODO Exceptionhandling
-            IFlightBooking flightBooking = flightBookingFactory_.Create(args_);
-            CreatedFlightBookings.Add(flightBooking);
+            try
+            {
+                IFlightBooking flightBooking = flightBookingFactory_.Create(args_);
+                CreatedFlightBookings.Add(flightBooking);
+            }
+            catch (Exception e)
+            {
+                CaughtException = e;
+            }   
         }
 
         public void DoConfirmFlightBooking()
         {
-            //TODO Exceptionhandling
-            ChosenFlightBooking.Confirm();
+            try
+            {
+                ChosenFlightBooking.Confirm();
+            }
+            catch (Exception e)
+            {
+                CaughtException = e;
+            }
         }
 
         public void DoCancelFlightBooking()
         {
-            //TODO Exceptionhandling
-            ChosenFlightBooking.Cancel();
+            try
+            {
+                ChosenFlightBooking.Cancel();
+            }
+            catch (Exception e)
+            {
+                CaughtException = e;
+            }            
         }
     }
 }
