@@ -100,7 +100,7 @@
         <CheckBox
             Grid.Row="8"
             Grid.Column="1"
-            Content="{Binding ChosenFlightBooking.FlightBookingData.Reserved, Mode=OneWay}"
+            IsChecked="{Binding ChosenFlightBooking.FlightBookingData.Reserved, Mode=OneWay}"
             IsEnabled="False" />
         <Label
             Grid.Row="9"
@@ -109,7 +109,7 @@
         <CheckBox
             Grid.Row="9"
             Grid.Column="1"
-            Content="{Binding ChosenFlightBooking.FlightBookingData.Cancelled, Mode=OneWay}"
+            IsChecked="{Binding ChosenFlightBooking.FlightBookingData.Cancelled, Mode=OneWay}"
             IsEnabled="False" />
         <Label
             Grid.Row="10"
