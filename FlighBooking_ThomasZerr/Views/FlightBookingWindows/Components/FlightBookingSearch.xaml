@@ -21,6 +21,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -86,8 +87,12 @@
             <DatePicker DockPanel.Dock="Right" />
             <Label Content="Enddatum" DockPanel.Dock="Right" />
         </DockPanel>
-        <ListBox
+        <Button
             Grid.Row="9"
+            Grid.Column="1"
+            Content="Suchen" />
+        <ListBox
+            Grid.Row="10"
             Grid.Column="0"
             Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
