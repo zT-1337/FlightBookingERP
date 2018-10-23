@@ -61,6 +61,7 @@
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\IDateRange.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeOption.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\FlightBookingDataSAP.cs" />
+    <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
