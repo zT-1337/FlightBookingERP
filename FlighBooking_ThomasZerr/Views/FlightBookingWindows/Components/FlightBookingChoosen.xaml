@@ -24,6 +24,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -128,5 +129,18 @@
             Grid.Row="11"
             Grid.Column="1"
             Content="{Binding ChosenFlightBooking.FlightBookingData.PassagierName, Mode=OneWay}" />
+        <DockPanel
+            Grid.Row="12"
+            Grid.Column="1"
+            LastChildFill="False">
+            <Button
+                Click="DoConfirm"
+                Content="Bestätigen"
+                DockPanel.Dock="Left" />
+            <Button
+                Click="DoCancel"
+                Content="Stornieren"
+                DockPanel.Dock="Left" />
+        </DockPanel>
     </Grid>
 </UserControl>
