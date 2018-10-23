@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Components
 {
@@ -27,7 +28,8 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Components
 
         private void DoSearch(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var flightBookingViewModel = (IFlightBookingViewModel) DataContext;
+            flightBookingViewModel.DoFlightBookingSearch();
         }
     }
 }
