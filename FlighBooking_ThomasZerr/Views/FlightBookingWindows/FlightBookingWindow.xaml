@@ -20,8 +20,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <components:FlightBookingSearch Grid.Row="1" Grid.Column="0" />
         <components:FlightBookingChoosen Grid.Row="1" Grid.Column="1" />
+        <components:FlightBookingCreate Grid.Row="1" Grid.Column="2" />
     </Grid>
 </Window>
