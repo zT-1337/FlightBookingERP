@@ -86,24 +86,26 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 
         public void DoFlightBookingSearch()
         {
+            IFlightBooking[] flightBookings = RetrieveFlightBookings();
+            RetrievedFlightBookings.Clear();
+            foreach (var flightBooking in flightBookings)
+            {
+                RetrievedFlightBookings.Add(flightBooking);
+            }
+        }
+
+        private IFlightBooking[] RetrieveFlightBookings()
+        {
             try
             {
-                IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(args_);
-                RetrievedFlightBookings.Clear();
-                foreach (var flightBooking in flightBookings)
-                {
-                    RetrievedFlightBookings.Add(flightBooking);
-                }
+                return flightBookingFactory_.RetrieveAll(args_);
             }
             catch (Exception e)
             {
                 CaughtException = e;
             }
-        }
 
-        public void DoChooseFlightBooking(int index)
-        {
-            ChosenFlightBooking = RetrievedFlightBookings[index];
+            return new IFlightBooking[0];
         }
 
         public void DoCreateFlightBooking()
