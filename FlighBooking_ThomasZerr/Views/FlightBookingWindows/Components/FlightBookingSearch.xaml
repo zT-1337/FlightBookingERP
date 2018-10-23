@@ -29,7 +29,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -119,7 +119,9 @@
             ItemsSource="{Binding RetrievedFlightBookings, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding FlightBookingData.AirlineId, Mode=OneWay}" />
+                    <DockPanel LastChildFill="True">
+                        <Label Content="{Binding FlightBookingData.AirlineId, Mode=OneWay}" />
+                    </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
