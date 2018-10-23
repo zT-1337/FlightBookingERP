@@ -24,5 +24,10 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Components
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
