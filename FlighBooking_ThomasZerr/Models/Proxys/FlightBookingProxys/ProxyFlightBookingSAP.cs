@@ -5,7 +5,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRange
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    class ProxySAP : IProxyFlightBookingSAP
+    class ProxyFlightBookingSAP : IProxyFlightBooking
     {
         private Z_HH_FlightBooking_MT_01Client sapClient_;
 
@@ -21,7 +21,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             set { sapClient_.ClientCredentials.UserName.Password = value; }
         }
 
-        public ProxySAP()
+        public ProxyFlightBookingSAP()
         {
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
         }

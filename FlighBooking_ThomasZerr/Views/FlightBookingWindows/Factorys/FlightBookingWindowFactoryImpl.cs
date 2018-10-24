@@ -33,18 +33,18 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             return new FlightBookingWindow(flightBookingViewModel);
         }
 
-        private IProxyFlightBookingSAP CreateProxySAP(string username, string password)
+        private IProxyFlightBooking CreateProxySAP(string username, string password)
         {
-            return new ProxySAP
+            return new ProxyFlightBookingSAP
             {
                 Username = username,
                 Password = password
             };
         }
 
-        private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyFlightBookingSAP proxyFlightBookingSap)
+        private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyFlightBooking proxyFlightBooking)
         {
-            return new FlightBookingFactoryERP(proxyFlightBookingSap);
+            return new FlightBookingFactoryERP(proxyFlightBooking);
         }
 
         private IFlightBookingData CreateDefaultArgsSAP()

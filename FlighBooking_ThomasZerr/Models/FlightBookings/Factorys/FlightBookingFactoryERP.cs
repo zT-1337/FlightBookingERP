@@ -9,22 +9,22 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
     class FlightBookingFactoryERP : IFlightBookingFactory
     {
-        private IProxyFlightBookingSAP _proxyFlightBookingSap;
+        private IProxyFlightBooking _proxyFlightBooking;
 
-        public FlightBookingFactoryERP(IProxyFlightBookingSAP proxyFlightBookingSap)
+        public FlightBookingFactoryERP(IProxyFlightBooking proxyFlightBooking)
         {
-            _proxyFlightBookingSap = proxyFlightBookingSap;
+            _proxyFlightBooking = proxyFlightBooking;
         }
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyResponse response = _proxyFlightBookingSap.FlightBookingCreateFromData(args);
+            ProxyResponse response = _proxyFlightBooking.FlightBookingCreateFromData(args);
 
             HandleIsError(response.ReturnCode, response.Message);
 
             args.AirlineId = response.FlightBookingData.AirlineId;
             args.BookingId = response.FlightBookingData.BookingId;
-            return new FlightBookingERP(_proxyFlightBookingSap, args);
+            return new FlightBookingERP(_proxyFlightBooking, args);
         }
 
         private void HandleIsError(ReturnCodeProxys returnCode, string message)
@@ -35,14 +35,14 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
-            ProxyResponse responses = _proxyFlightBookingSap.FlightBookingGetList(args);
+            ProxyResponse responses = _proxyFlightBooking.FlightBookingGetList(args);
 
             HandleIsError(responses.ReturnCode, responses.Message);
 
             List<IFlightBooking> flightBookings = new List<IFlightBooking>();
             foreach (var flightBookingData in responses.FlightBookingDatas)
             {
-                flightBookings.Add(new FlightBookingERP(_proxyFlightBookingSap, flightBookingData));
+                flightBookings.Add(new FlightBookingERP(_proxyFlightBooking, flightBookingData));
             }
 
             return flightBookings.ToArray();

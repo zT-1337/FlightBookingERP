@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    public interface IProxyFlightBookingSAP
+    public interface IProxyFlightBooking
     {
         string Username { get; set; }
         string Password { set; }
