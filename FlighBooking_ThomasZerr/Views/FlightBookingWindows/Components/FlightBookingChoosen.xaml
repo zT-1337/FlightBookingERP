@@ -38,7 +38,8 @@
             Grid.Row="0"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.AirlineId, Mode=OneWay}" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.FlightData.AirlineId, Mode=OneWay}"
+            TextChanged="TextBox_TextChanged" />
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -56,7 +57,7 @@
             Grid.Row="2"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.ConnectId, Mode=OneWay}" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.FlightData.ConnectId, Mode=OneWay}" />
         <Label
             Grid.Row="3"
             Grid.Column="0"
@@ -65,7 +66,7 @@
             Grid.Row="3"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.Flightdate.DateString, Mode=OneWay}" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.FlightData.Flightdate.DateString, Mode=OneWay}" />
         <Label
             Grid.Row="4"
             Grid.Column="0"

@@ -33,7 +33,7 @@
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding AgencyId, Mode=OneWayToSource}" />
+            Text="{Binding Args.AgencyId, Mode=OneWayToSource}" />
         <Label
             Grid.Row="1"
             Grid.Column="0"
@@ -41,7 +41,7 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding AirlineId, Mode=OneWayToSource}" />
+            Text="{Binding Args.FlightData.AirlineId, Mode=OneWayToSource}" />
         <Label
             Grid.Row="2"
             Grid.Column="0"
@@ -49,7 +49,7 @@
         <TextBox
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Class, Mode=OneWayToSource}" />
+            Text="{Binding Args.Class, Mode=OneWayToSource}" />
         <Label
             Grid.Row="3"
             Grid.Column="0"
@@ -57,7 +57,7 @@
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding ConnectId, Mode=OneWayToSource}" />
+            Text="{Binding Args.FlightData.ConnectId, Mode=OneWayToSource}" />
         <Label
             Grid.Row="4"
             Grid.Column="0"
@@ -65,7 +65,7 @@
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
-            Text="{Binding CustomerId, Mode=OneWayToSource}" />
+            Text="{Binding Args.CustomerId, Mode=OneWayToSource}" />
         <Label
             Grid.Row="5"
             Grid.Column="0"
@@ -73,7 +73,7 @@
         <DatePicker
             Grid.Row="5"
             Grid.Column="1"
-            SelectedDate="{Binding Flightdate.Date, Mode=OneWayToSource}" />
+            SelectedDate="{Binding Args.FlightData.Flightdate.Date, Mode=OneWayToSource}" />
         <Label
             Grid.Row="6"
             Grid.Column="0"
@@ -81,7 +81,7 @@
         <TextBox
             Grid.Row="6"
             Grid.Column="1"
-            Text="{Binding PassagierName, Mode=OneWayToSource}" />
+            Text="{Binding Args.PassagierName, Mode=OneWayToSource}" />
         <Label
             Grid.Row="7"
             Grid.Column="0"
@@ -89,7 +89,7 @@
         <CheckBox
             Grid.Row="7"
             Grid.Column="1"
-            IsChecked="{Binding Reserved, Mode=OneWayToSource}" />
+            IsChecked="{Binding Args.Reserved, Mode=OneWayToSource}" />
         <Button
             Grid.Row="8"
             Grid.Column="1"
