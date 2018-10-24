@@ -18,7 +18,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingCreateFromData(args);
+            ProxyResponse response = _proxyFlightBookingSap.FlightBookingCreateFromData(args);
 
             HandleIsError(response.ReturnCode, response.Message);
 
@@ -27,15 +27,15 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
             return new FlightBookingERP(_proxyFlightBookingSap, args);
         }
 
-        private void HandleIsError(ReturnCodeERP returnCode, string message)
+        private void HandleIsError(ReturnCodeProxys returnCode, string message)
         {
-            if (returnCode == ReturnCodeERP.Error || returnCode == ReturnCodeERP.Abort)
+            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
                 throw new InvalidOperationException(message);
         }
 
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
-            ProxyResponseERP responses = _proxyFlightBookingSap.FlightBookingGetList(args);
+            ProxyResponse responses = _proxyFlightBookingSap.FlightBookingGetList(args);
 
             HandleIsError(responses.ReturnCode, responses.Message);
 

@@ -20,7 +20,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         public void Confirm()
         {
-            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingConfirm(FlightBookingData);
+            ProxyResponse response = _proxyFlightBookingSap.FlightBookingConfirm(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
 
@@ -28,15 +28,15 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         }
 
-        private void HandleIsError(ReturnCodeERP returnCode, string message)
+        private void HandleIsError(ReturnCodeProxys returnCode, string message)
         {
-            if (returnCode == ReturnCodeERP.Error || returnCode == ReturnCodeERP.Abort)
+            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
                 throw new InvalidOperationException(message);
         }
 
         public void Cancel()
         {
-            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingCancel(FlightBookingData);
+            ProxyResponse response = _proxyFlightBookingSap.FlightBookingCancel(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
 
