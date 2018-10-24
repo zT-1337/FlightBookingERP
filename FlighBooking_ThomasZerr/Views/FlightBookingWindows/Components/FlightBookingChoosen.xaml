@@ -65,7 +65,7 @@
             Grid.Row="3"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.Flightdate, Mode=OneWay}" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.Flightdate.DateString, Mode=OneWay}" />
         <Label
             Grid.Row="4"
             Grid.Column="0"
@@ -92,7 +92,7 @@
             Grid.Row="6"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.Bookdate, Mode=OneWay}" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.Bookdate.DateString, Mode=OneWay}" />
         <Label
             Grid.Row="7"
             Grid.Column="0"
