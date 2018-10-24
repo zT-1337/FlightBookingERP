@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Proxys;
+using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
     class FlightBookingFactoryERP : IFlightBookingFactory
     {
-        private IProxyERP proxyERP_;
+        private IProxyFlightBookingSAP _proxyFlightBookingSap;
 
-        public FlightBookingFactoryERP(IProxyERP proxyERP)
+        public FlightBookingFactoryERP(IProxyFlightBookingSAP proxyFlightBookingSap)
         {
-            proxyERP_ = proxyERP;
+            _proxyFlightBookingSap = proxyFlightBookingSap;
         }
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyResponseERP response = proxyERP_.FlightBookingCreateFromData(args);
+            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingCreateFromData(args);
 
             HandleIsError(response.ReturnCode, response.Message);
 
             args.AirlineId = response.FlightBookingData.AirlineId;
             args.BookingId = response.FlightBookingData.BookingId;
-            return new FlightBookingERP(proxyERP_, args);
+            return new FlightBookingERP(_proxyFlightBookingSap, args);
         }
 
         private void HandleIsError(ReturnCodeERP returnCode, string message)
@@ -34,14 +35,14 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
-            ProxyResponseERP responses = proxyERP_.FlightBookingGetList(args);
+            ProxyResponseERP responses = _proxyFlightBookingSap.FlightBookingGetList(args);
 
             HandleIsError(responses.ReturnCode, responses.Message);
 
             List<IFlightBooking> flightBookings = new List<IFlightBooking>();
             foreach (var flightBookingData in responses.FlightBookingDatas)
             {
-                flightBookings.Add(new FlightBookingERP(proxyERP_, flightBookingData));
+                flightBookings.Add(new FlightBookingERP(_proxyFlightBookingSap, flightBookingData));
             }
 
             return flightBookings.ToArray();

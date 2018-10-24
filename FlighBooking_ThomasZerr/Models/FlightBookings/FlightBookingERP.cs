@@ -2,24 +2,25 @@
 using System.ComponentModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Proxys;
+using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
     class FlightBookingERP : IFlightBooking
     {
-        private IProxyERP proxyERP_;
+        private IProxyFlightBookingSAP _proxyFlightBookingSap;
 
         public IFlightBookingData FlightBookingData { get; }
 
-        public FlightBookingERP(IProxyERP proxyERP, IFlightBookingData flightBookingData)
+        public FlightBookingERP(IProxyFlightBookingSAP proxyFlightBookingSap, IFlightBookingData flightBookingData)
         {
-            proxyERP_ = proxyERP;
+            _proxyFlightBookingSap = proxyFlightBookingSap;
             FlightBookingData = flightBookingData;
         }
 
         public void Confirm()
         {
-            ProxyResponseERP response = proxyERP_.FlightBookingConfirm(FlightBookingData);
+            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingConfirm(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
 
@@ -35,7 +36,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         public void Cancel()
         {
-            ProxyResponseERP response = proxyERP_.FlightBookingCancel(FlightBookingData);
+            ProxyResponseERP response = _proxyFlightBookingSap.FlightBookingCancel(FlightBookingData);
 
             HandleIsError(response.ReturnCode, response.Message);
 

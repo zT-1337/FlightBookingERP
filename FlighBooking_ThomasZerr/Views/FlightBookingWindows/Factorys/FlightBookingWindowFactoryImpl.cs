@@ -6,6 +6,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Models.Proxys;
+using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
@@ -32,7 +33,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             return new FlightBookingWindow(flightBookingViewModel);
         }
 
-        private IProxyERP CreateProxySAP(string username, string password)
+        private IProxyFlightBookingSAP CreateProxySAP(string username, string password)
         {
             return new ProxySAP
             {
@@ -41,9 +42,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             };
         }
 
-        private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyERP proxyERP)
+        private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyFlightBookingSAP proxyFlightBookingSap)
         {
-            return new FlightBookingFactoryERP(proxyERP);
+            return new FlightBookingFactoryERP(proxyFlightBookingSap);
         }
 
         private IFlightBookingData CreateDefaultArgsSAP()

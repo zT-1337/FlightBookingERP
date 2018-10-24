@@ -3,9 +3,9 @@ using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 
-namespace FlighBooking_ThomasZerr.Models.Proxys
+namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    class ProxySAP : IProxyERP
+    class ProxySAP : IProxyFlightBookingSAP
     {
         private Z_HH_FlightBooking_MT_01Client sapClient_;
 
