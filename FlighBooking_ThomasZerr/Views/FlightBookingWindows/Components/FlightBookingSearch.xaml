@@ -123,7 +123,7 @@
                 <DataTemplate>
                     <DockPanel LastChildFill="True">
                         <Label Content="{Binding FlightBookingData.AirlineId, Mode=OneWay}" DockPanel.Dock="Left" />
-                        <Label Content="{Binding FlightBookingData.Flightdate, Mode=OneWay}" DockPanel.Dock="Left" />
+                        <Label Content="{Binding FlightBookingData.Flightdate.DateString, Mode=OneWay}" DockPanel.Dock="Left" />
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
