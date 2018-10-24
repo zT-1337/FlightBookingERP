@@ -14,5 +14,6 @@ namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas
         IDate Flightdate { get; }
         string Planetype { get; set; }
         string CurrencyIso { get; set; }
+        decimal Price { get; set; }
     }
 }
