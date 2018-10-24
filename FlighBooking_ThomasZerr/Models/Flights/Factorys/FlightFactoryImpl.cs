@@ -24,7 +24,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
             
             HandleIsError(proxyFlightResponse.ReturnCode, proxyFlightResponse.Message);
 
-            return new FlightImpl(proxyFlight_, proxyFlightResponse.FlightData);
+            return new FlightImpl(proxyFlight_, data);
         }
 
         private void HandleIsError(ReturnCodeProxys returnCode, string message)

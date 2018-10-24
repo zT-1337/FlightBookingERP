@@ -51,9 +51,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
         {
             var flightBookingData = new FlightBookingDataSAP
             {
-                AirlineId = "",
                 BookingId = "",
-                ConnectId = "",
                 CustomerId = "",
                 Class = "",
                 Counter = "",
@@ -63,6 +61,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
                 Cancelled = false,
             };
 
+            flightBookingData.FlightData.AirlineId = "";
+            flightBookingData.FlightData.ConnectId = "";
+
             flightBookingData.BookingDateRange.EarlierDateTime = DateTime.Now;
             flightBookingData.BookingDateRange.LaterDateTime = DateTime.Now;
             flightBookingData.BookingDateRange.Option = DateRangeOption.Between;
@@ -71,7 +72,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
             flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
 
-            flightBookingData.Flightdate.Date = DateTime.Now;
+            flightBookingData.FlightData.Flightdate.Date = DateTime.Now;
             flightBookingData.Bookdate.Date = DateTime.Now;
 
             return flightBookingData;
