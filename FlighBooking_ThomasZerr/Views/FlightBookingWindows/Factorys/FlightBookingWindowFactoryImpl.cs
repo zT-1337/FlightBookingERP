@@ -44,7 +44,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
 
         private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyFlightBooking proxyFlightBooking)
         {
-            return new FlightBookingFactoryERP(proxyFlightBooking);
+            return new FlightBookingFactoryImpl(proxyFlightBooking);
         }
 
         private IFlightBookingData CreateDefaultArgsSAP()
