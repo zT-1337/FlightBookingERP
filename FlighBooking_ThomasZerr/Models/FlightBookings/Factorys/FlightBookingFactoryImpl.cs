@@ -7,11 +7,11 @@ using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
-    class FlightBookingFactoryERP : IFlightBookingFactory
+    class FlightBookingFactoryImpl : IFlightBookingFactory
     {
         private IProxyFlightBooking _proxyFlightBooking;
 
-        public FlightBookingFactoryERP(IProxyFlightBooking proxyFlightBooking)
+        public FlightBookingFactoryImpl(IProxyFlightBooking proxyFlightBooking)
         {
             _proxyFlightBooking = proxyFlightBooking;
         }
@@ -24,7 +24,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
             args.AirlineId = flightBookingResponse.FlightBookingData.AirlineId;
             args.BookingId = flightBookingResponse.FlightBookingData.BookingId;
-            return new FlightBookingERP(_proxyFlightBooking, args);
+            return new FlightBookingImpl(_proxyFlightBooking, args);
         }
 
         private void HandleIsError(ReturnCodeProxys returnCode, string message)
@@ -42,7 +42,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
             List<IFlightBooking> flightBookings = new List<IFlightBooking>();
             foreach (var flightBookingData in flightBookingResponses.FlightBookingDatas)
             {
-                flightBookings.Add(new FlightBookingERP(_proxyFlightBooking, flightBookingData));
+                flightBookings.Add(new FlightBookingImpl(_proxyFlightBooking, flightBookingData));
             }
 
             return flightBookings.ToArray();

@@ -6,13 +6,13 @@ using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
-    class FlightBookingERP : IFlightBooking
+    class FlightBookingImpl : IFlightBooking
     {
         private IProxyFlightBooking _proxyFlightBooking;
 
         public IFlightBookingData FlightBookingData { get; }
 
-        public FlightBookingERP(IProxyFlightBooking proxyFlightBooking, IFlightBookingData flightBookingData)
+        public FlightBookingImpl(IProxyFlightBooking proxyFlightBooking, IFlightBookingData flightBookingData)
         {
             _proxyFlightBooking = proxyFlightBooking;
             FlightBookingData = flightBookingData;
