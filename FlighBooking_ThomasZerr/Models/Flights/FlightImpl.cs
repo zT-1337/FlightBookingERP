@@ -11,9 +11,10 @@ namespace FlighBooking_ThomasZerr.Models.Flights
 
         public IFlightData FlightData { get; }
 
-        public FlightImpl(IProxyFlight proxyFlight)
+        public FlightImpl(IProxyFlight proxyFlight, IFlightData flightData)
         {
             proxyFlight_ = proxyFlight;
+            FlightData = flightData;
         }
 
         public bool IsExisting()
