@@ -73,7 +73,7 @@
         <DatePicker
             Grid.Row="5"
             Grid.Column="1"
-            SelectedDate="{Binding Flightdate, Mode=OneWayToSource}" />
+            SelectedDate="{Binding Flightdate.Date, Mode=OneWayToSource}" />
         <Label
             Grid.Row="6"
             Grid.Column="0"
