@@ -1,4 +1,5 @@
 ﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
@@ -8,10 +9,10 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         string AirlineId { get; set; }
         string BookingId { get; set; }
         string ConnectId { get; set; }
-        string Flightdate { get; set; }
+        IDate Flightdate { get; }
         string CustomerId { get; set; }
         string Class { get; set; }
-        string Bookdate { get; set; }
+        IDate Bookdate { get; }
         string Counter { get; set; }
         string AgencyId { get; set; }
         string PassagierName { get; set; }
