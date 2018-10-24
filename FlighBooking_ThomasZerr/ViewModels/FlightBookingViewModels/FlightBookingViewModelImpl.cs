@@ -4,6 +4,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
@@ -49,11 +50,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
             get => args_.Counter;
             set => args_.Counter = value;
         }
-        public string Flightdate
-        {
-            get => args_.Flightdate;
-            set => args_.Flightdate = value;
-        }
+        public IDate Flightdate => args_.Flightdate;
+
         public string PassagierName
         {
             get => args_.PassagierName;

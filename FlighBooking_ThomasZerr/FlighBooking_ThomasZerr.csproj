@@ -57,10 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeSAP.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeImpl.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\IDateRange.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeOption.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\DateImpl.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\IDate.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\FlightBookingDataSAP.cs" />
+    <Compile Include="Utils\DateConverters\DateConverterSAP.cs" />
+    <Compile Include="Utils\DateConverters\IDateConverter.cs" />
     <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />

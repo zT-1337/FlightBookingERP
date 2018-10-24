@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
@@ -22,7 +23,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
         string Class { get; set; }
         string ConnectId { get; set; }
         string Counter { get; set; }
-        string Flightdate { get; set; }
+        IDate Flightdate { get; }
         string PassagierName { get; set; }
         bool Reserved { get; set; }
 

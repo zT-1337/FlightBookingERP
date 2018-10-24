@@ -108,7 +108,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                 Connectid = args.ConnectId,
                 Counter = args.Counter,
                 Customerid = args.CustomerId,
-                Flightdate = args.Flightdate,
+                Flightdate = args.Flightdate.DateString,
                 Passname = args.PassagierName
             };
         }
@@ -219,16 +219,17 @@ namespace FlighBooking_ThomasZerr.Models.Proxys
                     AirlineId = booking.Airlineid,
                     BookingId = booking.Bookingid,
                     ConnectId = booking.Connectid,
-                    Flightdate = booking.Flightdate,
                     CustomerId = booking.Customerid,
                     Class = booking.Class,
-                    Bookdate = booking.Bookdate,
                     Counter = booking.Counter,
                     AgencyId = booking.Agencynum,
                     Reserved = ConvertStringOfSAPToBool(booking.Reserved),
                     Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
+                flightBookingData.Flightdate.DateString = booking.Flightdate;
+                flightBookingData.Bookdate.DateString = booking.Bookdate;
+
                 flightBookingDatas[i] = flightBookingData;
             }
 

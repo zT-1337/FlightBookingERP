@@ -53,10 +53,8 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
                 AirlineId = "",
                 BookingId = "",
                 ConnectId = "",
-                Flightdate = "",
                 CustomerId = "",
                 Class = "",
-                Bookdate = "",
                 Counter = "",
                 AgencyId = "",
                 PassagierName = "",
@@ -71,6 +69,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
             flightBookingData.FlightDateRange.EarlierDateTime = DateTime.Now;
             flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
             flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
+
+            flightBookingData.Flightdate.Date = DateTime.Now;
+            flightBookingData.Bookdate.Date = DateTime.Now;
 
             return flightBookingData;
         }
