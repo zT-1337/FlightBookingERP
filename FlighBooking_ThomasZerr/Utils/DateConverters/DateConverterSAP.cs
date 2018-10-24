@@ -16,8 +16,8 @@ namespace FlighBooking_ThomasZerr.Utils.DateConverters
         public DateTime ConvertStringToDateTime(string date)
         {
             int year = Int32.Parse(date.Substring(0, 4));
-            int month = Int32.Parse(date.Substring(4, 2));
-            int day = Int32.Parse(date.Substring(6, 2));
+            int month = Int32.Parse(date.Substring(5, 2));
+            int day = Int32.Parse(date.Substring(8, 2));
 
             return new DateTime(year, month, day);
         }
