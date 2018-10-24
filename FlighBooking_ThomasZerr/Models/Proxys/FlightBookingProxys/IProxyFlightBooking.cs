@@ -7,9 +7,9 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         string Username { get; set; }
         string Password { set; }
 
-        ProxyFlightBookingResponse FlightBookingConfirm(IFlightBookingData args);
-        ProxyFlightBookingResponse FlightBookingCancel(IFlightBookingData args);
-        ProxyFlightBookingResponse FlightBookingCreateFromData(IFlightBookingData args);
-        ProxyFlightBookingResponse FlightBookingGetList(IFlightBookingData args);
+        ProxyFlightBookingResponse Confirm(IFlightBookingData args);
+        ProxyFlightBookingResponse Cancel(IFlightBookingData args);
+        ProxyFlightBookingResponse Create(IFlightBookingData args);
+        ProxyFlightBookingResponse GetList(IFlightBookingData args);
     }
 }

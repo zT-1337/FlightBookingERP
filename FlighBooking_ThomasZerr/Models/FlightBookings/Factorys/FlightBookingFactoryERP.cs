@@ -18,7 +18,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.FlightBookingCreateFromData(args);
+            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.Create(args);
 
             HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
@@ -35,7 +35,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse flightBookingResponses = _proxyFlightBooking.FlightBookingGetList(args);
+            ProxyFlightBookingResponse flightBookingResponses = _proxyFlightBooking.GetList(args);
 
             HandleIsError(flightBookingResponses.ReturnCode, flightBookingResponses.Message);
 

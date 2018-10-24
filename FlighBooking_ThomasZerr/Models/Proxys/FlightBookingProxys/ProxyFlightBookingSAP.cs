@@ -26,7 +26,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
         }
 
-        public ProxyFlightBookingResponse FlightBookingConfirm(IFlightBookingData args)
+        public ProxyFlightBookingResponse Confirm(IFlightBookingData args)
         {
             var confirm = new FlightBookingConfirm
             {
@@ -47,7 +47,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             return result;
         }
 
-        public ProxyFlightBookingResponse FlightBookingCancel(IFlightBookingData args)
+        public ProxyFlightBookingResponse Cancel(IFlightBookingData args)
         {
             var cancel = new FlightBookingCancel
             {
@@ -68,7 +68,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             return result;
         }
 
-        public ProxyFlightBookingResponse FlightBookingCreateFromData(IFlightBookingData args)
+        public ProxyFlightBookingResponse Create(IFlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
             string reserved = ConvertBoolToStringForSAP(args.Reserved);
@@ -121,7 +121,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                 return "";
         }
 
-        public ProxyFlightBookingResponse FlightBookingGetList(IFlightBookingData args)
+        public ProxyFlightBookingResponse GetList(IFlightBookingData args)
         {
             Bapisfldra[] bookingDateRange = {ConvertFromDateRangeToBapisfldra(args.BookingDateRange)};
             Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
