@@ -1,15 +1,13 @@
 ﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
+using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
     public interface IFlightBookingData
     {
         //TODO Flightdate eventuell in besseren Datentypen umwandeln
-        string AirlineId { get; set; }
-        string BookingId { get; set; }
-        string ConnectId { get; set; }
-        IDate Flightdate { get; }
+        IFlightData FlightData { get; }
         string CustomerId { get; set; }
         string Class { get; set; }
         IDate Bookdate { get; }
