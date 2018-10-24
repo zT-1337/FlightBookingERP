@@ -18,12 +18,12 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyResponse response = _proxyFlightBooking.FlightBookingCreateFromData(args);
+            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.FlightBookingCreateFromData(args);
 
-            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
-            args.AirlineId = response.FlightBookingData.AirlineId;
-            args.BookingId = response.FlightBookingData.BookingId;
+            args.AirlineId = flightBookingResponse.FlightBookingData.AirlineId;
+            args.BookingId = flightBookingResponse.FlightBookingData.BookingId;
             return new FlightBookingERP(_proxyFlightBooking, args);
         }
 
@@ -35,12 +35,12 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking[] RetrieveAll(IFlightBookingData args)
         {
-            ProxyResponse responses = _proxyFlightBooking.FlightBookingGetList(args);
+            ProxyFlightBookingResponse flightBookingResponses = _proxyFlightBooking.FlightBookingGetList(args);
 
-            HandleIsError(responses.ReturnCode, responses.Message);
+            HandleIsError(flightBookingResponses.ReturnCode, flightBookingResponses.Message);
 
             List<IFlightBooking> flightBookings = new List<IFlightBooking>();
-            foreach (var flightBookingData in responses.FlightBookingDatas)
+            foreach (var flightBookingData in flightBookingResponses.FlightBookingDatas)
             {
                 flightBookings.Add(new FlightBookingERP(_proxyFlightBooking, flightBookingData));
             }

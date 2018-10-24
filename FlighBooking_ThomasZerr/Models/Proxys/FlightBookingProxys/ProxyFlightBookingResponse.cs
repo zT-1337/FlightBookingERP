@@ -1,8 +1,8 @@
 ﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 
-namespace FlighBooking_ThomasZerr.Models.Proxys
+namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    public class ProxyResponse
+    public class ProxyFlightBookingResponse
     {
         public IFlightBookingData FlightBookingData { get; set; }
         public IFlightBookingData[] FlightBookingDatas { get; set; }

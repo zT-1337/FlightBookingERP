@@ -20,9 +20,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         public void Confirm()
         {
-            ProxyResponse response = _proxyFlightBooking.FlightBookingConfirm(FlightBookingData);
+            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.FlightBookingConfirm(FlightBookingData);
 
-            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
             FlightBookingData.ConfirmFlight();
 
@@ -36,9 +36,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         public void Cancel()
         {
-            ProxyResponse response = _proxyFlightBooking.FlightBookingCancel(FlightBookingData);
+            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.FlightBookingCancel(FlightBookingData);
 
-            HandleIsError(response.ReturnCode, response.Message);
+            HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
             FlightBookingData.Cancelled = true;
         }
