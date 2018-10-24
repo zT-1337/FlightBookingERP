@@ -68,9 +68,19 @@
     <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\DateImpl.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\IDate.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\FlightBookingDataSAP.cs" />
+    <Compile Include="Models\Flights\Factorys\FlightFactoryImpl.cs" />
+    <Compile Include="Models\Flights\Factorys\IFlightFactory.cs" />
+    <Compile Include="Models\Flights\FlightDatas\FlightDataSAP.cs" />
+    <Compile Include="Models\Flights\FlightImpl.cs" />
+    <Compile Include="Models\Flights\FlightDatas\IFlightData.cs" />
+    <Compile Include="Models\Flights\IFlight.cs" />
+    <Compile Include="Models\Proxys\FlightProxys\IProxyFlight.cs" />
+    <Compile Include="Models\Proxys\FlightProxys\ProxyFlightResponse.cs" />
+    <Compile Include="Models\Proxys\FlightProxys\ProxyFlightSAP.cs" />
     <Compile Include="Utils\DateConverters\DateConverterSAP.cs" />
     <Compile Include="Utils\DateConverters\IDateConverter.cs" />
     <Compile Include="Utils\EnumBooleanConverter.cs" />
+    <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
@@ -123,15 +133,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\FlightBookings\Factorys\FlightBookingFactoryERP.cs" />
+    <Compile Include="Models\FlightBookings\Factorys\FlightBookingFactoryImpl.cs" />
     <Compile Include="Models\FlightBookings\Factorys\IFlightBookingFactory.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\IFlightBookingData.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingERP.cs" />
+    <Compile Include="Models\FlightBookings\FlightBookingImpl.cs" />
     <Compile Include="Models\FlightBookings\IFlightBooking.cs" />
-    <Compile Include="Models\Proxys\IProxyERP.cs" />
-    <Compile Include="Models\Proxys\ProxyResponseERP.cs" />
-    <Compile Include="Models\Proxys\ProxySAP.cs" />
-    <Compile Include="Models\Proxys\ReturnCodeERP.cs" />
+    <Compile Include="Models\Proxys\FlightBookingProxys\IProxyFlightBooking.cs" />
+    <Compile Include="Models\Proxys\FlightBookingProxys\ProxyFlightBookingResponse.cs" />
+    <Compile Include="Models\Proxys\FlightBookingProxys\ProxyFlightBookingSAP.cs" />
+    <Compile Include="Models\Proxys\ReturnCodeProxys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -262,5 +272,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

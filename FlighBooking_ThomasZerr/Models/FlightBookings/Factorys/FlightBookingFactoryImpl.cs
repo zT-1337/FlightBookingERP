@@ -22,7 +22,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
             HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
-            args.AirlineId = flightBookingResponse.FlightBookingData.AirlineId;
+            args.FlightData.AirlineId = flightBookingResponse.FlightBookingData.FlightData.AirlineId;
             args.BookingId = flightBookingResponse.FlightBookingData.BookingId;
             return new FlightBookingImpl(_proxyFlightBooking, args);
         }

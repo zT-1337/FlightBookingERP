@@ -2,6 +2,7 @@
 using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
@@ -30,13 +31,13 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             var confirm = new FlightBookingConfirm
             {
-                AirlineID = args.AirlineId,
+                AirlineID = args.FlightData.AirlineId,
                 BookingNumber = args.BookingId
             };
 
             FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirm);
 
-            ReturnCodeProxys returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
@@ -51,13 +52,13 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             var cancel = new FlightBookingCancel
             {
-                AirlineID = args.AirlineId,
+                AirlineID = args.FlightData.AirlineId,
                 BookingNumber = args.BookingId
             };
 
             FlightBookingCancelResponse sapResponse = sapClient_.FlightBookingCancel(cancel);
 
-            ReturnCodeProxys returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
@@ -81,13 +82,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
             FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createFromData);
 
-            ReturnCodeProxys returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             IFlightBookingData flightBookingData = new FlightBookingDataSAP()
             {
-                AirlineId = sapResponse.AirlineID,
                 BookingId = sapResponse.BookingNumber
             };
+            flightBookingData.FlightData.AirlineId = sapResponse.AirlineID;
+
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
                 ReturnCode = returnCode,
@@ -103,12 +105,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             return new Bapisbonew
             {
                 Agencynum = args.AgencyId,
-                Airlineid = args.AirlineId,
+                Airlineid = args.FlightData.AirlineId,
                 Class = args.Class,
-                Connectid = args.ConnectId,
+                Connectid = args.FlightData.ConnectId,
                 Counter = args.Counter,
                 Customerid = args.CustomerId,
-                Flightdate = args.Flightdate.DateString,
+                Flightdate = args.FlightData.Flightdate.DateString,
                 Passname = args.PassagierName
             };
         }
@@ -131,7 +133,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                 //TODO zu entfernen
                 MaxRowsSpecified = true,
                 MaxRows = 100,
-                Airline = args.AirlineId,
+                Airline = args.FlightData.AirlineId,
                 TravelAgency = args.AgencyId,
                 CustomerNumber = args.CustomerId,
                 BookingDateRange = bookingDateRange,
@@ -141,7 +143,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getList);
 
             //TODO Warum hier ein Array von Returns?
-            ReturnCodeProxys returnCode = ConvertTypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
             string message = sapResponse.Return[0].Message;
 
@@ -188,25 +190,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             throw new InvalidOperationException($"Gegebene DateRangeOption nicht bekannt: {option:G}");
         }
 
-        private ReturnCodeProxys ConvertTypeToReturnCode(string type)
-        {
-            switch (type)
-            {
-                case "S":
-                    return ReturnCodeProxys.Success;
-                case "E":
-                    return ReturnCodeProxys.Error;
-                case "W":
-                    return ReturnCodeProxys.Warning;
-                case "I":
-                    return ReturnCodeProxys.Information;
-                case "A":
-                    return ReturnCodeProxys.Abort;
-            }
-
-            throw new InvalidOperationException($"Gegebener Type unbekannt: {type}");
-        }
-
         private IFlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
         {
             IFlightBookingData[] flightBookingDatas = new IFlightBookingData[bookingList.Length];
@@ -216,9 +199,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                 var booking = bookingList[i];
                 var flightBookingData = new FlightBookingDataSAP()
                 {
-                    AirlineId = booking.Airlineid,
                     BookingId = booking.Bookingid,
-                    ConnectId = booking.Connectid,
                     CustomerId = booking.Customerid,
                     Class = booking.Class,
                     Counter = booking.Counter,
@@ -227,7 +208,9 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                     Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
-                flightBookingData.Flightdate.DateString = booking.Flightdate;
+                flightBookingData.FlightData.AirlineId = booking.Airlineid;
+                flightBookingData.FlightData.ConnectId = booking.Connectid;
+                flightBookingData.FlightData.Flightdate.DateString = booking.Flightdate;
                 flightBookingData.Bookdate.DateString = booking.Bookdate;
 
                 flightBookingDatas[i] = flightBookingData;
