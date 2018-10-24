@@ -57,6 +57,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connected Services\Flight\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeImpl.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\IDateRange.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeOption.cs" />
@@ -181,6 +186,43 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FlightBookingReference\Flightbooking.wsdl" />
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.BapiServiceTransactionCommitResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.BapiServiceTransactionCommitResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.BapiServiceTransactionRollbackResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.BapiServiceTransactionRollbackResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightCheckAvailibilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightCheckAvailibilityResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightGetDetailResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightGetDetailResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightGetListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightGetListResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightSaveReplicaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\FlighBooking_ThomasZerr.Flight.FlightSaveReplicaResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Flight\flight.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -194,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FlightBookingReference\" />
+    <WCFMetadataStorage Include="Connected Services\Flight\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\FlightBookingReference\configuration91.svcinfo" />
@@ -203,6 +246,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\FlightBookingReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Flight\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Flight\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Flight\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
