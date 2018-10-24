@@ -1,6 +1,6 @@
 ﻿namespace FlighBooking_ThomasZerr.Models.Proxys
 {
-    public enum ReturnCodeERP
+    public enum ReturnCodeProxys
     {
         Success,
         Error,

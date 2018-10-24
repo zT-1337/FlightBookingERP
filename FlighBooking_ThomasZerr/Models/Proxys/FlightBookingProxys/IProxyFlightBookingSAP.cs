@@ -2,14 +2,14 @@
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    public interface IProxyERP
+    public interface IProxyFlightBookingSAP
     {
         string Username { get; set; }
         string Password { set; }
 
-        ProxyResponseERP FlightBookingConfirm(IFlightBookingData args);
-        ProxyResponseERP FlightBookingCancel(IFlightBookingData args);
-        ProxyResponseERP FlightBookingCreateFromData(IFlightBookingData args);
-        ProxyResponseERP FlightBookingGetList(IFlightBookingData args);
+        ProxyResponse FlightBookingConfirm(IFlightBookingData args);
+        ProxyResponse FlightBookingCancel(IFlightBookingData args);
+        ProxyResponse FlightBookingCreateFromData(IFlightBookingData args);
+        ProxyResponse FlightBookingGetList(IFlightBookingData args);
     }
 }
