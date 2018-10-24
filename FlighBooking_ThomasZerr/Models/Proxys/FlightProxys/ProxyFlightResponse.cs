@@ -9,7 +9,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
     class ProxyFlightResponse
     {
-        public IFlightData FlightData { get; set; }
         public ReturnCodeProxys ReturnCode { get; set; }
         public string Message { get; set; }
     }
