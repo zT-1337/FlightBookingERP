@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates
 {
-    interface IDate
+    public interface IDate
     {
         DateTime Date { get; set; }
         string DateString { get; set; }
