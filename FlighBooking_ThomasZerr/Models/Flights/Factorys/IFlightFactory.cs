@@ -11,5 +11,6 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
     {
         bool IsFlightExisting(IFlightData data);
         IFlight Create(IFlightData data);
+        IFlight[] Retrieve(IFlightData data);
     }
 }

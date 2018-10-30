@@ -43,6 +43,11 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
             return new FlightImpl(proxyFlight_, data);
         }
 
+        public IFlight[] Retrieve(IFlightData data)
+        {
+            throw new NotImplementedException();
+        }
+
         private void HandleIsError(ReturnCodeProxys returnCode, string message)
         {
             if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
