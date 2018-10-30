@@ -12,7 +12,7 @@ using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
 {
-    class FlightBookingWindowFactoryImpl : IFlightBookingWindowFactory
+    class FlightBookingMainWindowFactoryImpl : IFlightBookingMainWindowFactory
     {
         public FlightBookingMainWindow Create(string username, string password)
         {
