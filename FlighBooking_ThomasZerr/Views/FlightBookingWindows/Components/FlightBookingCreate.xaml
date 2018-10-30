@@ -21,6 +21,9 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -29,69 +32,94 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Content="Reisebüro" />
+            Content="Fluggesellschaft" />
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Args.AgencyId, Mode=OneWayToSource}" />
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Content="Fluggesellschaft" />
-        <TextBox
-            Grid.Row="1"
-            Grid.Column="1"
             Text="{Binding Args.FlightData.AirlineId, Mode=OneWayToSource}" />
         <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Content="Klasse" />
-        <TextBox
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding Args.Class, Mode=OneWayToSource}" />
-        <Label
-            Grid.Row="3"
+            Grid.Row="1"
             Grid.Column="0"
             Content="Verbindungsnummer" />
         <TextBox
-            Grid.Row="3"
+            Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Args.FlightData.ConnectId, Mode=OneWayToSource}" />
         <Label
-            Grid.Row="4"
-            Grid.Column="0"
-            Content="Kundennummer" />
-        <TextBox
-            Grid.Row="4"
-            Grid.Column="1"
-            Text="{Binding Args.CustomerId, Mode=OneWayToSource}" />
-        <Label
-            Grid.Row="5"
+            Grid.Row="2"
             Grid.Column="0"
             Content="Flugdatum" />
         <DatePicker
-            Grid.Row="5"
+            Grid.Row="2"
             Grid.Column="1"
             SelectedDate="{Binding Args.FlightData.Flightdate.Date, Mode=OneWayToSource}" />
         <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="Flugzeugtyp" />
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding Args.FlightData.Planetype, Mode=OneWayToSource}" />
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Content="Währung" />
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding Args.FlightData.CurrencyIso, Mode=OneWayToSource}" />
+        <Label
+            Grid.Row="5"
+            Grid.Column="0"
+            Content="Preis" />
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="{Binding Args.FlightData.Price, Mode=OneWayToSource}" />
+
+        <Label
             Grid.Row="6"
             Grid.Column="0"
-            Content="Passagiername" />
+            Content="Reisebüro" />
         <TextBox
             Grid.Row="6"
             Grid.Column="1"
-            Text="{Binding Args.PassagierName, Mode=OneWayToSource}" />
+            Text="{Binding Args.AgencyId, Mode=OneWayToSource}" />
         <Label
             Grid.Row="7"
             Grid.Column="0"
+            Content="Klasse" />
+        <TextBox
+            Grid.Row="7"
+            Grid.Column="1"
+            Text="{Binding Args.Class, Mode=OneWayToSource}" />
+        <Label
+            Grid.Row="8"
+            Grid.Column="0"
+            Content="Kundennummer" />
+        <TextBox
+            Grid.Row="8"
+            Grid.Column="1"
+            Text="{Binding Args.CustomerId, Mode=OneWayToSource}" />
+        <Label
+            Grid.Row="9"
+            Grid.Column="0"
+            Content="Passagiername" />
+        <TextBox
+            Grid.Row="9"
+            Grid.Column="1"
+            Text="{Binding Args.PassagierName, Mode=OneWayToSource}" />
+        <Label
+            Grid.Row="10"
+            Grid.Column="0"
             Content="Nur Reservieren" />
         <CheckBox
-            Grid.Row="7"
+            Grid.Row="10"
             Grid.Column="1"
             IsChecked="{Binding Args.Reserved, Mode=OneWayToSource}" />
         <Button
-            Grid.Row="8"
+            Grid.Row="11"
             Grid.Column="1"
             Click="DoCreate"
             Content="Erstelle" />
