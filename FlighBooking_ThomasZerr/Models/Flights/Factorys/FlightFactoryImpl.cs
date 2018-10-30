@@ -21,6 +21,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
         public bool IsFlightExisting(IFlightData data)
         {
             ProxyFlightResponse proxyFlightResponse = proxyFlight_.IsExisting(data);
+            HandleIsError(proxyFlightResponse.ReturnCode, proxyFlightResponse.Message);
             return proxyFlightResponse.ReturnCode == ReturnCodeProxys.Success;
         }
 
