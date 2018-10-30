@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows
 {
@@ -19,8 +20,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows
     /// </summary>
     public partial class FlightBookingEditWindow : Window
     {
-        public FlightBookingEditWindow()
+        public FlightBookingEditWindow(IFlightBookingEditViewModel editViewModel)
         {
+            DataContext = editViewModel;
             InitializeComponent();
         }
     }
