@@ -10,7 +10,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
-    interface IFlightBookingCreateViewModel
+    public interface IFlightBookingCreateViewModel
     {
         Exception CaughtException { get; }
 
