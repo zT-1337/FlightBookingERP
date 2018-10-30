@@ -38,8 +38,7 @@
             Grid.Row="0"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlightBooking.FlightBookingData.FlightData.AirlineId, Mode=OneWay}"
-            TextChanged="TextBox_TextChanged" />
+            Text="{Binding ChosenFlightBooking.FlightBookingData.FlightData.AirlineId, Mode=OneWay}" />
         <Label
             Grid.Row="1"
             Grid.Column="0"
