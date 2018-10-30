@@ -15,7 +15,7 @@ using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 {
-    class IFlightBookingCreateWindowFactorySAP : IFlightBookingCreateWindowFactory
+    class FlightBookingCreateWindowFactorySAP : IFlightBookingCreateWindowFactory
     {
         public FlightBookingCreateWindow Create(string username, string password)
         {
