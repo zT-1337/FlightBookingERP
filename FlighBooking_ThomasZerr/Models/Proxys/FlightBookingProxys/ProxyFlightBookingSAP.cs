@@ -33,14 +33,22 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         public ProxyFlightBookingResponse Confirm(IFlightBookingData args)
         {
-            var confirm = new FlightBookingConfirm
+            var confirmRequest = BuildConfirmRequest(args);
+            FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirmRequest);
+            return BuildConfirmResponse(sapResponse);
+        }
+
+        private FlightBookingConfirm BuildConfirmRequest(IFlightBookingData args)
+        {
+            return new FlightBookingConfirm
             {
                 AirlineID = args.FlightData.AirlineId,
                 BookingNumber = args.BookingId
             };
+        }
 
-            FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirm);
-
+        private ProxyFlightBookingResponse BuildConfirmResponse(FlightBookingConfirmResponse sapResponse)
+        {
             ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
@@ -54,14 +62,22 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         public ProxyFlightBookingResponse Cancel(IFlightBookingData args)
         {
-            var cancel = new FlightBookingCancel
+            var cancelRequest = BuildCancelRequest(args);
+            FlightBookingCancelResponse sapResponse = sapClient_.FlightBookingCancel(cancelRequest);
+            return BuildCancelResponse(sapResponse);
+        }
+
+        private FlightBookingCancel BuildCancelRequest(IFlightBookingData args)
+        {
+            return new FlightBookingCancel
             {
                 AirlineID = args.FlightData.AirlineId,
                 BookingNumber = args.BookingId
             };
+        }
 
-            FlightBookingCancelResponse sapResponse = sapClient_.FlightBookingCancel(cancel);
-
+        private ProxyFlightBookingResponse BuildCancelResponse(FlightBookingCancelResponse sapResponse)
+        {
             ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
@@ -78,7 +94,9 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             if (!IsFlightExisting(args.FlightData))
                 CreateFlight(args.FlightData);
 
-            return CreateFlightBooking(args);
+            var createRequest = BuildCreateFromDataRequest(args);
+            FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createRequest);
+            return BuildCreateFromDataResponse(sapResponse);
         }
 
         private bool IsFlightExisting(IFlightData args)
@@ -91,18 +109,20 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             flightFactory_.Create(args);
         }
 
-        private ProxyFlightBookingResponse CreateFlightBooking(IFlightBookingData args)
+        private FlightBookingCreateFromData BuildCreateFromDataRequest(IFlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
             string reserved = ConvertBoolToStringForSAP(args.Reserved);
 
-            var createFromData = new FlightBookingCreateFromData
+            return new FlightBookingCreateFromData
             {
                 BookingData = bookingData,
                 ReserveOnly = reserved
             };
+        }
 
-            FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createFromData);
+        private ProxyFlightBookingResponse BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
+        {
 
             ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
@@ -147,12 +167,19 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         public ProxyFlightBookingResponse GetList(IFlightBookingData args)
         {
-            Bapisfldra[] bookingDateRange = {ConvertFromDateRangeToBapisfldra(args.BookingDateRange)};
-            Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
+            var getListRequest = BuildGetListRequest(args); 
+            FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getListRequest);
+            return BuildGetListResponse(sapResponse);
+        }
 
-            var getList = new FlightBookingGetList
+        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args)
+        {
+            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(args.BookingDateRange) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+
+            return new FlightBookingGetList
             {
-                //TODO zu entfernen
+                //TODO zu ändern
                 MaxRowsSpecified = true,
                 MaxRows = 100,
                 Airline = args.FlightData.AirlineId,
@@ -161,10 +188,10 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                 BookingDateRange = bookingDateRange,
                 FlightDateRange = flightDateRange
             };
+        }
 
-            FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getList);
-
-            //TODO Warum hier ein Array von Returns?
+        private ProxyFlightBookingResponse BuildGetListResponse(FlightBookingGetListResponse sapResponse)
+        {
             ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
             string message = sapResponse.Return[0].Message;
