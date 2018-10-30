@@ -83,13 +83,17 @@
     <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
-    <Compile Include="ViewModels\FlightBookingEditViewModelImpl.cs" />
+    <Compile Include="ViewModels\FlightBookingEditViewModels\FlightBookingEditViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingEditViewModels\IFlightBookingEditViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\UserDataViewModelImpl.cs" />
+    <Compile Include="Views\FlightBookingCreateWindows\Factorys\IFlightBookingCreateWindowFactory.cs" />
+    <Compile Include="Views\FlightBookingCreateWindows\Factorys\FlightBookingCreateWindowFactorySAP.cs" />
     <Compile Include="Views\FlightBookingCreateWindows\FlightBookingCreateWindow.xaml.cs">
       <DependentUpon>FlightBookingCreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\FlightBookingEditWindows\Factorys\FlightBookingEditWindowFactorySAP.cs" />
+    <Compile Include="Views\FlightBookingEditWindows\Factorys\IFlightBookingEditWindowFactory.cs" />
     <Compile Include="Views\FlightBookingEditWindows\FlightBookingEditWindow.xaml.cs">
       <DependentUpon>FlightBookingEditWindow.xaml</DependentUpon>
     </Compile>
@@ -288,9 +292,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\FlightBookingCreateWindows\Factorys\" />
-    <Folder Include="Views\FlightBookingEditWindows\Factorys\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
