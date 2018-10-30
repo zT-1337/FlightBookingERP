@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Flights;
@@ -25,11 +26,16 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         public IFlightData FlightArgs { get; }
         public IFlightBookingData FlightBookingArgs { get; }
 
-        public FlightBookingCreateViewModelImpl(IFlightData defaultFlightArgs, IFlightBookingData defaultFlightBookingArgs,
+        public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
+            IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
             ObservableCollection<IFlight> retrievedFlights)
         {
+            flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
+
+            flightBookingFactory_ = flightBookingFactory;
             FlightBookingArgs = defaultFlightBookingArgs;
+
             RetrievedFlights = retrievedFlights;
         }
 
