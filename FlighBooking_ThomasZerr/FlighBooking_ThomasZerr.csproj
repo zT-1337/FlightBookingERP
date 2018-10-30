@@ -81,23 +81,31 @@
     <Compile Include="Utils\DateConverters\IDateConverter.cs" />
     <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
+    <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
+    <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
+    <Compile Include="ViewModels\FlightBookingEditViewModels\IFlightBookingEditViewModel.cs" />
     <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
-    <Compile Include="ViewModels\FlightBookingViewModels\IFlightBookingViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\UserDataViewModelImpl.cs" />
-    <Compile Include="Views\FlightBookingWindows\Components\FlightBookingChoosen.xaml.cs">
+    <Compile Include="Views\FlightBookingCreateWindows\FlightBookingCreateWindow.xaml.cs">
+      <DependentUpon>FlightBookingCreateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightBookingEditWindows\FlightBookingEditWindow.xaml.cs">
+      <DependentUpon>FlightBookingEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FlightBookingEditWindows\Components\FlightBookingChoosen.xaml.cs">
       <DependentUpon>FlightBookingChoosen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightBookingWindows\Components\FlightBookingCreate.xaml.cs">
+    <Compile Include="Views\FlightBookingCreateWindows\Components\FlightBookingCreate.xaml.cs">
       <DependentUpon>FlightBookingCreate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightBookingWindows\Components\FlightBookingSearch.xaml.cs">
+    <Compile Include="Views\FlightBookingEditWindows\Components\FlightBookingSearch.xaml.cs">
       <DependentUpon>FlightBookingSearch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FlightBookingWindows\Factorys\FlightBookingWindowFactoryImpl.cs" />
-    <Compile Include="Views\FlightBookingWindows\Factorys\IFlightBookingWindowFactory.cs" />
-    <Compile Include="Views\FlightBookingWindows\FlightBookingWindow.xaml.cs">
-      <DependentUpon>FlightBookingWindow.xaml</DependentUpon>
+    <Compile Include="Views\FlightBookingMainWindows\Factorys\FlightBookingMainWindowFactoryImpl.cs" />
+    <Compile Include="Views\FlightBookingMainWindows\Factorys\IFlightBookingMainWindowFactory.cs" />
+    <Compile Include="Views\FlightBookingMainWindows\FlightBookingMainWindow.xaml.cs">
+      <DependentUpon>FlightBookingMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -111,19 +119,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Page Include="Views\FlightBookingWindows\Components\FlightBookingChoosen.xaml">
+    <Page Include="Views\FlightBookingCreateWindows\FlightBookingCreateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FlightBookingWindows\Components\FlightBookingCreate.xaml">
+    <Page Include="Views\FlightBookingEditWindows\FlightBookingEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FlightBookingWindows\Components\FlightBookingSearch.xaml">
+    <Page Include="Views\FlightBookingEditWindows\Components\FlightBookingChoosen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FlightBookingWindows\FlightBookingWindow.xaml">
+    <Page Include="Views\FlightBookingCreateWindows\Components\FlightBookingCreate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightBookingEditWindows\Components\FlightBookingSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FlightBookingMainWindows\FlightBookingMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -272,6 +288,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\FlightBookingCreateWindows\Factorys\" />
+    <Folder Include="Views\FlightBookingEditWindows\Factorys\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
