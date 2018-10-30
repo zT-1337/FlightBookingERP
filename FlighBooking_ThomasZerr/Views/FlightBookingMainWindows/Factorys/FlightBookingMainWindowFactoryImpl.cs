@@ -26,72 +26,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
 
         private FlightBookingMainWindow CreateForSAP(string username, string password)
         {
-            var proxySAP = CreateProxySAP(username, password);
-            var flightBookingFactory = CreateFlightBookingFactoryERP(proxySAP);
-            var defaultArgs = CreateDefaultArgsSAP();
-            var flightBookingViewModel = CreateFlightBookingViewModelImpl(defaultArgs, flightBookingFactory);
-
-            return new FlightBookingMainWindow(flightBookingViewModel);
+            throw new NotImplementedException();
         }
-
-        private IProxyFlightBooking CreateProxySAP(string username, string password)
-        {
-            IProxyFlight proxyFlight = new ProxyFlightSAP
-            {
-                Username = username,
-                Password = password
-            };
-            IFlightFactory flightFactory = new FlightFactoryImpl(proxyFlight);
-            IProxyFlightBooking proxyFlightBooking = new ProxyFlightBookingSAP(flightFactory)
-            {
-                Username = username,
-                Password = password
-            };
-            return proxyFlightBooking;
-        }
-
-        private IFlightBookingFactory CreateFlightBookingFactoryERP(IProxyFlightBooking proxyFlightBooking)
-        {
-            return new FlightBookingFactoryImpl(proxyFlightBooking);
-        }
-
-        private IFlightBookingData CreateDefaultArgsSAP()
-        {
-            var flightBookingData = new FlightBookingDataSAP
-            {
-                BookingId = "",
-                CustomerId = "",
-                Class = "",
-                Counter = "",
-                AgencyId = "",
-                PassagierName = "",
-                Reserved = false,
-                Cancelled = false,
-            };
-
-            flightBookingData.FlightData.AirlineId = "";
-            flightBookingData.FlightData.ConnectId = "";
-
-            flightBookingData.BookingDateRange.EarlierDateTime = DateTime.Now;
-            flightBookingData.BookingDateRange.LaterDateTime = DateTime.Now;
-            flightBookingData.BookingDateRange.Option = DateRangeOption.Between;
-
-            flightBookingData.FlightDateRange.EarlierDateTime = DateTime.Now;
-            flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
-            flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
-
-            flightBookingData.FlightData.Flightdate.Date = DateTime.Now;
-            flightBookingData.Bookdate.Date = DateTime.Now;
-
-            return flightBookingData;
-        }
-
-        private IFlightBookingViewModel CreateFlightBookingViewModelImpl(IFlightBookingData defaultArgs, IFlightBookingFactory flightBookingFactory)
-        {
-            return new FlightBookingViewModelImpl(defaultArgs, flightBookingFactory, 
-                new ObservableCollection<IFlightBooking>(), new ObservableCollection<IFlightBooking>());
-        }
-
-
     }
 }
