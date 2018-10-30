@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
+using FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys;
+using FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
 {
@@ -8,12 +9,14 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
     /// </summary>
     partial class FlightBookingMainWindow : Window
     {
-        private IFlightBookingViewModel flightBookingViewModel_;
+        private IFlightBookingCreateWindowFactory createWindowFactory_;
+        private IFlightBookingEditWindowFactory editWindowFactory_;
 
-        public FlightBookingMainWindow(IFlightBookingViewModel flightBookingViewModel)
+        public FlightBookingMainWindow(IFlightBookingCreateWindowFactory createWindowFactory, IFlightBookingEditWindowFactory editWindowFactory)
         {
-            DataContext = flightBookingViewModel;
-            flightBookingViewModel_ = flightBookingViewModel;
+            createWindowFactory_ = createWindowFactory;
+            editWindowFactory_ = editWindowFactory;
+
             InitializeComponent();
         }
     }
