@@ -17,21 +17,21 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 {
     class FlightBookingCreateWindowFactorySAP : IFlightBookingCreateWindowFactory
     {
-        private string username_;
-        private string password_;
+        public string Username { get; set; }
+        public string Password { get; set; }
 
-        public FlightBookingCreateWindow Create(string username, string password)
+        public FlightBookingCreateWindow Create()
         {
-            var createViewModel = CreateViewModel(username, password);
+            var createViewModel = CreateViewModel();
             return new FlightBookingCreateWindow(createViewModel);
         }
 
-        private IFlightBookingCreateViewModel CreateViewModel(string username, string password)
+        private IFlightBookingCreateViewModel CreateViewModel()
         {
 
-            var flightFactory = CreateFlightFactory(username, password);
+            var flightFactory = CreateFlightFactory();
             var defaultFlightArgs = CreateDefaultFlightArgs();
-            var flightBookingFactory = CreateFlightBookingFactory(username, password);
+            var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingArgs = CreateDefaultFlightBookingArgs();
 
             return new FlightBookingCreateViewModelImpl(flightFactory, defaultFlightArgs, 
@@ -39,12 +39,12 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
                 new ObservableCollection<IFlight>());
         }
 
-        private IFlightFactory CreateFlightFactory(string username, string password)
+        private IFlightFactory CreateFlightFactory()
         {
             var proxyFlight = new ProxyFlightSAP
             {
-                Username = username,
-                Password = password
+                Username = Username,
+                Password = Password
             };
             return new FlightFactoryImpl(proxyFlight);
         }
@@ -61,12 +61,12 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
             };
         }
 
-        private IFlightBookingFactory CreateFlightBookingFactory(string username, string password)
+        private IFlightBookingFactory CreateFlightBookingFactory()
         {
             var proxyFlightBooking = new ProxyFlightBookingSAP
             {
-                Username = username,
-                Password = password
+                Username = Username,
+                Password = Password
             };
 
             return new FlightBookingFactoryImpl(proxyFlightBooking);

@@ -11,6 +11,6 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
         string Username { get; set; }
         string Password { get; set; }
 
-        FlightBookingCreateWindow Create(string username, string password);
+        FlightBookingCreateWindow Create();
     }
 }
