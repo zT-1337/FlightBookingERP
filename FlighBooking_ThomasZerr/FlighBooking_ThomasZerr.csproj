@@ -83,8 +83,8 @@
     <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
+    <Compile Include="ViewModels\FlightBookingEditViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingEditViewModels\IFlightBookingEditViewModel.cs" />
-    <Compile Include="ViewModels\FlightBookingViewModels\FlightBookingViewModelImpl.cs" />
     <Compile Include="ViewModels\UserDataViewModels\IUserDataViewModel.cs" />
     <Compile Include="ViewModels\UserDataViewModels\UserDataViewModelImpl.cs" />
     <Compile Include="Views\FlightBookingCreateWindows\FlightBookingCreateWindow.xaml.cs">
