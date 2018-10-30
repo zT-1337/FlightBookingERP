@@ -1,24 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
 
-namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
+namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
 {
-    public interface IFlightBookingViewModel
+    interface IFlightBookingEditViewModel
     {
         Exception CaughtException { get; }
 
         IFlightBooking ChosenFlightBooking { get; set; }
         ObservableCollection<IFlightBooking> RetrievedFlightBookings { get; }
-        ObservableCollection<IFlightBooking> CreatedFlightBookings { get; }
 
         IFlightBookingData Args { get; }
 
         void DoFlightBookingSearch();
-        void DoCreateFlightBooking();
         void DoConfirmFlightBooking();
         void DoCancelFlightBooking();
     }
