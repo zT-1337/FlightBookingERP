@@ -13,8 +13,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
     {
         private Z_FLIGHT_MTClient sapClient_;
 
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
+        public string Password { get => sapClient_.ClientCredentials.UserName.Password; set => sapClient_.ClientCredentials.UserName.Password = value; }
 
         public ProxyFlightSAP()
         {
