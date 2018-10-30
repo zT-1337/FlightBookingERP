@@ -79,7 +79,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         public ProxyFlightResponse GetList(IFlightData args)
         {
-            Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlighDateRange)};
+            Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
 
             var flightGetlist = new FlightGetList
             {
