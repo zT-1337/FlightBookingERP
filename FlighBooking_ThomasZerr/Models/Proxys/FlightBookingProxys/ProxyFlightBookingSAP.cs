@@ -2,6 +2,8 @@
 using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Models.Flights.Factorys;
+using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
@@ -9,6 +11,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
     class ProxyFlightBookingSAP : IProxyFlightBooking
     {
         private Z_HH_FlightBooking_MT_01Client sapClient_;
+        private IFlightFactory flightFactory_;
 
         public string Username
         {
@@ -22,9 +25,10 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             set { sapClient_.ClientCredentials.UserName.Password = value; }
         }
 
-        public ProxyFlightBookingSAP()
+        public ProxyFlightBookingSAP(IFlightFactory flightFactory)
         {
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
+            flightFactory_ = flightFactory;
         }
 
         public ProxyFlightBookingResponse Confirm(IFlightBookingData args)
@@ -71,9 +75,27 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         public ProxyFlightBookingResponse Create(IFlightBookingData args)
         {
+            if (!IsFlightExisting(args.FlightData))
+                CreateFlight(args.FlightData);
+
+            return CreateFlightBooking(args);
+        }
+
+        private bool IsFlightExisting(IFlightData args)
+        {
+            return flightFactory_.IsFlightExisting(args);
+        }
+
+        private void CreateFlight(IFlightData args)
+        {
+            flightFactory_.Create(args);
+        }
+
+        private ProxyFlightBookingResponse CreateFlightBooking(IFlightBookingData args)
+        {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
             string reserved = ConvertBoolToStringForSAP(args.Reserved);
-            
+
             var createFromData = new FlightBookingCreateFromData
             {
                 BookingData = bookingData,
