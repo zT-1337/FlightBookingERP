@@ -17,6 +17,14 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
 
         public IFlightBookingData Args { get; }
 
+        public FlightBookingEditViewModelImpl(IFlightBookingFactory flightBookingFactory,
+            IFlightBookingData defaultArgs, ObservableCollection<IFlightBooking> retrievedFlightBookings)
+        {
+            flightBookingFactory_ = flightBookingFactory;
+            Args = defaultArgs;
+            RetrievedFlightBookings = retrievedFlightBookings;
+        }
+
         public void DoFlightBookingSearch()
         {
             try
