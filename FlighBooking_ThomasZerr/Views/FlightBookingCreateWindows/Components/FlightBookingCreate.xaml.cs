@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components
 {
@@ -15,7 +16,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components
 
         private void DoCreate(object sender, RoutedEventArgs e)
         {
-            var flightBookingViewModel = (IFlightBookingViewModel) DataContext;
+            var flightBookingViewModel = (IFlightBookingCreateViewModel) DataContext;
             flightBookingViewModel.DoCreateFlightBooking();
         }
     }

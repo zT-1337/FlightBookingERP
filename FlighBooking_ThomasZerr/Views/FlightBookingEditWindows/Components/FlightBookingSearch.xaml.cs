@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Components
 {
@@ -15,7 +16,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Components
 
         private void DoSearch(object sender, RoutedEventArgs e)
         {
-            var flightBookingViewModel = (IFlightBookingViewModel) DataContext;
+            var flightBookingViewModel = (IFlightBookingEditViewModel) DataContext;
             flightBookingViewModel.DoFlightBookingSearch();
         }
     }

@@ -4,11 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:DateRanges="clr-namespace:FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges"
     xmlns:Utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
-    xmlns:ViewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels"
+    xmlns:ViewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingWindows.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance Type=ViewModel:FlightBookingViewModelImpl}"
+    d:DataContext="{d:DesignInstance Type=ViewModel:FlightBookingEditViewModelImpl}"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">

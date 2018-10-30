@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Components
 {
@@ -15,13 +16,13 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Components
 
         private void DoConfirm(object sender, RoutedEventArgs e)
         {
-            var flightBookingViewModel = (IFlightBookingViewModel) DataContext;
+            var flightBookingViewModel = (IFlightBookingEditViewModel) DataContext;
             flightBookingViewModel.DoConfirmFlightBooking();
         }
 
         private void DoCancel(object sender, RoutedEventArgs e)
         {
-            var flightBookingViewModel = (IFlightBookingViewModel)DataContext;
+            var flightBookingViewModel = (IFlightBookingEditViewModel) DataContext;
             flightBookingViewModel.DoCancelFlightBooking();
         }
     }
