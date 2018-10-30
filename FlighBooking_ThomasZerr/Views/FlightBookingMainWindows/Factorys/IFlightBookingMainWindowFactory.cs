@@ -2,6 +2,6 @@
 {
     public interface IFlightBookingWindowFactory
     {
-        FlightBookingWindow Create(string username, string password);
+        FlightBookingMainWindow Create(string username, string password);
     }
 }

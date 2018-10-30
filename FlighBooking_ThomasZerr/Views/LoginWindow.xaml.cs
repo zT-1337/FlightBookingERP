@@ -8,12 +8,12 @@ namespace FlighBooking_ThomasZerr.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private IFlightBookingWindowFactory flightBookingWindowFactory;
+        private IFlightBookingMainWindowFactory _flightBookingMainWindowFactory;
 
         public LoginWindow()
         {
             InitializeComponent();
-            flightBookingWindowFactory = new FlightBookingWindowFactoryImpl();
+            _flightBookingMainWindowFactory = new FlightBookingMainWindowFactoryImpl();
         }
 
         private void DoLogin(object sender, RoutedEventArgs e)
@@ -21,7 +21,7 @@ namespace FlighBooking_ThomasZerr.Views
             string username = UsernameBox.Text;
             string password = PasswordBox.Text;
 
-            flightBookingWindowFactory.Create(username, password).Show();
+            _flightBookingMainWindowFactory.Create(username, password).Show();
             Close();
         }
     }

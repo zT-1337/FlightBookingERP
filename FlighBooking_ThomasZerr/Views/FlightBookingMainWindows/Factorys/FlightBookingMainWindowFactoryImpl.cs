@@ -14,7 +14,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
 {
     class FlightBookingWindowFactoryImpl : IFlightBookingWindowFactory
     {
-        public FlightBookingWindow Create(string username, string password)
+        public FlightBookingMainWindow Create(string username, string password)
         {
             string erpSystem = ConfigurationManager.AppSettings["ERP-System"];
 
@@ -24,14 +24,14 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
             throw new ConfigurationErrorsException($"ERP-System {erpSystem} ist eine unbekannte Option");
         }
 
-        private FlightBookingWindow CreateForSAP(string username, string password)
+        private FlightBookingMainWindow CreateForSAP(string username, string password)
         {
             var proxySAP = CreateProxySAP(username, password);
             var flightBookingFactory = CreateFlightBookingFactoryERP(proxySAP);
             var defaultArgs = CreateDefaultArgsSAP();
             var flightBookingViewModel = CreateFlightBookingViewModelImpl(defaultArgs, flightBookingFactory);
 
-            return new FlightBookingWindow(flightBookingViewModel);
+            return new FlightBookingMainWindow(flightBookingViewModel);
         }
 
         private IProxyFlightBooking CreateProxySAP(string username, string password)

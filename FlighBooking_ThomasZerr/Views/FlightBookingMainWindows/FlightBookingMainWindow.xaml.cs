@@ -6,11 +6,11 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
     /// <summary>
     /// Interaktionslogik für FlightBookingWindow.xaml
     /// </summary>
-    partial class FlightBookingWindow : Window
+    partial class FlightBookingMainWindow : Window
     {
         private IFlightBookingViewModel flightBookingViewModel_;
 
-        public FlightBookingWindow(IFlightBookingViewModel flightBookingViewModel)
+        public FlightBookingMainWindow(IFlightBookingViewModel flightBookingViewModel)
         {
             DataContext = flightBookingViewModel;
             flightBookingViewModel_ = flightBookingViewModel;
