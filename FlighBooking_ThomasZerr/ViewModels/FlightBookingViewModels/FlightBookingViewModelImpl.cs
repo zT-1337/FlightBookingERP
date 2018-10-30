@@ -8,7 +8,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels
 {
-    class FlightBookingViewModelImpl : IFlightBookingViewModel
+    class FlightBookingViewModelImpl
     {
         private IFlightBookingFactory flightBookingFactory_;
 
