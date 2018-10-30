@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys;
+using FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys;
 
 namespace FlighBooking_ThomasZerr.Views
 {

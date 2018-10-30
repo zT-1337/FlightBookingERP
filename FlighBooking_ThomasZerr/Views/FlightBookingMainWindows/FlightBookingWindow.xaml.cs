@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
-namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows
+namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
 {
     /// <summary>
     /// Interaktionslogik für FlightBookingWindow.xaml

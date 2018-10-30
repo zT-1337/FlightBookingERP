@@ -6,12 +6,11 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.Factorys;
-using FlighBooking_ThomasZerr.Models.Proxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingViewModels;
 
-namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
+namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
 {
     class FlightBookingWindowFactoryImpl : IFlightBookingWindowFactory
     {

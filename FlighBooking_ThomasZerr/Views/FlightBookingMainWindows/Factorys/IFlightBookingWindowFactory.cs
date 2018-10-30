@@ -1,4 +1,4 @@
-﻿namespace FlighBooking_ThomasZerr.Views.FlightBookingWindows.Factorys
+﻿namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys
 {
     public interface IFlightBookingWindowFactory
     {
