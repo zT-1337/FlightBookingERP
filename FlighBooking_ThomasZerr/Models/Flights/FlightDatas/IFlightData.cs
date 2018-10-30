@@ -13,7 +13,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas
         string AirlineId { get; set; }
         string ConnectId { get; set; }
         IDate Flightdate { get; }
-        IDateRange FlighDateRange { get; }
+        IDateRange FlightDateRange { get; }
         string Planetype { get; set; }
         string CurrencyIso { get; set; }
         decimal Price { get; set; }
