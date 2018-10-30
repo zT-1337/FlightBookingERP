@@ -9,7 +9,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
 {
-    interface IFlightBookingEditViewModel
+    public interface IFlightBookingEditViewModel
     {
         Exception CaughtException { get; }
 
