@@ -17,6 +17,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 {
     class FlightBookingCreateWindowFactorySAP : IFlightBookingCreateWindowFactory
     {
+        private string username_;
+        private string password_;
+
         public FlightBookingCreateWindow Create(string username, string password)
         {
             var createViewModel = CreateViewModel(username, password);
