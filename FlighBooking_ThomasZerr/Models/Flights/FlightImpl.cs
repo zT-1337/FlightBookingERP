@@ -16,11 +16,5 @@ namespace FlighBooking_ThomasZerr.Models.Flights
             proxyFlight_ = proxyFlight;
             FlightData = flightData;
         }
-
-        public bool IsExisting()
-        {
-            ProxyFlightResponse proxyFlightResponse = proxyFlight_.IsExisting(FlightData);
-            return proxyFlightResponse.ReturnCode == ReturnCodeProxys.Success;
-        }
     }
 }

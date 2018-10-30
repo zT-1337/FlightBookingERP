@@ -9,6 +9,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 {
     interface IFlightFactory
     {
+        bool IsFlightExisting(IFlightData data);
         IFlight Create(IFlightData data);
     }
 }

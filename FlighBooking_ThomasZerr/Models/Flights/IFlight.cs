@@ -10,6 +10,5 @@ namespace FlighBooking_ThomasZerr.Models.Flights
     public interface IFlight
     {
         IFlightData FlightData { get; }
-        bool IsExisting();
     }
 }

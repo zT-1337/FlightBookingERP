@@ -18,6 +18,12 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
             proxyFlight_ = proxyFlight;
         }
 
+        public bool IsFlightExisting(IFlightData data)
+        {
+            ProxyFlightResponse proxyFlightResponse = proxyFlight_.IsExisting(data);
+            return proxyFlightResponse.ReturnCode == ReturnCodeProxys.Success;
+        }
+
         public IFlight Create(IFlightData data)
         {
             ProxyFlightResponse proxyFlightResponse = proxyFlight_.Create(data);
