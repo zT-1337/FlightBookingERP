@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows
 {
@@ -19,8 +20,10 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows
     /// </summary>
     public partial class FlightBookingCreateWindow : Window
     {
-        public FlightBookingCreateWindow()
+        public FlightBookingCreateWindow(IFlightBookingCreateViewModel createViewModel)
         {
+            DataContext = createViewModel;
+
             InitializeComponent();
         }
     }
