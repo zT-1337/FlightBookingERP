@@ -14,15 +14,18 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
 {
     class FlightBookingEditWindowFactorySAP : IFlightBookingEditWindowFactory
     {
-        public FlightBookingEditWindow Create(string username, string password)
+        public string Username { get; set; }
+        public string Password { get; set; }
+
+        public FlightBookingEditWindow Create()
         {
-            var editViewModel = CreateViewModel(username, password);
+            var editViewModel = CreateViewModel();
             return new FlightBookingEditWindow(editViewModel);
         }
 
-        private IFlightBookingEditViewModel CreateViewModel(string username, string password)
+        private IFlightBookingEditViewModel CreateViewModel()
         {
-            var flightBookingFactory = CreateFlightBookingFactory(username, password);
+            var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingData = CreateDefaultFlightBookingArgs();
 
             return new FlightBookingEditViewModelImpl(flightBookingFactory, 
@@ -30,12 +33,13 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
                 new ObservableCollection<IFlightBooking>());
         }
 
-        private IFlightBookingFactory CreateFlightBookingFactory(string username, string password)
+        private IFlightBookingFactory CreateFlightBookingFactory()
         {
             var proxyFlightBooking = new ProxyFlightBookingSAP
             {
-                Username = username,
-                Password = password
+                Username = Username,
+                Password = Password
+                
             };
 
             return new FlightBookingFactoryImpl(proxyFlightBooking);
