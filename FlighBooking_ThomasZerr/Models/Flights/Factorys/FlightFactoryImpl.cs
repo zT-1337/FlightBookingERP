@@ -45,7 +45,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 
         public IFlight[] Retrieve(IFlightData data)
         {
-            ProxyFlightResponse flightResponse = proxyFlight_.Create(data);
+            ProxyFlightResponse flightResponse = proxyFlight_.GetList(data);
 
             HandleIsError(flightResponse.ReturnCode, flightResponse.Message);
 
