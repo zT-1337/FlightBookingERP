@@ -20,7 +20,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         public Exception CaughtException { get; private set; }
 
-        public IFlight ChosenFlight { get; set; }
+        public IFlight ChosenFlight { get;
+            set; }
         public ObservableCollection<IFlight> RetrievedFlights { get; }
 
         public IFlightData FlightArgs { get; }
@@ -49,6 +50,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
                 {
                     RetrievedFlights.Add(flight);
                 }
+
+                CaughtException = null;
             }
             catch (Exception e)
             {
@@ -63,6 +66,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             try
             { 
                 flightBookingFactory_.Create(FlightBookingArgs);
+                CaughtException = null;
             }
             catch (Exception e)
             {
