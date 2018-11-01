@@ -34,6 +34,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
                 return false;
             }
 
+            CaughtException = null;
             return true;
         }
     }

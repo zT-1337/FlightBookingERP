@@ -55,6 +55,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
                 {
                     RetrievedFlightBookings.Add(flightBooking);
                 }
+
+                CaughtException = null;
             }
             catch (Exception e)
             {
@@ -67,6 +69,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
             try
             {
                 ChosenFlightBooking.Confirm();
+                CaughtException = null;
             }
             catch (Exception e)
             {
@@ -79,7 +82,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
             try
             {
                 ChosenFlightBooking.Cancel();
-                
+                CaughtException = null;
             }
             catch (Exception e)
             {
