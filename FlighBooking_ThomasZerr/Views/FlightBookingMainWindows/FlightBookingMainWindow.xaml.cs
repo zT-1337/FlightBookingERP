@@ -19,5 +19,15 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
 
             InitializeComponent();
         }
+
+        private void OpenFlightBookingEdit(object sender, RoutedEventArgs e)
+        {
+            editWindowFactory_.Create().Show();
+        }
+
+        private void OpenFlightBookingCreate(object sender, RoutedEventArgs e)
+        {
+            createWindowFactory_.Create().Show();
+        }
     }
 }
