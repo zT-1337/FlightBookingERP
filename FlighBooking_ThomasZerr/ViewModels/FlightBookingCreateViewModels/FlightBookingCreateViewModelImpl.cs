@@ -10,18 +10,36 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Flights;
 using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
+using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
-    class FlightBookingCreateViewModelImpl : IFlightBookingCreateViewModel
+    class FlightBookingCreateViewModelImpl : NotifyPropertyChanged, IFlightBookingCreateViewModel
     {
         private IFlightFactory flightFactory_;
         private IFlightBookingFactory flightBookingFactory_;
 
-        public Exception CaughtException { get; private set; }
+        private Exception caughtException_;
+        public Exception CaughtException
+        {
+            get => caughtException_;
+            private set
+            {
+                caughtException_ = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        public IFlight ChosenFlight { get;
-            set; }
+        private IFlight chosenFlight_;
+        public IFlight ChosenFlight
+        {
+            get => chosenFlight_;
+            set
+            {
+                chosenFlight_ = value;
+                RaisePropertyChanged();
+            }
+        }
         public ObservableCollection<IFlight> RetrievedFlights { get; }
 
         public IFlightData FlightArgs { get; }
