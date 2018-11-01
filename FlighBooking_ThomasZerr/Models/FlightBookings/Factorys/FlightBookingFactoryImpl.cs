@@ -9,22 +9,22 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
     class FlightBookingFactoryImpl : IFlightBookingFactory
     {
-        private IProxyFlightBooking _proxyFlightBooking;
+        private IProxyFlightBooking proxyFlightBooking_;
 
         public FlightBookingFactoryImpl(IProxyFlightBooking proxyFlightBooking)
         {
-            _proxyFlightBooking = proxyFlightBooking;
+            proxyFlightBooking_ = proxyFlightBooking;
         }
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.Create(args);
+            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.Create(args);
 
-            HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
+            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
 
-            args.FlightData.AirlineId = flightBookingResponse.FlightBookingData.FlightData.AirlineId;
-            args.BookingId = flightBookingResponse.FlightBookingData.BookingId;
-            return new FlightBookingImpl(_proxyFlightBooking, args);
+            args.FlightData.AirlineId = proxyResponse.FlightBookingData.FlightData.AirlineId;
+            args.BookingId = proxyResponse.FlightBookingData.BookingId;
+            return new FlightBookingImpl(proxyFlightBooking_, args);
         }
 
         private void HandleIsError(ReturnCodeProxys returnCode, string message)
@@ -33,19 +33,19 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
                 throw new InvalidOperationException(message);
         }
 
-        public IFlightBooking[] RetrieveAll(IFlightBookingData args)
+        public IFlightBooking[] Retrieve(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse flightBookingResponses = _proxyFlightBooking.GetList(args);
+            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.GetList(args);
 
-            HandleIsError(flightBookingResponses.ReturnCode, flightBookingResponses.Message);
+            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
 
-            List<IFlightBooking> flightBookings = new List<IFlightBooking>();
-            foreach (var flightBookingData in flightBookingResponses.FlightBookingDatas)
+            IFlightBooking[] flightBookings = new IFlightBooking[proxyResponse.FlightBookingDatas.Length];
+            for (int i = 0; i < flightBookings.Length; ++i)
             {
-                flightBookings.Add(new FlightBookingImpl(_proxyFlightBooking, flightBookingData));
+                flightBookings[i] = new FlightBookingImpl(proxyFlightBooking_, proxyResponse.FlightBookingDatas[i]);
             }
 
-            return flightBookings.ToArray();
+            return flightBookings;
         }
     }
 }

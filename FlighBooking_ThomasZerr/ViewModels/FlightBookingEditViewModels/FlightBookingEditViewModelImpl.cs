@@ -29,7 +29,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
         {
             try
             {
-                IFlightBooking[] flightBookings = flightBookingFactory_.RetrieveAll(Args);
+                IFlightBooking[] flightBookings = flightBookingFactory_.Retrieve(Args);
                 RetrievedFlightBookings.Clear();
                 foreach (var flightBooking in flightBookings)
                 {
