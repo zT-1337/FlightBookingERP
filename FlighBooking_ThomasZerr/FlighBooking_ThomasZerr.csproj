@@ -80,6 +80,7 @@
     <Compile Include="Utils\DateConverters\DateConverterSAP.cs" />
     <Compile Include="Utils\DateConverters\IDateConverter.cs" />
     <Compile Include="Utils\EnumBooleanConverter.cs" />
+    <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
