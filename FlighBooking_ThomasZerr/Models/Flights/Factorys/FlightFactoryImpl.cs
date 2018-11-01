@@ -45,7 +45,17 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 
         public IFlight[] Retrieve(IFlightData data)
         {
-            throw new NotImplementedException();
+            ProxyFlightResponse flightResponse = proxyFlight_.Create(data);
+
+            HandleIsError(flightResponse.ReturnCode, flightResponse.Message);
+
+            IFlight[] flights = new IFlight[flightResponse.FlightDatas.Length];
+            for (int i = 0; i < flights.Length; ++i)
+            {
+                flights[i] = new FlightImpl(proxyFlight_, flightResponse.FlightDatas[i]);
+            }
+
+            return flights;
         }
 
         private void HandleIsError(ReturnCodeProxys returnCode, string message)
