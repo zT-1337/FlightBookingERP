@@ -72,7 +72,7 @@
             Grid.Row="4"
             Grid.Column="1"
             IsReadOnly="True"
-            Text="{Binding ChosenFlight.FlightData.Price, Mode=OneWayToSource}" />
+            Text="{Binding ChosenFlight.FlightData.Price, Mode=OneWay}" />
         <Label
             Grid.Row="6"
             Grid.Column="0"
