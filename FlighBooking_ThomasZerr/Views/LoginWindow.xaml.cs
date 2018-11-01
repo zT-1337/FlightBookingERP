@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FlighBooking_ThomasZerr.ViewModels.UserDataViewModels;
 using FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys;
 
 namespace FlighBooking_ThomasZerr.Views
@@ -8,20 +9,23 @@ namespace FlighBooking_ThomasZerr.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private IFlightBookingMainWindowFactory _flightBookingMainWindowFactory;
+        private IUserDataViewModel userDataViewModel_;
+        private IFlightBookingMainWindowFactory flightBookingMainWindowFactory_;
 
         public LoginWindow()
         {
             InitializeComponent();
-            _flightBookingMainWindowFactory = new FlightBookingMainWindowFactoryImpl();
+            userDataViewModel_ = new UserDataViewModelImpl();
+            DataContext = userDataViewModel_;
+            flightBookingMainWindowFactory_ = new FlightBookingMainWindowFactoryImpl();
         }
 
         private void DoLogin(object sender, RoutedEventArgs e)
         {
-            string username = UsernameBox.Text;
-            string password = PasswordBox.Text;
+            if (!userDataViewModel_.IsLoginValid())
+                return;
 
-            _flightBookingMainWindowFactory.Create(username, password).Show();
+            flightBookingMainWindowFactory_.Create(userDataViewModel_.Username, userDataViewModel_.Password).Show();
             Close();
         }
     }
