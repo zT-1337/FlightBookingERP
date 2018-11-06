@@ -77,7 +77,7 @@
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Content="Anzahl Suchergebnisse" />
+            Content="Anzahl Suchergebnisse: " />
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
