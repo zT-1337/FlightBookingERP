@@ -11,6 +11,7 @@ using FlighBooking_ThomasZerr.Models.Flights;
 using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
+using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
@@ -20,6 +21,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private IFlightFactory flightFactory_;
         private IFlightBookingFactory flightBookingFactory_;
 
+        private IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
         public IOperationResult OperationResult
         {
@@ -48,7 +50,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
-            ObservableCollection<IFlight> retrievedFlights)
+            ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory)
         {
             flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
@@ -57,40 +59,50 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             FlightBookingArgs = defaultFlightBookingArgs;
 
             RetrievedFlights = retrievedFlights;
+
+            operationResultFactory_ = operationResultFactory;
         }
 
         public void DoFlightSearch()
         {
             try
             {
-                IFlight[] flights = flightFactory_.Retrieve(FlightArgs);
-                RetrievedFlights.Clear();
-                foreach (var flight in flights)
-                {
-                    RetrievedFlights.Add(flight);
-                }
-
-                OperationResult = null;
+                ExecuteFlightSearch();
+                OperationResult = operationResultFactory_.CreateSuccess();
             }
             catch (Exception e)
             {
-                OperationResult = e;
+                OperationResult = operationResultFactory_.CreateException(e);
+            }
+        }
+
+        private void ExecuteFlightSearch()
+        {
+            IFlight[] flights = flightFactory_.Retrieve(FlightArgs);
+            RetrievedFlights.Clear();
+            foreach (var flight in flights)
+            {
+                RetrievedFlights.Add(flight);
             }
         }
 
         public void DoCreateFlightBooking()
         {
-            UpdateFlightDataOfFlightBookingArgs();
-
             try
-            { 
-                flightBookingFactory_.Create(FlightBookingArgs);
-                OperationResult = null;
+            {
+                ExecuteCreateFlightBooking();
+                OperationResult = operationResultFactory_.CreateSuccess();
             }
             catch (Exception e)
             {
-                OperationResult = e;
+                OperationResult = operationResultFactory_.CreateException(e);
             }
+        }
+
+        private void ExecuteCreateFlightBooking()
+        {
+            UpdateFlightDataOfFlightBookingArgs();
+            flightBookingFactory_.Create(FlightBookingArgs);
         }
 
         private void UpdateFlightDataOfFlightBookingArgs()
