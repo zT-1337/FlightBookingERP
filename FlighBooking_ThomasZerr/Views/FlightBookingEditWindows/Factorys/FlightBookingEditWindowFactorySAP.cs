@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
@@ -27,10 +28,12 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
         {
             var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingData = CreateDefaultFlightBookingArgs();
+            var operationResultFactory = CreateOperationResultFactory();
 
             return new FlightBookingEditViewModelImpl(flightBookingFactory, 
                 defaultFlightBookingData, 
-                new ObservableCollection<IFlightBooking>());
+                new ObservableCollection<IFlightBooking>(),
+                operationResultFactory);
         }
 
         private IFlightBookingFactory CreateFlightBookingFactory()
@@ -58,6 +61,11 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
                 Reserved = false,
                 Cancelled = false,
             };
+        }
+
+        private IOperationResultFactory CreateOperationResultFactory()
+        {
+            return new OperationResultFactorySAP();
         }
     }
 }
