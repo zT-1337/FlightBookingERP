@@ -20,29 +20,6 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
             proxyFlight_ = proxyFlight;
         }
 
-        public bool IsFlightExisting(IFlightData data)
-        {
-            ProxyFlightResponse proxyFlightResponse = proxyFlight_.IsExisting(data);
-            if (IsMessageTellingNotExisting(proxyFlightResponse.Message))
-                return false;
-
-            HandleIsError(proxyFlightResponse.ReturnCode, proxyFlightResponse.Message);
-
-            return true;
-        }
-
-        private bool IsMessageTellingNotExisting(string Message)
-        {
-            return Regex.IsMatch(Message, "Flug .* nicht vorhanden");
-        }
-
-        public IFlight Create(IFlightData data)
-        {
-            ProxyFlightResponse proxyFlightResponse = proxyFlight_.Create(data);
-            HandleIsError(proxyFlightResponse.ReturnCode, proxyFlightResponse.Message);
-            return new FlightImpl(proxyFlight_, data);
-        }
-
         public IFlight[] Retrieve(IFlightData data)
         {
             ProxyFlightResponse flightResponse = proxyFlight_.GetList(data);
