@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
 using FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys;
 using FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys;
 
@@ -12,22 +14,43 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
         private IFlightBookingCreateWindowFactory createWindowFactory_;
         private IFlightBookingEditWindowFactory editWindowFactory_;
 
+        private List<Window> openedWindows_;
+
         public FlightBookingMainWindow(IFlightBookingCreateWindowFactory createWindowFactory, IFlightBookingEditWindowFactory editWindowFactory)
         {
             createWindowFactory_ = createWindowFactory;
             editWindowFactory_ = editWindowFactory;
+            openedWindows_ = new List<Window>();
 
             InitializeComponent();
         }
 
         private void OpenFlightBookingEdit(object sender, RoutedEventArgs e)
         {
-            editWindowFactory_.Create().Show();
+            var editWindow = editWindowFactory_.Create();
+            editWindow.Show();
+            openedWindows_.Add(editWindow);
         }
 
         private void OpenFlightBookingCreate(object sender, RoutedEventArgs e)
         {
-            createWindowFactory_.Create().Show();
+            var createWindow = createWindowFactory_.Create();
+            createWindow.Show();
+            openedWindows_.Add(createWindow);
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            new LoginWindow().Show();
+            Close();
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            foreach (var window in openedWindows_)
+            {
+                window.Close();
+            }
         }
     }
 }
