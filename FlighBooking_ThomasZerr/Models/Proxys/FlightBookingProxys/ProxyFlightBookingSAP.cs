@@ -95,7 +95,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         private FlightBookingCreateFromData BuildCreateFromDataRequest(IFlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
-            string reserved = ConvertBoolToStringForSAP(args.Reserved);
+            string reserved = SAPConverter.ConvertBoolToStringForSAP(args.Reserved);
 
             return new FlightBookingCreateFromData
             {
@@ -140,14 +140,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private string ConvertBoolToStringForSAP(bool toConvert)
-        {
-            if (toConvert)
-                return "X";
-            else
-                return "";
-        }
-
         public ProxyFlightBookingResponse GetList(IFlightBookingData args)
         {
             var getListRequest = BuildGetListRequest(args); 
@@ -190,7 +182,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
         {
-            string option = ConvertDateRangeOptionToString(dateRange.Option);
+            string option = SAPConverter.ConvertDateRangeOptionToString(dateRange.Option);
 
             Bapisfldra result = new Bapisfldra
             {
@@ -202,23 +194,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
 
             return result;
-        }
-
-        private string ConvertDateRangeOptionToString(DateRangeOption option)
-        {
-            switch (option)
-            {
-                case DateRangeOption.Equal:
-                    return "EQ";
-                case DateRangeOption.NotEqual:
-                    return "NE";
-                case DateRangeOption.Between:
-                    return "BT";
-                case DateRangeOption.NotBetween:
-                    return "NB";
-            }
-
-            throw new InvalidOperationException($"Gegebene DateRangeOption nicht bekannt: {option:G}");
         }
 
         private IFlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
@@ -235,8 +210,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                     Class = booking.Class,
                     Counter = booking.Counter,
                     AgencyId = booking.Agencynum,
-                    Reserved = ConvertStringOfSAPToBool(booking.Reserved),
-                    Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
+                    Reserved = SAPConverter.ConvertStringOfSAPToBool(booking.Reserved),
+                    Cancelled = SAPConverter.ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
                 flightBookingData.FlightData.AirlineId = booking.Airlineid;
@@ -248,11 +223,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             }
 
             return flightBookingDatas;
-        }
-
-        private bool ConvertStringOfSAPToBool(string toConvert)
-        {
-            return toConvert.Equals("X");
         }
     }
 }

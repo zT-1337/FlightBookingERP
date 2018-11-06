@@ -81,7 +81,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
         {
-            string option = ConvertDateRangeOptionToString(dateRange.Option);
+            string option = SAPConverter.ConvertDateRangeOptionToString(dateRange.Option);
 
             Bapisfldra result = new Bapisfldra
             {
@@ -93,23 +93,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
             };
 
             return result;
-        }
-
-        private string ConvertDateRangeOptionToString(DateRangeOption option)
-        {
-            switch (option)
-            {
-                case DateRangeOption.Equal:
-                    return "EQ";
-                case DateRangeOption.NotEqual:
-                    return "NE";
-                case DateRangeOption.Between:
-                    return "BT";
-                case DateRangeOption.NotBetween:
-                    return "NB";
-            }
-
-            throw new InvalidOperationException($"Gegebene DateRangeOption nicht bekannt: {option:G}");
         }
     }
 }
