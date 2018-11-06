@@ -23,12 +23,12 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 
         public IOperationResult CreateException(Exception exception)
         {
-            string message = createMessageForException(exception);
+            string message = CreateMessageForException(exception);
 
             return new OperationResultImpl(message, ReturnCode.Exception);
         }
 
-        private string createMessageForException(Exception exception)
+        private string CreateMessageForException(Exception exception)
         {
             switch (exception.Message)
             {
