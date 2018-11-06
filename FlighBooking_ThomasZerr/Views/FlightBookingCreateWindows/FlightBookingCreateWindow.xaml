@@ -28,6 +28,6 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             IsReadOnly="True"
-            Text="{Binding CaughtException.Message, Mode=OneWay}" />
+            Text="{Binding OperationResult.Message, Mode=OneWay}" />
     </Grid>
 </Window>
