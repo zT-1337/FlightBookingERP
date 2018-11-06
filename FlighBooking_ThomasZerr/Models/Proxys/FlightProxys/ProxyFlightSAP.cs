@@ -22,66 +22,18 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
             sapClient_ = new Z_FLIGHT_MTClient();
         }
 
-        public ProxyFlightResponse IsExisting(IFlightData args)
-        {
-            var flightGetDetail = new FlightGetDetail
-            {
-                AirlineID = args.AirlineId,
-                ConnectionID = args.ConnectId,
-                FlightDate = args.Flightdate.DateString
-            };
-
-            var sapResponse = sapClient_.FlightGetDetail(flightGetDetail);
-
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-
-            return new ProxyFlightResponse
-            {
-                ReturnCode =  returnCode,
-                Message = message
-            };
-        }
-
-        public ProxyFlightResponse Create(IFlightData args)
-        {
-            Bapisflrep flightData = ConvertFlightDataToBapisflrep(args);
-
-            var flightCreate = new FlightSaveReplica()
-            {
-                FlightData = flightData
-            };
-
-            var sapResponse = sapClient_.FlightSaveReplica(flightCreate);
-
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-
-            return new ProxyFlightResponse
-            {
-                ReturnCode = returnCode,
-                Message = message
-            };
-        }
-
-        private Bapisflrep ConvertFlightDataToBapisflrep(IFlightData args)
-        {
-            return new Bapisflrep
-            {
-                Airlineid = args.AirlineId,
-                Connectid = args.ConnectId,
-                CurrIso = args.CurrencyIso,
-                Flightdate = args.Flightdate.DateString,
-                Planetype = args.Planetype,
-                Price = args.Price
-            };
-        }
-
         public ProxyFlightResponse GetList(IFlightData args)
         {
-            Bapisfldra[] flightDateRange = {ConvertFromDateRangeToBapisfldra(args.FlightDateRange)};
+            var getListRequest = BuildGetListRequest(args);
+            var sapResponse = sapClient_.FlightGetList(getListRequest);
+            return BuildGetListResponse(sapResponse);
+        }
 
-            var flightGetlist = new FlightGetList
+        private FlightGetList BuildGetListRequest(IFlightData args)
+        {
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+
+            return new FlightGetList
             {
                 Airline = args.AirlineId,
                 DateRange = flightDateRange,
@@ -89,8 +41,10 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
                 MaxRowsSpecified = args.IsMaxResultsActive
             };
 
-            var sapResponse = sapClient_.FlightGetList(flightGetlist);
+        }
 
+        private ProxyFlightResponse BuildGetListResponse(FlightGetListResponse sapResponse)
+        {
             ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);

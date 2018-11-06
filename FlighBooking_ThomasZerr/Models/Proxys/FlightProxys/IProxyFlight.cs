@@ -12,8 +12,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
         string Username { get; set; }
         string Password { set; }
 
-        ProxyFlightResponse IsExisting(IFlightData args);
-        ProxyFlightResponse Create(IFlightData args);
         ProxyFlightResponse GetList(IFlightData args);
     }
 }
