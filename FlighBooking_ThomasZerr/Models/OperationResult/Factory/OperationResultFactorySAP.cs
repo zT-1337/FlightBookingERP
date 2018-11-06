@@ -32,8 +32,10 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
         {
             switch (exception.Message)
             {
-                    default:
-                        return exception.Message;
+                case "Eintrag für den Flug bereits gesperrt (Tabelle SFLIGHT)":
+                    return "Operation wird bereits ausgeführt";
+                default:
+                    return exception.Message;
             }
         }
     }
