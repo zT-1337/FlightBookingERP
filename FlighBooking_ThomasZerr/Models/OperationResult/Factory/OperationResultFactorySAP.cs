@@ -9,24 +9,23 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 {
     class OperationResultFactorySAP : IOperationResultFactory
     {
+        private IOperationResult successResult_;
+
+        public OperationResultFactorySAP()
+        {
+            successResult_ = new OperationResultImpl("Operation erfolgreich ausgeführt", ReturnCode.Success);
+        }
+
         public IOperationResult CreateSuccess()
         {
-            return new OperationResultImpl
-            {
-                Message = "Operation erfolgreich ausgeführt",
-                ReturnCode = ReturnCode.Success
-            };
+            return successResult_;
         }
 
         public IOperationResult CreateException(Exception exception)
         {
             string message = createMessageForException(exception);
 
-            return new OperationResultImpl
-            {
-                Message = message,
-                ReturnCode = ReturnCode.Exception
-            };
+            return new OperationResultImpl(message, ReturnCode.Exception);
         }
 
         private string createMessageForException(Exception exception)
