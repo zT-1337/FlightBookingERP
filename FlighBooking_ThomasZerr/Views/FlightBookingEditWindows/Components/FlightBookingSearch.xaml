@@ -2,19 +2,19 @@
     x:Class="FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Components.FlightBookingSearch"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:DateRanges="clr-namespace:FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges"
     xmlns:Utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:ViewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dateRanges="clr-namespace:FlighBooking_ThomasZerr.Models.DateRanges"
     d:DataContext="{d:DesignInstance Type=ViewModel:FlightBookingEditViewModelImpl}"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Utils:EnumBooleanConverter x:Key="EnumBooleanConverter" />
-        <DateRanges:DateRangeOption x:Key="Between">Between</DateRanges:DateRangeOption>
-        <DateRanges:DateRangeOption x:Key="NotBetween">NotBetween</DateRanges:DateRangeOption>
+        <dateRanges:DateRangeOption x:Key="Between">Between</dateRanges:DateRangeOption>
+        <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
