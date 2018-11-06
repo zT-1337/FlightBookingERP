@@ -10,6 +10,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Flights;
 using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
+using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
@@ -19,13 +20,13 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private IFlightFactory flightFactory_;
         private IFlightBookingFactory flightBookingFactory_;
 
-        private Exception caughtException_;
-        public Exception CaughtException
+        private IOperationResult operationResult_;
+        public IOperationResult OperationResult
         {
-            get => caughtException_;
+            get => operationResult_;
             private set
             {
-                caughtException_ = value;
+                operationResult_ = value;
                 RaisePropertyChanged();
             }
         }
@@ -69,11 +70,11 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
                     RetrievedFlights.Add(flight);
                 }
 
-                CaughtException = null;
+                OperationResult = null;
             }
             catch (Exception e)
             {
-                CaughtException = e;
+                OperationResult = e;
             }
         }
 
@@ -84,11 +85,11 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             try
             { 
                 flightBookingFactory_.Create(FlightBookingArgs);
-                CaughtException = null;
+                OperationResult = null;
             }
             catch (Exception e)
             {
-                CaughtException = e;
+                OperationResult = e;
             }
         }
 
