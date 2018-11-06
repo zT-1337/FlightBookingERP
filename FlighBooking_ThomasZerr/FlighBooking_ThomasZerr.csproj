@@ -75,8 +75,9 @@
     <Compile Include="Models\Flights\FlightDatas\IFlightData.cs" />
     <Compile Include="Models\Flights\IFlight.cs" />
     <Compile Include="Models\OperationResult\Factory\IOperationResultFactory.cs" />
+    <Compile Include="Models\OperationResult\Factory\OperationResultFactoryCreateSAP.cs" />
     <Compile Include="Models\OperationResult\Factory\OperationResultFactoryLogin.cs" />
-    <Compile Include="Models\OperationResult\Factory\OperationResultFactorySAP.cs" />
+    <Compile Include="Models\OperationResult\Factory\OperationResultFactoryEditSAP.cs" />
     <Compile Include="Models\OperationResult\IOperationResult.cs" />
     <Compile Include="Models\OperationResult\OperationResultImpl.cs" />
     <Compile Include="Models\OperationResult\ReturnCodes\ReturnCode.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\ReturnCodeToColorConverter.cs" />
     <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
+    <Compile Include="Utils\ValidationRules\AirlineIdValidation.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
     <Compile Include="ViewModels\FlightBookingEditViewModels\FlightBookingEditViewModelImpl.cs" />
