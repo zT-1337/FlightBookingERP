@@ -7,7 +7,7 @@ using FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes;
 
 namespace FlighBooking_ThomasZerr.Models.OperationResult
 {
-    interface IOperationResult
+    public interface IOperationResult
     {
         string Message { get;}
         ReturnCode ReturnCode { get;}
