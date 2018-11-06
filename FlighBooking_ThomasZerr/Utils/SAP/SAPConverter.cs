@@ -7,7 +7,7 @@ using FlighBooking_ThomasZerr.Models.Proxys;
 
 namespace FlighBooking_ThomasZerr.Utils.SAP
 {
-    class TypeReturnCodeConverter
+    class SAPConverter
     {
         public static ReturnCodeProxys TypeToReturnCode(string type)
         {

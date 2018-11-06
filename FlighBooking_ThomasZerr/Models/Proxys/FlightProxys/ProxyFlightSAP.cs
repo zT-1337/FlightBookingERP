@@ -45,7 +45,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         private ProxyFlightResponse BuildGetListResponse(FlightGetListResponse sapResponse)
         {
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);
 

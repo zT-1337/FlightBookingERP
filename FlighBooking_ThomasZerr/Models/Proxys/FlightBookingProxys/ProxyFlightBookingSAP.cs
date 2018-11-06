@@ -45,7 +45,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         private ProxyFlightBookingResponse BuildConfirmResponse(FlightBookingConfirmResponse sapResponse)
         {
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
@@ -74,7 +74,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         private ProxyFlightBookingResponse BuildCancelResponse(FlightBookingCancelResponse sapResponse)
         {
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
@@ -107,7 +107,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         private ProxyFlightBookingResponse BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
         {
 
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             IFlightBookingData flightBookingData = new FlightBookingDataSAP()
             {
@@ -174,7 +174,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
         private ProxyFlightBookingResponse BuildGetListResponse(FlightBookingGetListResponse sapResponse)
         {
-            ReturnCodeProxys returnCode = TypeReturnCodeConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
             string message = sapResponse.Return[0].Message;
 
