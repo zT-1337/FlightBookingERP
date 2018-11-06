@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights;
 using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
@@ -53,7 +54,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
         private IFlightData CreateDefaultFlightArgs()
         {
-            return new FlightDataSAP
+            var flighData =  new FlightDataSAP
             {
                 AirlineId = "",
                 ConnectId = "",
@@ -61,6 +62,12 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
                 CurrencyIso = "",
                 Price = 0,
             };
+
+            flighData.FlightDateRange.Option = DateRangeOption.Between;
+            flighData.FlightDateRange.EarlierDateTime = DateTime.Now;
+            flighData.FlightDateRange.LaterDateTime = DateTime.Now;
+
+            return flighData;
         }
 
         private IFlightBookingFactory CreateFlightBookingFactory()
