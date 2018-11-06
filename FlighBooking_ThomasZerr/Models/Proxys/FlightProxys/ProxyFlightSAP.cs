@@ -85,9 +85,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
             {
                 Airline = args.AirlineId,
                 DateRange = flightDateRange,
-                //TODO schöner machen
-                MaxRows = 100,
-                MaxRowsSpecified = true
+                MaxRows = args.MaxResults,
+                MaxRowsSpecified = args.IsMaxResultsActive
             };
 
             var sapResponse = sapClient_.FlightGetList(flightGetlist);

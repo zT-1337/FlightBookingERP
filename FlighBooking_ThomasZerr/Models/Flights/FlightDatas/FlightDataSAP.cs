@@ -18,6 +18,8 @@ namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas
         public string Planetype { get; set; }
         public string CurrencyIso { get; set; }
         public decimal Price { get; set; }
+        public int MaxResults { get; set; }
+        public bool IsMaxResultsActive { get; set; }
 
         public FlightDataSAP()
         {
