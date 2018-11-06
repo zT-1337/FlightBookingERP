@@ -9,7 +9,13 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult
 {
     class OperationResultImpl : IOperationResult
     {
-        public string Message { get; set; }
-        public ReturnCode ReturnCode { get; set; }
+        public string Message { get;}
+        public ReturnCode ReturnCode { get;}
+
+        public OperationResultImpl(string message, ReturnCode returnCode)
+        {
+            Message = message;
+            ReturnCode = returnCode;
+        }
     }
 }
