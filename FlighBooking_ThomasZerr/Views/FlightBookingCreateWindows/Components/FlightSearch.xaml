@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
+    xmlns:validationRules="clr-namespace:FlighBooking_ThomasZerr.Utils.ValidationRules"
     xmlns:viewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels"
     d:DataContext="{d:DesignInstance Type=viewModel:FlightBookingCreateViewModelImpl}"
     d:DesignHeight="300"
@@ -16,6 +17,7 @@
         <utils:EnumBooleanConverter x:Key="EnumBooleanConverter" />
         <dateRanges:DateRangeOption x:Key="Between">Between</dateRanges:DateRangeOption>
         <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
+        <validationRules:AirlineIdValidation x:Key="AirlineIdValidation" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -34,10 +36,18 @@
             Grid.Row="0"
             Grid.Column="0"
             Content="Fluggesellschaft: " />
-        <TextBox
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding FlightArgs.AirlineId, Mode=OneWayToSource}" />
+        <TextBox Grid.Row="0" Grid.Column="1">
+            <TextBox.Text>
+                <Binding
+                    Mode="OneWayToSource"
+                    Path="FlightArgs.AirlineId"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validationRules:AirlineIdValidation />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <Label
             Grid.Row="1"
             Grid.Column="0"
