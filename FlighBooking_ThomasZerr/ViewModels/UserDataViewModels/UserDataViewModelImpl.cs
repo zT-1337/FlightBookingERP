@@ -1,4 +1,6 @@
 ﻿using System;
+using FlighBooking_ThomasZerr.Models.OperationResult;
+using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
@@ -8,33 +10,38 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
         public string Username { get; set; }
         public string Password { get; set; }
 
-        private Exception caughtException_;
-
-        public Exception CaughtException
+        private IOperationResultFactory operationResultFactory_;
+        private IOperationResult operationResult_;
+        public IOperationResult OperationResult
         {
-            get => caughtException_;
+            get => operationResult_;
             private set
             {
-                caughtException_ = value;
+                operationResult_ = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public UserDataViewModelImpl()
+        {
+            operationResultFactory_ = new OperationResultFactoryLogin();
         }
 
         public bool IsLoginValid()
         {
             if (Username.Length < 1)
             {
-                CaughtException = new Exception("Benutzername darf nicht leer sein");
+                OperationResult = operationResultFactory_.CreateException(new Exception("Der Benutzername darf nicht leer sein"));
                 return false;
             }
 
             if (Password.Length < 1)
             {
-                CaughtException = new Exception("Passwort darf nicht leer sein");
+                OperationResult = operationResultFactory_.CreateException(new Exception("Passwort darf nicht leer sein"));
                 return false;
             }
 
-            CaughtException = null;
+            OperationResult = operationResultFactory_.CreateSuccess();
             return true;
         }
     }

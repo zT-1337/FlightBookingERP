@@ -75,6 +75,7 @@
     <Compile Include="Models\Flights\FlightDatas\IFlightData.cs" />
     <Compile Include="Models\Flights\IFlight.cs" />
     <Compile Include="Models\OperationResult\Factory\IOperationResultFactory.cs" />
+    <Compile Include="Models\OperationResult\Factory\OperationResultFactoryLogin.cs" />
     <Compile Include="Models\OperationResult\Factory\OperationResultFactorySAP.cs" />
     <Compile Include="Models\OperationResult\IOperationResult.cs" />
     <Compile Include="Models\OperationResult\OperationResultImpl.cs" />

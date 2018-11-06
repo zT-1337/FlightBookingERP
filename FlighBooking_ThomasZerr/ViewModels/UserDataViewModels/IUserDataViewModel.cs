@@ -1,4 +1,5 @@
 ﻿using System;
+using FlighBooking_ThomasZerr.Models.OperationResult;
 
 namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
 {
@@ -6,7 +7,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
     {
         string Username { get; set; }
         string Password { get; set; }
-        Exception CaughtException { get; }
+        IOperationResult OperationResult { get; }
         bool IsLoginValid();
     }
 }
