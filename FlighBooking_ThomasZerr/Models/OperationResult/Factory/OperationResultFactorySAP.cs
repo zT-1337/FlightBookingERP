@@ -30,7 +30,11 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 
         private string createMessageForException(Exception exception)
         {
-            throw new NotImplementedException();
+            switch (exception.Message)
+            {
+                    default:
+                        return exception.Message;
+            }
         }
     }
 }
