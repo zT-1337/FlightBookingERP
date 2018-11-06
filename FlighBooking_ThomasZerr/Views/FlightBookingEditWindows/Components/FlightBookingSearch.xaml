@@ -28,7 +28,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -106,13 +108,26 @@
             <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding Args.FlightDateRange.LaterDateTime, Mode=OneWayToSource}" />
             <Label Content="Enddatum" DockPanel.Dock="Right" />
         </DockPanel>
-        <Button
+        <Label
             Grid.Row="9"
+            Grid.Column="0"
+            Content="Anzahl Suchergebnisse: " />
+        <TextBox
+            Grid.Row="9"
+            Grid.Column="1"
+            Text="{Binding Args.MaxResults, Mode=TwoWay}" />
+        <CheckBox
+            Grid.Row="10"
+            Grid.Column="1"
+            Content="Anzahl limitieren"
+            IsChecked="{Binding Args.IsMaxResultsActive, Mode=TwoWay}" />
+        <Button
+            Grid.Row="11"
             Grid.Column="1"
             Click="DoSearch"
             Content="Suchen" />
         <ListBox
-            Grid.Row="10"
+            Grid.Row="12"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             MaxHeight="200"

@@ -162,9 +162,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
             return new FlightBookingGetList
             {
-                //TODO zu ändern
-                MaxRowsSpecified = true,
-                MaxRows = 100,
+                MaxRows = args.MaxResults,
+                MaxRowsSpecified = args.IsMaxResultsActive,
                 Airline = args.FlightData.AirlineId,
                 TravelAgency = args.AgencyId,
                 CustomerNumber = args.CustomerId,

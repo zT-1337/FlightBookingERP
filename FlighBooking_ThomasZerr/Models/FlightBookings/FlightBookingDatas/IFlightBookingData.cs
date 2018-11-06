@@ -22,6 +22,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         IDateRange BookingDateRange { get; }
         IDateRange FlightDateRange { get; }
 
+        int MaxResults { get; set; }
+        bool IsMaxResultsActive { get; set; }
+
         void ConfirmFlight();
     }
 }
