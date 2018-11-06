@@ -1,4 +1,4 @@
-﻿namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges
+﻿namespace FlighBooking_ThomasZerr.Models.DateRanges
 {
     public enum DateRangeOption
     {

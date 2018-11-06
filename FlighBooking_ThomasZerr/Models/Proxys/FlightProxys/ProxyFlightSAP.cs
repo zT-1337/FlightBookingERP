@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Flight;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
+using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Utils.SAP;
 

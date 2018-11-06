@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.Dates;
+using FlighBooking_ThomasZerr.Models.DateRanges;
+using FlighBooking_ThomasZerr.Models.Dates;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
 
 namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas

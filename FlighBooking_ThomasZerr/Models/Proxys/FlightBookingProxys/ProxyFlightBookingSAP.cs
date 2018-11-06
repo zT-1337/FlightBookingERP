@@ -1,7 +1,7 @@
 ﻿using System;
 using FlighBooking_ThomasZerr.FlightBookingReference;
+using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges;
 using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys

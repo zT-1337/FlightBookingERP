@@ -1,7 +1,7 @@
 ﻿using System;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
 
-namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas.DateRanges
+namespace FlighBooking_ThomasZerr.Models.DateRanges
 {
     class DateRangeImpl : IDateRange
     {
