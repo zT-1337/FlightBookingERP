@@ -62,11 +62,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeImpl.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\IDateRange.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\DateRanges\DateRangeOption.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\DateImpl.cs" />
-    <Compile Include="Models\FlightBookings\FlightBookingDatas\Dates\IDate.cs" />
+    <Compile Include="Models\DateRanges\DateRangeImpl.cs" />
+    <Compile Include="Models\DateRanges\IDateRange.cs" />
+    <Compile Include="Models\DateRanges\DateRangeOption.cs" />
+    <Compile Include="Models\Dates\DateImpl.cs" />
+    <Compile Include="Models\Dates\IDate.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingDatas\FlightBookingDataSAP.cs" />
     <Compile Include="Models\Flights\Factorys\FlightFactoryImpl.cs" />
     <Compile Include="Models\Flights\Factorys\IFlightFactory.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\ReturnCodeToColorConverter.cs" />
-    <Compile Include="Utils\SAP\TypeReturnCodeConverter.cs" />
+    <Compile Include="Utils\SAP\SAPConverter.cs" />
     <Compile Include="Utils\ValidationRules\AirlineIdValidation.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
