@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.OperationResult;
+using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
@@ -11,13 +13,14 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
     {
         private IFlightBookingFactory flightBookingFactory_;
 
-        private Exception caughtException_;
-        public Exception CaughtException
+        private IOperationResultFactory operationResultFactory_;
+        private IOperationResult operationResult_;
+        public IOperationResult OperationResult
         {
-            get => caughtException_;
+            get => operationResult_;
             private set
             {
-                caughtException_ = value;
+                operationResult_ = value;
                 RaisePropertyChanged();
             }
         }
@@ -38,29 +41,35 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
         public IFlightBookingData Args { get; }
 
         public FlightBookingEditViewModelImpl(IFlightBookingFactory flightBookingFactory,
-            IFlightBookingData defaultArgs, ObservableCollection<IFlightBooking> retrievedFlightBookings)
+            IFlightBookingData defaultArgs, ObservableCollection<IFlightBooking> retrievedFlightBookings,
+            IOperationResultFactory operationResultFactory)
         {
             flightBookingFactory_ = flightBookingFactory;
             Args = defaultArgs;
             RetrievedFlightBookings = retrievedFlightBookings;
+            operationResultFactory_ = operationResultFactory;
         }
 
         public void DoFlightBookingSearch()
         {
             try
             {
-                IFlightBooking[] flightBookings = flightBookingFactory_.Retrieve(Args);
-                RetrievedFlightBookings.Clear();
-                foreach (var flightBooking in flightBookings)
-                {
-                    RetrievedFlightBookings.Add(flightBooking);
-                }
-
-                CaughtException = null;
+                ExecuteFlightBookingSearch();
+                OperationResult = operationResultFactory_.CreateSuccess();
             }
             catch (Exception e)
             {
-                CaughtException = e;
+                OperationResult = operationResultFactory_.CreateException(e);
+            }
+        }
+
+        private void ExecuteFlightBookingSearch()
+        {
+            IFlightBooking[] flightBookings = flightBookingFactory_.Retrieve(Args);
+            RetrievedFlightBookings.Clear();
+            foreach (var flightBooking in flightBookings)
+            {
+                RetrievedFlightBookings.Add(flightBooking);
             }
         }
 
@@ -68,26 +77,36 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
         {
             try
             {
-                ChosenFlightBooking.Confirm();
-                CaughtException = null;
+                ExecuteConfirmFlightBooking();
+                OperationResult = operationResultFactory_.CreateSuccess();
             }
             catch (Exception e)
             {
-                CaughtException = e;
+                OperationResult = operationResultFactory_.CreateException(e);
             }
+        }
+
+        private void ExecuteConfirmFlightBooking()
+        {
+            ChosenFlightBooking.Confirm();
         }
 
         public void DoCancelFlightBooking()
         {
             try
             {
-                ChosenFlightBooking.Cancel();
-                CaughtException = null;
+                ExecuteCancelFlightBooking();
+                OperationResult = operationResultFactory_.CreateSuccess();
             }
             catch (Exception e)
             {
-                CaughtException = e;
+                OperationResult = operationResultFactory_.CreateException(e);
             }
+        }
+
+        private void ExecuteCancelFlightBooking()
+        {
+            ChosenFlightBooking.Cancel();
         }
     }
 }
