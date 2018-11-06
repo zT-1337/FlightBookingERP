@@ -8,11 +8,11 @@ using FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes;
 
 namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 {
-    class OperationResultFactorySAP : IOperationResultFactory
+    class OperationResultFactoryEditSAP : IOperationResultFactory
     {
         private IOperationResult successResult_;
 
-        public OperationResultFactorySAP()
+        public OperationResultFactoryEditSAP()
         {
             successResult_ = new OperationResultImpl("Operation erfolgreich ausgeführt", ReturnCode.Success);
         }
