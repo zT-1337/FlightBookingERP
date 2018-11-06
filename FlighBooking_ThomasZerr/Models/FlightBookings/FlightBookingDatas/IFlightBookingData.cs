@@ -6,7 +6,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
     public interface IFlightBookingData
     {
-        //TODO Flightdate eventuell in besseren Datentypen umwandeln
         IFlightData FlightData { get; }
         string BookingId { get; set; }
         string CustomerId { get; set; }
