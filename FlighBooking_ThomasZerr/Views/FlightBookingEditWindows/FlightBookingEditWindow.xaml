@@ -6,12 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingEditWindows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:viewModels="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels"
     Title="FlightBookingEditWindow"
     Width="500"
     Height="600"
     d:DataContext="{d:DesignInstance Type=viewModels:FlightBookingEditViewModelImpl}"
     mc:Ignorable="d">
+    <Window.Resources>
+        <utils:ReturnCodeToColorConverter x:Key="ReturnCodeToColorConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -27,7 +31,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
+            Background="{Binding OperationResult.ReturnCode, Converter={StaticResource ReturnCodeToColorConverter}, Mode=OneWay}"
             IsReadOnly="True"
-            Text="{Binding CaughtException.Message, Mode=OneWay}" />
+            Text="{Binding OperationResult.Message, Mode=OneWay}" />
     </Grid>
 </Window>
