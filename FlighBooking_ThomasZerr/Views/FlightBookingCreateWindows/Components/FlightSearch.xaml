@@ -3,12 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dateRanges="clr-namespace:FlighBooking_ThomasZerr.Models.DateRanges"
     xmlns:local="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:validationRules="clr-namespace:FlighBooking_ThomasZerr.Utils.ValidationRules"
     xmlns:viewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels"
-    xmlns:dateRanges="clr-namespace:FlighBooking_ThomasZerr.Models.DateRanges"
     d:DataContext="{d:DesignInstance Type=viewModel:FlightBookingCreateViewModelImpl}"
     d:DesignHeight="300"
     d:DesignWidth="300"
@@ -19,94 +19,96 @@
         <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
         <validationRules:AirlineIdValidation x:Key="AirlineIdValidation" />
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            Content="Fluggesellschaft: " />
-        <TextBox Grid.Row="0" Grid.Column="1">
-            <TextBox.Text>
-                <Binding
-                    Mode="OneWayToSource"
-                    Path="FlightArgs.AirlineId"
-                    UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <validationRules:AirlineIdValidation />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Content="Flugdatum: " />
-        <DockPanel Grid.Row="1" Grid.Column="1">
-            <RadioButton
-                Content="Einschließen"
-                DockPanel.Dock="Top"
-                GroupName="OptionFlugdatum"
-                IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
-            <RadioButton
-                Content="Ausschließen"
-                DockPanel.Dock="Top"
-                GroupName="OptionFlugdatum"
-                IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
-        </DockPanel>
-        <DockPanel Grid.Row="2" Grid.Column="1">
-            <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightArgs.FlightDateRange.EarlierDateTime, Mode=TwoWay}" />
-            <Label Content="Startdatum" DockPanel.Dock="Right" />
-        </DockPanel>
-        <DockPanel Grid.Row="3" Grid.Column="1">
-            <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightArgs.FlightDateRange.LaterDateTime, Mode=TwoWay}" />
-            <Label Content="Enddatum" DockPanel.Dock="Right" />
-        </DockPanel>
-        <Label
-            Grid.Row="4"
-            Grid.Column="0"
-            Content="Anzahl Suchergebnisse: " />
-        <TextBox
-            Grid.Row="4"
-            Grid.Column="1"
-            Text="{Binding FlightArgs.MaxResults, Mode=TwoWay}" />
-        <CheckBox
-            Grid.Row="5"
-            Grid.Column="1"
-            Content="Anzahl limitieren"
-            IsChecked="{Binding FlightArgs.IsMaxResultsActive, Mode=TwoWay}" />
-        <Button
-            Grid.Row="6"
-            Grid.Column="1"
-            Click="DoSearchFlight"
-            Content="Flug suchen" />
-        <ListBox
-            Grid.Row="7"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            MaxHeight="200"
-            ItemsSource="{Binding RetrievedFlights, Mode=OneWay}"
-            SelectedItem="{Binding ChosenFlight, Mode=OneWayToSource}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel LastChildFill="True">
-                        <Label Content="{Binding FlightData.AirlineId, Mode=OneWay}" DockPanel.Dock="Left" />
-                        <Label Content="{Binding FlightData.Flightdate.DateString, Mode=OneWay}" DockPanel.Dock="Left" />
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Fluggesellschaft: " />
+            <TextBox Grid.Row="0" Grid.Column="1">
+                <TextBox.Text>
+                    <Binding
+                        Mode="OneWayToSource"
+                        Path="FlightArgs.AirlineId"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationRules:AirlineIdValidation />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Flugdatum: " />
+            <DockPanel Grid.Row="1" Grid.Column="1">
+                <RadioButton
+                    Content="Einschließen"
+                    DockPanel.Dock="Top"
+                    GroupName="OptionFlugdatum"
+                    IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                <RadioButton
+                    Content="Ausschließen"
+                    DockPanel.Dock="Top"
+                    GroupName="OptionFlugdatum"
+                    IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel Grid.Row="2" Grid.Column="1">
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightArgs.FlightDateRange.EarlierDateTime, Mode=TwoWay}" />
+                <Label Content="Startdatum" DockPanel.Dock="Right" />
+            </DockPanel>
+            <DockPanel Grid.Row="3" Grid.Column="1">
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightArgs.FlightDateRange.LaterDateTime, Mode=TwoWay}" />
+                <Label Content="Enddatum" DockPanel.Dock="Right" />
+            </DockPanel>
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Content="Anzahl Suchergebnisse: " />
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding FlightArgs.MaxResults, Mode=TwoWay}" />
+            <CheckBox
+                Grid.Row="5"
+                Grid.Column="1"
+                Content="Anzahl limitieren"
+                IsChecked="{Binding FlightArgs.IsMaxResultsActive, Mode=TwoWay}" />
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Click="DoSearchFlight"
+                Content="Flug suchen" />
+            <ListBox
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                MaxHeight="200"
+                ItemsSource="{Binding RetrievedFlights, Mode=OneWay}"
+                SelectedItem="{Binding ChosenFlight, Mode=OneWayToSource}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Label Content="{Binding FlightData.AirlineId, Mode=OneWay}" DockPanel.Dock="Left" />
+                            <Label Content="{Binding FlightData.Flightdate.DateString, Mode=OneWay}" DockPanel.Dock="Left" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
