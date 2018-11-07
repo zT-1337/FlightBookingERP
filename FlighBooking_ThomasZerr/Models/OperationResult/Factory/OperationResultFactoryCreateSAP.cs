@@ -9,21 +9,16 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 {
     class OperationResultFactoryCreateSAP : IOperationResultFactory
     {
-        private IOperationResult successResult_;
-
-        public OperationResultFactoryCreateSAP()
-        {
-            successResult_ = new OperationResultImpl("Operation erfolgreich ausgeführt", ReturnCode.Success);
-        }
 
         public IOperationResult CreateSuccess()
         {
-            return successResult_;
+            return new OperationResultImpl("Operation erfolgreich ausgeführt" + " " + DateTime.Now.ToString("G"), ReturnCode.Success);
         }
 
         public IOperationResult CreateException(Exception exception)
         {
             string message = CreateMessageForException(exception);
+            message = message + " " + DateTime.Now.ToString("G");
 
             return new OperationResultImpl(message, ReturnCode.Exception);
         }
@@ -36,6 +31,8 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
                     return "Wählen sie zunächst einen Flug aus";
                 case "Eintrag für den Flug bereits gesperrt (Tabelle SFLIGHT)":
                     return "Operation nicht durchführbar. Eintrag des Fluges gesperrt";
+                case "Die HTTP-Anforderung ist beim Clientauthentifizierungsschema \"Basic\" nicht autorisiert. Vom Server wurde der Authentifizierungsheader \"Basic realm=\"SAP NetWeaver Application Server [I48/902]\"\" empfangen.":
+                    return "Benutzername oder Passwort sind ungültig";
                 default:
                     return exception.Message;
             }
