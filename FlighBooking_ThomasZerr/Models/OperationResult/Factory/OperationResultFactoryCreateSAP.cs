@@ -35,7 +35,7 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
                 case "Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.":
                     return "Wählen sie zunächst einen Flug aus";
                 case "Eintrag für den Flug bereits gesperrt (Tabelle SFLIGHT)":
-                    return "Operation wird bereits ausgeführt";
+                    return "Operation nicht durchführbar. Eintrag des Fluges gesperrt";
                 default:
                     return exception.Message;
             }
