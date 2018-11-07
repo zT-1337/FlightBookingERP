@@ -9,7 +9,7 @@
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:viewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels"
     Title="FlightBookingCreateWindow"
-    Width="400"
+    Width="750"
     Height="600"
     d:DataContext="{d:DesignInstance Type=viewModel:FlightBookingCreateViewModelImpl}"
     mc:Ignorable="d">
