@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Dates;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
+using FlighBooking_ThomasZerr.Utils;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 {
-    class FlightBookingDataSAP : IFlightBookingData
+    class FlightBookingDataSAP : NotifyPropertyChanged, IFlightBookingData
     {
         public IFlightData FlightData { get; }
         public string BookingId { get; set; }
@@ -20,9 +21,48 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         public string Counter { get; set; }
         public string AgencyId { get; set; }
         public string PassagierName { get; set; }
-        public bool Reserved { get; set; }
-        public bool Cancelled { get; set; }
-        public bool Confirmed => !Reserved && !Cancelled;
+
+        private bool reserved_;
+        public bool Reserved
+        {
+            get => reserved_;
+            set
+            {
+                reserved_ = value;
+                if (value)
+                    Confirmed = false;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool cancelled_;
+        public bool Cancelled
+        {
+            get => cancelled_;
+            set
+            {
+                cancelled_ = value;
+                if (value)
+                    Confirmed = false;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        public bool Confirmed
+        {
+            get => !Reserved && !Cancelled;
+            set
+            {
+                if (value)
+                {
+                    Reserved = false;
+                    Cancelled = false;
+                }
+
+                RaisePropertyChanged();
+            }
+        }
 
         public IDateRange BookingDateRange { get; }
         public IDateRange FlightDateRange { get; }
@@ -37,12 +77,6 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
             BookingDateRange = new DateRangeImpl(dateConverter);
             FlightDateRange = new DateRangeImpl(dateConverter);
             Bookdate = new DateImpl(dateConverter);
-        }
-
-        public void ConfirmFlight()
-        {
-            Reserved = false;
-            Cancelled = false;
         }
     }
 }

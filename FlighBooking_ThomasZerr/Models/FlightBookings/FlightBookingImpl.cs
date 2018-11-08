@@ -24,7 +24,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
             HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message);
 
-            FlightBookingData.ConfirmFlight();
+            FlightBookingData.Confirmed = true;
 
         }
 

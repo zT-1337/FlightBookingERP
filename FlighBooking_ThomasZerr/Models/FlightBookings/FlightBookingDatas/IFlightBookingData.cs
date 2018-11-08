@@ -16,14 +16,12 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         string PassagierName { get; set; }
         bool Reserved { get; set; }
         bool Cancelled { get; set; }
-        bool Confirmed { get; }
+        bool Confirmed { get; set; }
 
         IDateRange BookingDateRange { get; }
         IDateRange FlightDateRange { get; }
 
         int MaxResults { get; set; }
         bool IsMaxResultsActive { get; set; }
-
-        void ConfirmFlight();
     }
 }
