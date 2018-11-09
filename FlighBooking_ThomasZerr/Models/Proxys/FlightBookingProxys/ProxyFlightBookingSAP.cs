@@ -9,6 +9,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
     class ProxyFlightBookingSAP : IProxyFlightBooking
     {
         private Z_HH_FlightBooking_MT_01Client sapClient_;
+        private BapiServiceTransactionCommit sapTransactionCommit_;
 
         public string Username
         {
@@ -25,12 +26,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         public ProxyFlightBookingSAP()
         {
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
+            sapTransactionCommit_ = new BapiServiceTransactionCommit{WAIT = " "};
         }
 
         public ProxyFlightBookingResponse Confirm(IFlightBookingData args)
         {
             var confirmRequest = BuildConfirmRequest(args);
             FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirmRequest);
+            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
             return BuildConfirmResponse(sapResponse);
         }
 
@@ -60,6 +63,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             var cancelRequest = BuildCancelRequest(args);
             FlightBookingCancelResponse sapResponse = sapClient_.FlightBookingCancel(cancelRequest);
+            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
             return BuildCancelResponse(sapResponse);
         }
 
@@ -89,6 +93,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             var createRequest = BuildCreateFromDataRequest(args);
             FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createRequest);
+            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
             return BuildCreateFromDataResponse(sapResponse);
         }
 
