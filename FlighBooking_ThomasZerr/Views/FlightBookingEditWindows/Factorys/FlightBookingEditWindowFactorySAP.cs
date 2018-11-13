@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
@@ -50,7 +51,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
 
         private IFlightBookingData CreateDefaultFlightBookingArgs()
         {
-            return new FlightBookingDataSAP
+            var flightBookingData = new FlightBookingDataSAP
             {
                 BookingId = "",
                 CustomerId = "",
@@ -61,6 +62,16 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
                 Reserved = false,
                 Cancelled = false,
             };
+
+            flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
+            flightBookingData.FlightDateRange.EarlierDateTime = DateTime.Now;
+            flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
+
+            flightBookingData.BookingDateRange.Option = DateRangeOption.Between;
+            flightBookingData.BookingDateRange.EarlierDateTime = DateTime.Now;
+            flightBookingData.BookingDateRange.LaterDateTime = DateTime.Now;
+
+            return flightBookingData;
         }
 
         private IOperationResultFactory CreateOperationResultFactory()
