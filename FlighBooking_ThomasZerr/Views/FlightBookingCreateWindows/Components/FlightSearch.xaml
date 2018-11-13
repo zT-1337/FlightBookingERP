@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
-    xmlns:validationRules="clr-namespace:FlighBooking_ThomasZerr.Utils.ValidationRules"
     xmlns:viewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels"
     d:DataContext="{d:DesignInstance Type=viewModel:FlightBookingCreateViewModelImpl}"
     d:DesignHeight="300"

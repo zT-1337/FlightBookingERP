@@ -88,10 +88,10 @@
     <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\ReturnCodeToColorConverter.cs" />
-    <Compile Include="Utils\ValidationRules\AirlineIdValidation.cs" />
-    <Compile Include="Utils\ValidationRules\DateTimeIsNotLaterValidation.cs" />
-    <Compile Include="Utils\ValidationRules\DependencyObjects\WrapperDateTime.cs" />
-    <Compile Include="Utils\ValidationRules\MaxRowValidation.cs" />
+    <Compile Include="Utils\Validators\AirlineIdValidatorSAP.cs" />
+    <Compile Include="Utils\Validators\FlightDateValidator.cs" />
+    <Compile Include="Utils\Validators\IValidator.cs" />
+    <Compile Include="Utils\Validators\MaxResultsValidator.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
     <Compile Include="ViewModels\FlightBookingEditViewModels\FlightBookingEditViewModelImpl.cs" />

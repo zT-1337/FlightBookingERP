@@ -13,6 +13,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
+using FlighBooking_ThomasZerr.Utils.Validators;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
@@ -36,10 +37,14 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
             var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingArgs = CreateDefaultFlightBookingArgs();
             var operationResultFactory = CreateOperationResultFactory();
+            var airlineIdValidator = CreateAirlineIdValidator();
+            var flightDateValidator = CreateFlightDateValidator();
+            var maxResultsValidator = CreateMaxResultsValidator();
 
             return new FlightBookingCreateViewModelImpl(flightFactory, defaultFlightArgs, 
                 flightBookingFactory, defaultFlightBookingArgs, 
-                new ObservableCollection<IFlight>(), operationResultFactory);
+                new ObservableCollection<IFlight>(), operationResultFactory,
+                airlineIdValidator, flightDateValidator, maxResultsValidator);
         }
 
         private IFlightFactory CreateFlightFactory()
@@ -99,6 +104,21 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
         private IOperationResultFactory CreateOperationResultFactory()
         {
             return new OperationResultFactoryImpl();
+        }
+
+        private IValidator CreateAirlineIdValidator()
+        {
+            return new AirlineIdValidatorSAP{ MaxLength = 3};
+        }
+
+        private IValidator CreateFlightDateValidator()
+        {
+            return new FlightDateValidator();
+        }
+
+        private IValidator CreateMaxResultsValidator()
+        {
+            return new MaxResultsValidator();
         }
     }
 }

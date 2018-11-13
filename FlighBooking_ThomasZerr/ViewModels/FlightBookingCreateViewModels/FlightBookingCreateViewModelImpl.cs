@@ -13,6 +13,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Utils;
+using FlighBooking_ThomasZerr.Utils.Validators;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
@@ -20,6 +21,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
     {
         private IFlightFactory flightFactory_;
         private IFlightBookingFactory flightBookingFactory_;
+
+        private IValidator airlineIdValidator_;
+        private IValidator flightDateValidator_;
+        private IValidator maxResultsDateValidator_;
 
         private IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
@@ -50,7 +55,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
-            ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory)
+            ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
+            IValidator airlineIdValidator, IValidator flightDateValidator, IValidator maxResultsDateValidator)
         {
             flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
@@ -61,12 +67,17 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             RetrievedFlights = retrievedFlights;
 
             operationResultFactory_ = operationResultFactory;
+
+            airlineIdValidator_ = airlineIdValidator;
+            flightDateValidator_ = flightDateValidator;
+            maxResultsDateValidator_ = maxResultsDateValidator;
         }
 
         public void DoFlightSearch()
         {
             try
             {
+                ValidateSearchInput();
                 ExecuteFlightSearch();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
@@ -74,6 +85,29 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             {
                 OperationResult = operationResultFactory_.CreateException(e);
             }
+        }
+
+        private void ValidateSearchInput()
+        {
+            ValidateAirlineId();
+            ValidateFlightDate();
+            ValidateMaxResults();
+        }
+
+        private void ValidateAirlineId()
+        {
+            airlineIdValidator_.IsValid(FlightArgs.AirlineId);
+        }
+
+        private void ValidateFlightDate()
+        {
+            flightDateValidator_.ExtraParam = FlightArgs.FlightDateRange.LaterDateTime;
+            flightDateValidator_.IsValid(FlightArgs.FlightDateRange.EarlierDateTime);
+        }
+
+        private void ValidateMaxResults()
+        {
+            maxResultsDateValidator_.IsValid(FlightArgs.MaxResults);
         }
 
         private void ExecuteFlightSearch()
