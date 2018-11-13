@@ -2,7 +2,7 @@
 
 namespace FlighBooking_ThomasZerr.Utils.Validators
 {
-    class AirlineIdValidatorSAP : IValidator
+    class AirlineIdValidator : IValidator
     {
         public int MaxLength { get; set; }
 

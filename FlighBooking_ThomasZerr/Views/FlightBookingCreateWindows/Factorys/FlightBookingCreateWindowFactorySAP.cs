@@ -34,17 +34,25 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
             var flightFactory = CreateFlightFactory();
             var defaultFlightArgs = CreateDefaultFlightArgs();
+
             var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingArgs = CreateDefaultFlightBookingArgs();
+
             var operationResultFactory = CreateOperationResultFactory();
+
             var airlineIdValidator = CreateAirlineIdValidator();
             var flightDateValidator = CreateFlightDateValidator();
             var maxResultsValidator = CreateMaxResultsValidator();
 
+            var travelAgencyIdValidator = CreateTravelAgencyIdValidator();
+            var customerIdValidator = CreateCustomerIdValidator();
+            var flightClassValidator = createFlightClassValidator();
+
             return new FlightBookingCreateViewModelImpl(flightFactory, defaultFlightArgs, 
                 flightBookingFactory, defaultFlightBookingArgs, 
                 new ObservableCollection<IFlight>(), operationResultFactory,
-                airlineIdValidator, flightDateValidator, maxResultsValidator);
+                airlineIdValidator, flightDateValidator, maxResultsValidator,
+                travelAgencyIdValidator, customerIdValidator, flightClassValidator);
         }
 
         private IFlightFactory CreateFlightFactory()
@@ -108,7 +116,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
         private IValidator CreateAirlineIdValidator()
         {
-            return new AirlineIdValidatorSAP{ MaxLength = 3};
+            return new AirlineIdValidator{ MaxLength = 3};
         }
 
         private IValidator CreateFlightDateValidator()
@@ -119,6 +127,21 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
         private IValidator CreateMaxResultsValidator()
         {
             return new MaxResultsValidator();
+        }
+
+        private IValidator CreateTravelAgencyIdValidator()
+        {
+            return new TravelAgencyIdValidator {MaxLength = 8};
+        }
+
+        private IValidator CreateCustomerIdValidator()
+        {
+            return new CustomerIdValidator {MaxLength = 8};
+        }
+
+        private IValidator createFlightClassValidator()
+        {
+            return new FlightClassValidator {FlightClasses = new []{"C", "Y", "F"}};
         }
     }
 }

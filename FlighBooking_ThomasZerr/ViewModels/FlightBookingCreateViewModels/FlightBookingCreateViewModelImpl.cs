@@ -26,6 +26,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private IValidator flightDateValidator_;
         private IValidator maxResultsDateValidator_;
 
+        private IValidator travelAgencyIdValidator_;
+        private IValidator customerIdValidator_;
+        private IValidator flightClassValidator_;
+
         private IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
         public IOperationResult OperationResult
@@ -56,7 +60,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
             ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
-            IValidator airlineIdValidator, IValidator flightDateValidator, IValidator maxResultsDateValidator)
+            IValidator airlineIdValidator, IValidator flightDateValidator, IValidator maxResultsDateValidator,
+            IValidator travelAgencyIdValidator, IValidator customerIdValidator, IValidator flightClassValidator)
         {
             flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
@@ -71,6 +76,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             airlineIdValidator_ = airlineIdValidator;
             flightDateValidator_ = flightDateValidator;
             maxResultsDateValidator_ = maxResultsDateValidator;
+
+            travelAgencyIdValidator_ = travelAgencyIdValidator;
+            customerIdValidator_ = customerIdValidator;
+            flightClassValidator_ = flightClassValidator;
         }
 
         public void DoFlightSearch()
@@ -124,6 +133,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         {
             try
             {
+                ValidateCreateInput();
                 ExecuteCreateFlightBooking();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
@@ -135,6 +145,28 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             {
                 OperationResult = operationResultFactory_.CreateException(e);
             }
+        }
+
+        private void ValidateCreateInput()
+        {
+            ValidateTravelAgencyId();
+            ValidateCustomerId();
+            ValidateClass();
+        }
+
+        private void ValidateTravelAgencyId()
+        {
+            travelAgencyIdValidator_.IsValid(FlightBookingArgs.AgencyId);
+        }
+
+        private void ValidateCustomerId()
+        {
+            customerIdValidator_.IsValid(FlightBookingArgs.CustomerId);
+        }
+
+        private void ValidateClass()
+        {
+            flightClassValidator_.IsValid(FlightBookingArgs.Class);
         }
 
         private void ExecuteCreateFlightBooking()
