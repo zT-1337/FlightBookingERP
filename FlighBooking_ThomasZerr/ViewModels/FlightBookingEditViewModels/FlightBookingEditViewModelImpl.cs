@@ -80,6 +80,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
                 ExecuteConfirmFlightBooking();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
+            catch (NullReferenceException e)
+            {
+                OperationResult = operationResultFactory_.CreateException(new Exception("Keine Flugbuchung ausgewählt"));
+            }
             catch (Exception e)
             {
                 OperationResult = operationResultFactory_.CreateException(e);
@@ -97,6 +101,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
             {
                 ExecuteCancelFlightBooking();
                 OperationResult = operationResultFactory_.CreateSuccess();
+            }
+            catch (NullReferenceException e)
+            {
+                OperationResult = operationResultFactory_.CreateException(new Exception("Keine Flugbuchung ausgewählt"));
             }
             catch (Exception e)
             {

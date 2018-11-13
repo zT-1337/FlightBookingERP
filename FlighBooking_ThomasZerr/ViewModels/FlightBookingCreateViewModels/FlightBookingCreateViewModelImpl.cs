@@ -93,6 +93,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
                 ExecuteCreateFlightBooking();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
+            catch (NullReferenceException e)
+            {
+                OperationResult = operationResultFactory_.CreateException(new Exception("Kein Flug ausgewählt"));
+            }
             catch (Exception e)
             {
                 OperationResult = operationResultFactory_.CreateException(e);
