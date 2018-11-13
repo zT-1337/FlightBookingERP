@@ -9,7 +9,7 @@
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:viewModels="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels"
     Title="FlightBookingEditWindow"
-    Width="500"
+    Width="750"
     Height="600"
     d:DataContext="{d:DesignInstance Type=viewModels:FlightBookingEditViewModelImpl}"
     mc:Ignorable="d">
