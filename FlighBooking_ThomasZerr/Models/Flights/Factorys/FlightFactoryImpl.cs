@@ -22,12 +22,12 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 
         public IFlight[] Retrieve(IFlightData data)
         {
-            ProxyFlightResponse flightResponse = proxyFlight_.GetList(data);
+            IFlightData[] flightDatas = proxyFlight_.GetList(data);
 
-            IFlight[] flights = new IFlight[flightResponse.FlightDatas.Length];
+            IFlight[] flights = new IFlight[flightDatas.Length];
             for (int i = 0; i < flights.Length; ++i)
             {
-                flights[i] = new FlightImpl(proxyFlight_, flightResponse.FlightDatas[i]);
+                flights[i] = new FlightImpl(proxyFlight_, flightDatas[i]);
             }
 
             return flights;

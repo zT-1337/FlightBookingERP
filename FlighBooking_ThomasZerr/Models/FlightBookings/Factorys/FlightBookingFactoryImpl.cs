@@ -18,31 +18,21 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.Create(args);
+            IFlightBookingData flightBookingData = proxyFlightBooking_.Create(args);
 
-            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
-
-            args.FlightData.AirlineId = proxyResponse.FlightBookingData.FlightData.AirlineId;
-            args.BookingId = proxyResponse.FlightBookingData.BookingId;
+            args.FlightData.AirlineId = flightBookingData.FlightData.AirlineId;
+            args.BookingId = flightBookingData.BookingId;
             return new FlightBookingImpl(proxyFlightBooking_, args);
-        }
-
-        private void HandleIsError(ReturnCodeProxys returnCode, string message)
-        {
-            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
-                throw new InvalidOperationException(message);
         }
 
         public IFlightBooking[] Retrieve(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.GetList(args);
+            IFlightBookingData[] flightBookingDatas = proxyFlightBooking_.GetList(args);
 
-            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
-
-            IFlightBooking[] flightBookings = new IFlightBooking[proxyResponse.FlightBookingDatas.Length];
+            IFlightBooking[] flightBookings = new IFlightBooking[flightBookingDatas.Length];
             for (int i = 0; i < flightBookings.Length; ++i)
             {
-                flightBookings[i] = new FlightBookingImpl(proxyFlightBooking_, proxyResponse.FlightBookingDatas[i]);
+                flightBookings[i] = new FlightBookingImpl(proxyFlightBooking_, flightBookingDatas[i]);
             }
 
             return flightBookings;

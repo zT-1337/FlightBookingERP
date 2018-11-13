@@ -21,20 +21,13 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings
 
         public void Confirm()
         {
-            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.Confirm(FlightBookingData);
-
-            ErrorChecker.HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message, flightBookingResponse.MessageNumber);
-
+            _proxyFlightBooking.Confirm(FlightBookingData);
             FlightBookingData.Confirmed = true;
-
         }
 
         public void Cancel()
         {
-            ProxyFlightBookingResponse flightBookingResponse = _proxyFlightBooking.Cancel(FlightBookingData);
-
-            ErrorChecker.HandleIsError(flightBookingResponse.ReturnCode, flightBookingResponse.Message, flightBookingResponse.MessageNumber);
-
+            _proxyFlightBooking.Cancel(FlightBookingData);
             FlightBookingData.Cancelled = true;
         }
     }

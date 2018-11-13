@@ -81,15 +81,15 @@
     <Compile Include="Models\OperationResult\IOperationResult.cs" />
     <Compile Include="Models\OperationResult\OperationResultImpl.cs" />
     <Compile Include="Models\OperationResult\ReturnCodes\ReturnCode.cs" />
-    <Compile Include="Models\Proxys\FlightProxys\IProxyFlight.cs" />
+    <Compile Include="Models\Proxys\FlightProxys\ProxyFlight.cs" />
     <Compile Include="Models\Proxys\FlightProxys\ProxyFlightResponse.cs" />
     <Compile Include="Models\Proxys\FlightProxys\ProxyFlightSAP.cs" />
+    <Compile Include="Models\Proxys\Proxy.cs" />
     <Compile Include="Utils\DateConverters\DateConverterSAP.cs" />
     <Compile Include="Utils\DateConverters\IDateConverter.cs" />
     <Compile Include="Utils\EnumBooleanConverter.cs" />
     <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\ReturnCodeToColorConverter.cs" />
-    <Compile Include="Utils\SAP\SAPConverter.cs" />
     <Compile Include="Utils\ValidationRules\AirlineIdValidation.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />
@@ -175,7 +175,7 @@
     <Compile Include="Models\FlightBookings\FlightBookingDatas\IFlightBookingData.cs" />
     <Compile Include="Models\FlightBookings\FlightBookingImpl.cs" />
     <Compile Include="Models\FlightBookings\IFlightBooking.cs" />
-    <Compile Include="Models\Proxys\FlightBookingProxys\IProxyFlightBooking.cs" />
+    <Compile Include="Models\Proxys\FlightBookingProxys\ProxyFlightBooking.cs" />
     <Compile Include="Models\Proxys\FlightBookingProxys\ProxyFlightBookingResponse.cs" />
     <Compile Include="Models\Proxys\FlightBookingProxys\ProxyFlightBookingSAP.cs" />
     <Compile Include="Models\Proxys\ReturnCodeProxys.cs" />
