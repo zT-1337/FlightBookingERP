@@ -18,6 +18,7 @@
         <dateRanges:DateRangeOption x:Key="Between">Between</dateRanges:DateRangeOption>
         <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
         <validationRules:AirlineIdValidation x:Key="AirlineIdValidation" />
+        <validationRules:MaxRowValidation x:Key="MaxRowValidation" />
         <ToolTip x:Key="AirlineIdToolTip">
             <StackPanel>
                 <TextBlock>
@@ -28,36 +29,46 @@
                 </TextBlock>
             </StackPanel>
         </ToolTip>
-        <ToolTip x:Key="FlugdatumLabel">
+        <ToolTip x:Key="FlightDateLabel">
             <StackPanel>
                 <TextBlock>Definiert Zeitraum nachdem die Flüge gefilter werden sollen.</TextBlock>
             </StackPanel>
         </ToolTip>
-        <ToolTip x:Key="Einschließen">
+        <ToolTip x:Key="Include">
             <StackPanel>
                 <TextBlock>
                     Alle Flüge innerhalb vom Start- und Enddatum werden zurück geliefert
                 </TextBlock>
             </StackPanel>
         </ToolTip>
-        <ToolTip x:Key="Ausschließen">
+        <ToolTip x:Key="Exclude">
             <StackPanel>
                 <TextBlock>
                     Alle Flüge außerhalb vom Start- und Enddatum werden zurück geliefert
                 </TextBlock>
             </StackPanel>
         </ToolTip>
-        <ToolTip x:Key="Startdatum">
+        <ToolTip x:Key="Startdate">
             <StackPanel>
                 <TextBlock Foreground="Red">
                     Muss ein gültiges Datum enthalten (DD.MM.YYYY), darf nicht leer sein und darf nicht nach dem Enddatum liegen
                 </TextBlock>
             </StackPanel>
         </ToolTip>
-        <ToolTip x:Key="Enddatum">
+        <ToolTip x:Key="Enddate">
             <StackPanel>
                 <TextBlock Foreground="Red">
                     Muss ein gültiges Datum enthalten (DD.MM.YYYY), darf nicht leer sein und darf nicht vor dem Startdatum liegen
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="SearchResults">
+            <StackPanel>
+                <TextBlock>
+                    Anzahl der Flüge die maximal angezeigt werden sollen. Falls 0 werden alle Ergebnisse angezeigt.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Muss eine positive ganze Zahl sein.
                 </TextBlock>
             </StackPanel>
         </ToolTip>
@@ -102,49 +113,61 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Content="Flugdatum: "
-                ToolTip="{StaticResource FlugdatumLabel}" />
+                ToolTip="{StaticResource FlightDateLabel}" />
             <DockPanel Grid.Row="1" Grid.Column="1">
                 <RadioButton
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
                     IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
-                    ToolTip="{StaticResource Einschließen}" />
+                    ToolTip="{StaticResource Include}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
                     IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
-                    ToolTip="{StaticResource Ausschließen}" />
+                    ToolTip="{StaticResource Exclude}" />
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
                     SelectedDate="{Binding FlightArgs.FlightDateRange.EarlierDateTime, Mode=TwoWay}"
-                    ToolTip="{StaticResource Startdatum}" />
+                    ToolTip="{StaticResource Startdate}" />
                 <Label
                     Content="Startdatum"
                     DockPanel.Dock="Right"
-                    ToolTip="{StaticResource Startdatum}" />
+                    ToolTip="{StaticResource Startdate}" />
             </DockPanel>
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
                     SelectedDate="{Binding FlightArgs.FlightDateRange.LaterDateTime, Mode=TwoWay}"
-                    ToolTip="{StaticResource Enddatum}" />
+                    ToolTip="{StaticResource Enddate}" />
                 <Label
                     Content="Enddatum"
                     DockPanel.Dock="Right"
-                    ToolTip="{StaticResource Enddatum}" />
+                    ToolTip="{StaticResource Enddate}" />
             </DockPanel>
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Content="Anzahl Suchergebnisse: " />
+                Content="Anzahl Suchergebnisse: "
+                ToolTip="{StaticResource SearchResults}" />
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding FlightArgs.MaxResults, Mode=TwoWay}" />
+                ToolTip="{StaticResource SearchResults}">
+                <TextBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="FlightArgs.MaxResults"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validationRules:MaxRowValidation />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <CheckBox
                 Grid.Row="5"
                 Grid.Column="1"
