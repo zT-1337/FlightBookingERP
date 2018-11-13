@@ -12,12 +12,12 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 
         public IOperationResult CreateSuccess()
         {
-            return new OperationResultImpl($"Ok (Zeit: {DateTime.Now:g})", ReturnCode.Success);
+            return new OperationResultImpl($"Ok (Zeit: {DateTime.Now:T})", ReturnCode.Success);
         }
 
         public IOperationResult CreateException(Exception exception)
         {
-            return new OperationResultImpl($"{exception.Message} (Zeit: {DateTime.Now:g})", ReturnCode.Exception);
+            return new OperationResultImpl($"{exception.Message} (Zeit: {DateTime.Now:T})", ReturnCode.Exception);
         }
     }
 }
