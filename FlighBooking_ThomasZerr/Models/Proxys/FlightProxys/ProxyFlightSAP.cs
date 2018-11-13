@@ -22,11 +22,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
             sapClient_ = new Z_FLIGHT_MTClient();
         }
 
-        public override ProxyFlightResponse GetList(IFlightData args)
+        public override IFlightData[] GetList(IFlightData args)
         {
             var getListRequest = BuildGetListRequest(args);
             var sapResponse = sapClient_.FlightGetList(getListRequest);
-            return BuildGetListResponse(sapResponse);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
+            return BuildGetListResponse(sapResponse.FlightList);
         }
 
         private FlightGetList BuildGetListRequest(IFlightData args)
@@ -43,25 +44,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         }
 
-        private ProxyFlightResponse BuildGetListResponse(FlightGetListResponse sapResponse)
-        {
-            ReturnCodeProxys returnCode = TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-            string messageNumber = sapResponse.Return[0].Number;
-            IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);
-
-            HandleIsError(returnCode, message, messageNumber);
-
-            return new ProxyFlightResponse
-            {
-                ReturnCode = returnCode,
-                Message = message,
-                MessageNumber = messageNumber,
-                FlightDatas = flightDatas
-            };
-        }
-
-        private IFlightData[] ConvertFlightListToFlightData(Bapisfldat[] flightList)
+        private IFlightData[] BuildGetListResponse(Bapisfldat[] flightList)
         {
             IFlightData[] flightDatas = new IFlightData[flightList.Length];
 

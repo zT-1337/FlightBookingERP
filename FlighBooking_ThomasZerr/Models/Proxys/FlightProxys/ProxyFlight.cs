@@ -9,6 +9,6 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
     abstract class ProxyFlight : Proxy
     {
-        public abstract ProxyFlightResponse GetList(IFlightData args);
+        public abstract IFlightData[] GetList(IFlightData args);
     }
 }

@@ -13,9 +13,9 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 {
     class FlightFactoryImpl : IFlightFactory
     {
-        private IProxyFlight proxyFlight_;
+        private ProxyFlight proxyFlight_;
 
-        public FlightFactoryImpl(IProxyFlight proxyFlight)
+        public FlightFactoryImpl(ProxyFlight proxyFlight)
         {
             proxyFlight_ = proxyFlight;
         }
@@ -24,8 +24,6 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
         {
             ProxyFlightResponse flightResponse = proxyFlight_.GetList(data);
 
-            HandleIsError(flightResponse.ReturnCode, flightResponse.Message);
-
             IFlight[] flights = new IFlight[flightResponse.FlightDatas.Length];
             for (int i = 0; i < flights.Length; ++i)
             {
@@ -33,12 +31,6 @@ namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
             }
 
             return flights;
-        }
-
-        private void HandleIsError(ReturnCodeProxys returnCode, string message)
-        {
-            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
-                throw new InvalidOperationException(message);
         }
     }
 }

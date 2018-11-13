@@ -4,9 +4,9 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
     abstract class ProxyFlightBooking : Proxy
     {
-        public abstract ProxyFlightBookingResponse Confirm(IFlightBookingData args);
-        public abstract ProxyFlightBookingResponse Cancel(IFlightBookingData args);
-        public abstract ProxyFlightBookingResponse Create(IFlightBookingData args);
-        public abstract ProxyFlightBookingResponse GetList(IFlightBookingData args);
+        public abstract void Confirm(IFlightBookingData args);
+        public abstract void Cancel(IFlightBookingData args);
+        public abstract IFlightBookingData Create(IFlightBookingData args);
+        public abstract IFlightBookingData[] GetList(IFlightBookingData args);
     }
 }
