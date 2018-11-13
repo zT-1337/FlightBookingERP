@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.DateRanges;
-using FlighBooking_ThomasZerr.Models.Proxys;
 
-namespace FlighBooking_ThomasZerr.Utils.SAP
+namespace FlighBooking_ThomasZerr.Models.Proxys
 {
-    class SAPConverter
+    abstract class Proxy
     {
-        public static ReturnCodeProxys TypeToReturnCode(string type)
+        public abstract string Username { get; set; }
+        public abstract string Password { set; }
+
+        protected ReturnCodeProxys TypeToReturnCode(string type)
         {
             switch (type)
             {
@@ -29,7 +31,7 @@ namespace FlighBooking_ThomasZerr.Utils.SAP
             throw new InvalidOperationException($"Gegebener Type unbekannt: {type}");
         }
 
-        public static string ConvertDateRangeOptionToString(DateRangeOption option)
+        protected string ConvertDateRangeOptionToString(DateRangeOption option)
         {
             switch (option)
             {
@@ -46,16 +48,22 @@ namespace FlighBooking_ThomasZerr.Utils.SAP
             throw new InvalidOperationException($"Gegebene DateRangeOption nicht bekannt: {option:G}");
         }
 
-        public static bool ConvertStringOfSAPToBool(string toConvert)
+        protected bool ConvertStringOfSAPToBool(string toConvert)
         {
             return toConvert.Equals("X");
         }
 
-        public static string ConvertBoolToStringForSAP(bool toConvert)
+        protected string ConvertBoolToStringForSAP(bool toConvert)
         {
             if (toConvert)
                 return "X";
             return "";
+        }
+
+        protected void HandleIsError(ReturnCodeProxys returnCode, string message, string messageNumber)
+        {
+            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
+                throw new InvalidOperationException($"{message} (Fehlercode: {messageNumber})");
         }
     }
 }

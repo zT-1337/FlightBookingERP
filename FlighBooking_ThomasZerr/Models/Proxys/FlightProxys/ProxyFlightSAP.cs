@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Flight;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
-using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
-    class ProxyFlightSAP : IProxyFlight
+    class ProxyFlightSAP : ProxyFlight
     {
         private Z_FLIGHT_MTClient sapClient_;
 
-        public string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
-        public string Password { get => sapClient_.ClientCredentials.UserName.Password; set => sapClient_.ClientCredentials.UserName.Password = value; }
+        public override string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
+        public override string Password { set => sapClient_.ClientCredentials.UserName.Password = value; }
 
         public ProxyFlightSAP()
         {
             sapClient_ = new Z_FLIGHT_MTClient();
         }
 
-        public ProxyFlightResponse GetList(IFlightData args)
+        public override ProxyFlightResponse GetList(IFlightData args)
         {
             var getListRequest = BuildGetListRequest(args);
             var sapResponse = sapClient_.FlightGetList(getListRequest);
@@ -46,11 +45,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         private ProxyFlightResponse BuildGetListResponse(FlightGetListResponse sapResponse)
         {
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
+            ReturnCodeProxys returnCode = TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
             string messageNumber = sapResponse.Return[0].Number;
             IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);
-            
+
+            HandleIsError(returnCode, message, messageNumber);
 
             return new ProxyFlightResponse
             {
@@ -85,7 +85,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
         {
-            string option = SAPConverter.ConvertDateRangeOptionToString(dateRange.Option);
+            string option = ConvertDateRangeOptionToString(dateRange.Option);
 
             Bapisfldra result = new Bapisfldra
             {

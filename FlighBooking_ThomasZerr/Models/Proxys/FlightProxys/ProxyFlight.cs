@@ -7,11 +7,8 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
-    interface IProxyFlight
+    abstract class ProxyFlight : Proxy
     {
-        string Username { get; set; }
-        string Password { set; }
-
-        ProxyFlightResponse GetList(IFlightData args);
+        public abstract ProxyFlightResponse GetList(IFlightData args);
     }
 }

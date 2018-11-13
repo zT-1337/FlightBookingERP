@@ -9,9 +9,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
     class FlightBookingFactoryImpl : IFlightBookingFactory
     {
-        private IProxyFlightBooking proxyFlightBooking_;
+        private ProxyFlightBooking proxyFlightBooking_;
 
-        public FlightBookingFactoryImpl(IProxyFlightBooking proxyFlightBooking)
+        public FlightBookingFactoryImpl(ProxyFlightBooking proxyFlightBooking)
         {
             proxyFlightBooking_ = proxyFlightBooking;
         }
