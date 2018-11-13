@@ -89,6 +89,8 @@
     <Compile Include="Utils\NotifyPropertyChanged.cs" />
     <Compile Include="Utils\ReturnCodeToColorConverter.cs" />
     <Compile Include="Utils\ValidationRules\AirlineIdValidation.cs" />
+    <Compile Include="Utils\ValidationRules\DateTimeIsNotLaterValidation.cs" />
+    <Compile Include="Utils\ValidationRules\DependencyObjects\WrapperDateTime.cs" />
     <Compile Include="Utils\ValidationRules\MaxRowValidation.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\FlightBookingCreateViewModelImpl.cs" />
     <Compile Include="ViewModels\FlightBookingCreateViewModels\IFlightBookingCreateViewModel.cs" />

@@ -17,8 +17,6 @@
         <utils:EnumBooleanConverter x:Key="EnumBooleanConverter" />
         <dateRanges:DateRangeOption x:Key="Between">Between</dateRanges:DateRangeOption>
         <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
-        <validationRules:AirlineIdValidation x:Key="AirlineIdValidation" />
-        <validationRules:MaxRowValidation x:Key="MaxRowValidation" />
         <ToolTip x:Key="AirlineIdToolTip">
             <StackPanel>
                 <TextBlock>
@@ -97,18 +95,8 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                ToolTip="{StaticResource AirlineIdToolTip}">
-                <TextBox.Text>
-                    <Binding
-                        Mode="OneWayToSource"
-                        Path="FlightArgs.AirlineId"
-                        UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationRules:AirlineIdValidation />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                Text="{Binding Mode=OneWayToSource, Path=FlightArgs.AirlineId, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource AirlineIdToolTip}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
@@ -131,7 +119,7 @@
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
-                    SelectedDate="{Binding FlightArgs.FlightDateRange.EarlierDateTime, Mode=TwoWay}"
+                    SelectedDate="{Binding Mode=TwoWay, Path=FlightArgs.FlightDateRange.EarlierDateTime, UpdateSourceTrigger=LostFocus}"
                     ToolTip="{StaticResource Startdate}" />
                 <Label
                     Content="Startdatum"
@@ -156,18 +144,8 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                ToolTip="{StaticResource SearchResults}">
-                <TextBox.Text>
-                    <Binding
-                        Mode="TwoWay"
-                        Path="FlightArgs.MaxResults"
-                        UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <validationRules:MaxRowValidation />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
+                Text="{Binding Mode=TwoWay, Path=FlightArgs.MaxResults, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource SearchResults}" />
             <CheckBox
                 Grid.Row="5"
                 Grid.Column="1"
