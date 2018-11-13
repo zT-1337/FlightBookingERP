@@ -7,23 +7,17 @@ using FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes;
 
 namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 {
-    class OperationResultFactoryLogin : IOperationResultFactory
+    class OperationResultFactoryImpl : IOperationResultFactory
     {
-        private IOperationResult successOperationResult_;
-
-        public OperationResultFactoryLogin()
-        {
-            successOperationResult_ = new OperationResultImpl("Ok", ReturnCode.Success);
-        }
 
         public IOperationResult CreateSuccess()
         {
-            return successOperationResult_;
+            return new OperationResultImpl($"Ok (Zeit: {DateTime.Now:g})", ReturnCode.Success);
         }
 
         public IOperationResult CreateException(Exception exception)
         {
-            return new OperationResultImpl(exception.Message, ReturnCode.Exception);
+            return new OperationResultImpl($"{exception.Message} (Zeit: {DateTime.Now:g}", ReturnCode.Exception);
         }
     }
 }

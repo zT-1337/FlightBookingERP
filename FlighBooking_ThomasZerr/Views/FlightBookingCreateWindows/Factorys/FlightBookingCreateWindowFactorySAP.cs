@@ -98,7 +98,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
         private IOperationResultFactory CreateOperationResultFactory()
         {
-            return new OperationResultFactoryCreateSAP();
+            return new OperationResultFactoryImpl();
         }
     }
 }

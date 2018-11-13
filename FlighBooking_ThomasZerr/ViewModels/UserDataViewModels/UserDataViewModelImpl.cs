@@ -24,7 +24,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
 
         public UserDataViewModelImpl()
         {
-            operationResultFactory_ = new OperationResultFactoryLogin();
+            operationResultFactory_ = new OperationResultFactoryImpl();
         }
 
         public bool IsLoginValid()
