@@ -17,7 +17,7 @@ namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
 
         public IOperationResult CreateException(Exception exception)
         {
-            return new OperationResultImpl($"{exception.Message} (Zeit: {DateTime.Now:g}", ReturnCode.Exception);
+            return new OperationResultImpl($"{exception.Message} (Zeit: {DateTime.Now:g})", ReturnCode.Exception);
         }
     }
 }
