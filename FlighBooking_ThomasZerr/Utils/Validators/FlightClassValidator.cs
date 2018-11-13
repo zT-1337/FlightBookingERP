@@ -32,7 +32,7 @@ namespace FlighBooking_ThomasZerr.Utils.Validators
                 if(flightClass.Length == 0)
                     throw new Exception("Klasse darf nicht leer sein");
 
-                if(FlightClasses.Contains(flightClass))
+                if(!IsFlightClass(flightClass))
                     throw new Exception($"Flugklasse muss einen dieser Werte haben: {ListOfFlightClasses}");
 
                 return;
@@ -40,6 +40,17 @@ namespace FlighBooking_ThomasZerr.Utils.Validators
 
             throw new ArgumentException();
     
+        }
+
+        private bool IsFlightClass(string maybeFlightClass)
+        {
+            foreach (var flightClass in FlightClasses)
+            {
+                if (flightClass.Equals(maybeFlightClass))
+                    return true;
+            }
+
+            return false;
         }
     }
 }
