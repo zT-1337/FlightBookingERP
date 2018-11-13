@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,12 +48,15 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
         {
             ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
+            string messageNumber = sapResponse.Return[0].Number;
             IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);
+            
 
             return new ProxyFlightResponse
             {
                 ReturnCode = returnCode,
                 Message = message,
+                MessageNumber = messageNumber,
                 FlightDatas = flightDatas
             };
         }

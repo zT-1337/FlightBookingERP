@@ -47,10 +47,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
+            string messageNumber = sapResponse.Return[0].Number;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
                 ReturnCode = returnCode,
-                Message = message
+                Message = message,
+                MessageNumber = messageNumber
             };
 
             return result;
@@ -76,10 +78,12 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
         {
             ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
+            string messageNumber = sapResponse.Return[0].Number;
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
                 ReturnCode = returnCode,
-                Message = message
+                Message = message,
+                MessageNumber = messageNumber
             };
 
             return result;
@@ -109,6 +113,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 
             ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             string message = sapResponse.Return[0].Message;
+            string messageNumber = sapResponse.Return[0].Number;
             IFlightBookingData flightBookingData = new FlightBookingDataSAP()
             {
                 BookingId = sapResponse.BookingNumber
@@ -119,6 +124,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             {
                 ReturnCode = returnCode,
                 Message = message,
+                MessageNumber = messageNumber,
                 FlightBookingData = flightBookingData
             };
 
@@ -169,12 +175,14 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
             IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
             string message = sapResponse.Return[0].Message;
+            string messageNumber = sapResponse.Return[0].Number;
 
             ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
             {
                 ReturnCode = returnCode,
                 FlightBookingDatas = flightBookingDatas,
                 Message = message,
+                MessageNumber = messageNumber
             };
 
             return result;

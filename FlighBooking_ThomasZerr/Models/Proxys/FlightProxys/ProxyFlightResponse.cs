@@ -11,6 +11,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
     {
         public ReturnCodeProxys ReturnCode { get; set; }
         public string Message { get; set; }
+        public string MessageNumber { get; set; }
         public IFlightData[] FlightDatas { get; set; }
     }
 }
