@@ -1,6 +1,4 @@
-﻿using System;
-using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
-using FlighBooking_ThomasZerr.Models.Proxys;
+﻿using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
 
 namespace FlighBooking_ThomasZerr.Models.Flights

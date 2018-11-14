@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlighBooking_ThomasZerr.Flight;
+﻿using FlighBooking_ThomasZerr.Flight;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
@@ -12,7 +6,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
     class ProxyFlightSAP : ProxyFlight
     {
-        private Z_FLIGHT_MTClient sapClient_;
+        private readonly Z_FLIGHT_MTClient sapClient_;
 
         public override string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
         public override string Password { set => sapClient_.ClientCredentials.UserName.Password = value; }

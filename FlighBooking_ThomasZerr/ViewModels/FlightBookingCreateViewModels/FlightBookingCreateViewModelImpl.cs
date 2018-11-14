@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.DateRanges;
-using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Flights;
@@ -13,7 +8,6 @@ using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
-using FlighBooking_ThomasZerr.Models.Validators;
 using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
@@ -27,18 +21,18 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
     class FlightBookingCreateViewModelImpl : NotifyPropertyChanged, IFlightBookingCreateViewModel
     {
-        private IFlightFactory flightFactory_;
-        private IFlightBookingFactory flightBookingFactory_;
+        private readonly IFlightFactory flightFactory_;
+        private readonly IFlightBookingFactory flightBookingFactory_;
 
-        private IAirlineIdValidator airlineIdValidator_;
-        private IDateRangeValidator flightDateRangeValidator_;
-        private IMaxResultsValidator maxResultsDateValidator_;
-        private ITravelAgencyIdValidator travelAgencyIdValidator_;
-        private ICustomerIdValidator customerIdValidator_;
-        private IFlightClassValidator flightClassValidator_;
-        private INotEmptyStringValidator notEmptyStringValidator_;
+        private readonly IAirlineIdValidator airlineIdValidator_;
+        private readonly IDateRangeValidator flightDateRangeValidator_;
+        private readonly IMaxResultsValidator maxResultsDateValidator_;
+        private readonly ITravelAgencyIdValidator travelAgencyIdValidator_;
+        private readonly ICustomerIdValidator customerIdValidator_;
+        private readonly IFlightClassValidator flightClassValidator_;
+        private readonly INotEmptyStringValidator notEmptyStringValidator_;
 
-        private IOperationResultFactory operationResultFactory_;
+        private readonly IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
         public IOperationResult OperationResult
         {

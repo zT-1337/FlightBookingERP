@@ -6,7 +6,6 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
-using FlighBooking_ThomasZerr.Models.Validators;
 using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
@@ -18,15 +17,15 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
 {
     class FlightBookingEditViewModelImpl : NotifyPropertyChanged, IFlightBookingEditViewModel
     {
-        private IFlightBookingFactory flightBookingFactory_;
+        private readonly IFlightBookingFactory flightBookingFactory_;
 
-        private IAirlineIdValidator airlinedIdValidator_;
-        private ITravelAgencyIdValidator travelAgencyIdValidator_;
-        private ICustomerIdValidator customerIdValidator_;
-        private IDateRangeValidator dateRangeValidator_;
-        private IMaxResultsValidator maxResultsValidator_;
+        private readonly IAirlineIdValidator airlinedIdValidator_;
+        private readonly ITravelAgencyIdValidator travelAgencyIdValidator_;
+        private readonly ICustomerIdValidator customerIdValidator_;
+        private readonly IDateRangeValidator dateRangeValidator_;
+        private readonly IMaxResultsValidator maxResultsValidator_;
 
-        private IOperationResultFactory operationResultFactory_;
+        private readonly IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
         public IOperationResult OperationResult
         {

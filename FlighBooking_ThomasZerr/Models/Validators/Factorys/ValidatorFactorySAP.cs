@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
+﻿using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
 using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
 using FlighBooking_ThomasZerr.Models.Validators.FlightClassValidators;
@@ -15,13 +10,13 @@ namespace FlighBooking_ThomasZerr.Models.Validators.Factorys
 {
     class ValidatorFactorySAP : IValidatorFactory
     {
-        private IAirlineIdValidator airlineIdValidator_;
-        private ICustomerIdValidator customerIdValidator_;
-        private IDateRangeValidator dateRangeValidator_;
-        private IFlightClassValidator flightClassValidator_;
-        private IMaxResultsValidator maxResultsValidator_;
-        private INotEmptyStringValidator notEmptyStringValidator_;
-        private ITravelAgencyIdValidator travelAgencyIdValidator_;
+        private readonly IAirlineIdValidator airlineIdValidator_;
+        private readonly ICustomerIdValidator customerIdValidator_;
+        private readonly IDateRangeValidator dateRangeValidator_;
+        private readonly IFlightClassValidator flightClassValidator_;
+        private readonly IMaxResultsValidator maxResultsValidator_;
+        private readonly INotEmptyStringValidator notEmptyStringValidator_;
+        private readonly ITravelAgencyIdValidator travelAgencyIdValidator_;
 
         public ValidatorFactorySAP()
         {

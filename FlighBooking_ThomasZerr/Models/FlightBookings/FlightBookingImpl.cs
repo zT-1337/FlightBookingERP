@@ -1,15 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
-using FlighBooking_ThomasZerr.Models.Proxys;
+﻿using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
-using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings
 {
     class FlightBookingImpl : IFlightBooking
     {
-        private ProxyFlightBooking _proxyFlightBooking;
+        private readonly ProxyFlightBooking _proxyFlightBooking;
 
         public IFlightBookingData FlightBookingData { get; }
 

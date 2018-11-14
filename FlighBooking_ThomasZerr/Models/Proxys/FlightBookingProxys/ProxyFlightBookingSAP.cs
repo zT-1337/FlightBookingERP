@@ -1,5 +1,4 @@
-﻿using System;
-using FlighBooking_ThomasZerr.FlightBookingReference;
+﻿using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 
@@ -7,7 +6,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
     class ProxyFlightBookingSAP : ProxyFlightBooking
     {
-        private Z_HH_FlightBooking_MT_01Client sapClient_;
+        private readonly Z_HH_FlightBooking_MT_01Client sapClient_;
 
         public override string Username
         {

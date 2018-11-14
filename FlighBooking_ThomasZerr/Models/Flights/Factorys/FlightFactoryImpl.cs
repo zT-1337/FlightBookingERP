@@ -1,20 +1,12 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using FlighBooking_ThomasZerr.Models.DateRanges;
+﻿using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
-using FlighBooking_ThomasZerr.Models.Proxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
 
 namespace FlighBooking_ThomasZerr.Models.Flights.Factorys
 {
     class FlightFactoryImpl : IFlightFactory
     {
-        private ProxyFlight proxyFlight_;
+        private readonly ProxyFlight proxyFlight_;
 
         public FlightFactoryImpl(ProxyFlight proxyFlight)
         {

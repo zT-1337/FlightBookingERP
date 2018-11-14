@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.ViewModels.UserDataViewModels;
 using FlighBooking_ThomasZerr.Views.FlightBookingMainWindows.Factorys;
 
@@ -10,8 +9,8 @@ namespace FlighBooking_ThomasZerr.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private IUserDataViewModel userDataViewModel_;
-        private IFlightBookingMainWindowFactory flightBookingMainWindowFactory_;
+        private readonly IUserDataViewModel userDataViewModel_;
+        private readonly IFlightBookingMainWindowFactory flightBookingMainWindowFactory_;
 
         public LoginWindow()
         {

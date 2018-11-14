@@ -11,10 +11,10 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingMainWindows
     /// </summary>
     partial class FlightBookingMainWindow : Window
     {
-        private IFlightBookingCreateWindowFactory createWindowFactory_;
-        private IFlightBookingEditWindowFactory editWindowFactory_;
+        private readonly IFlightBookingCreateWindowFactory createWindowFactory_;
+        private readonly IFlightBookingEditWindowFactory editWindowFactory_;
 
-        private List<Window> openedWindows_;
+        private readonly List<Window> openedWindows_;
 
         public FlightBookingMainWindow(IFlightBookingCreateWindowFactory createWindowFactory, IFlightBookingEditWindowFactory editWindowFactory)
         {

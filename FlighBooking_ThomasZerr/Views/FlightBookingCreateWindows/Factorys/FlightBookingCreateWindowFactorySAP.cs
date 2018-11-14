@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
@@ -13,14 +9,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
-using FlighBooking_ThomasZerr.Models.Validators;
-using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
-using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
-using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
 using FlighBooking_ThomasZerr.Models.Validators.Factorys;
-using FlighBooking_ThomasZerr.Models.Validators.FlightClassValidators;
-using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
-using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
@@ -98,11 +87,13 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
         private IDateRange CreateFlightDateRange()
         {
             var dateConverter = new DateConverterSAP();
-            var flightDateRange = new DateRangeImpl(dateConverter);
+            var flightDateRange = new DateRangeImpl(dateConverter)
+            {
+                Option = DateRangeOption.Between,
+                EarlierDateTime = DateTime.Now,
+                LaterDateTime = DateTime.Now
+            };
 
-            flightDateRange.Option = DateRangeOption.Between;
-            flightDateRange.EarlierDateTime = DateTime.Now;
-            flightDateRange.LaterDateTime = DateTime.Now;
 
             return flightDateRange;
         }
