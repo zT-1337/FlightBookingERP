@@ -17,12 +17,5 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         bool Reserved { get; set; }
         bool Cancelled { get; set; }
         bool Confirmed { get; set; }
-
-        //TODO BookingDateRange, FlightDateRange, MaxResults und IsMaxResultActive entfernen
-        IDateRange BookingDateRange { get; }
-        IDateRange FlightDateRange { get; }
-
-        int MaxResults { get; set; }
-        bool IsMaxResultsActive { get; set; }
     }
 }

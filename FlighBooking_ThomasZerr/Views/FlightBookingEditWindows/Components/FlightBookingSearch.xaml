@@ -70,19 +70,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding Args.BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding Args.BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
             </DockPanel>
             <DockPanel Grid.Row="4" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding Args.BookingDateRange.EarlierDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateRange.EarlierDateTime, Mode=TwoWay}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="5" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding Args.BookingDateRange.LaterDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateRange.LaterDateTime, Mode=TwoWay}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label
@@ -94,19 +94,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding Args.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding Args.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
             </DockPanel>
             <DockPanel Grid.Row="7" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding Args.FlightDateRange.EarlierDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateRange.EarlierDateTime, Mode=TwoWay}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="8" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding Args.FlightDateRange.LaterDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateRange.LaterDateTime, Mode=TwoWay}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label
@@ -116,12 +116,12 @@
             <TextBox
                 Grid.Row="9"
                 Grid.Column="1"
-                Text="{Binding Args.MaxResults, Mode=TwoWay}" />
+                Text="{Binding MaxResults, Mode=TwoWay}" />
             <CheckBox
                 Grid.Row="10"
                 Grid.Column="1"
                 Content="Anzahl limitieren"
-                IsChecked="{Binding Args.IsMaxResultsActive, Mode=TwoWay}" />
+                IsChecked="{Binding IsMaxResultsActive, Mode=TwoWay}" />
             <Button
                 Grid.Row="11"
                 Grid.Column="1"

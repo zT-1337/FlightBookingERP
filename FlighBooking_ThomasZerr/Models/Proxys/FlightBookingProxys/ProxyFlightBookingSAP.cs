@@ -104,23 +104,23 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        public override IFlightBookingData[] GetList(IFlightBookingData args)
+        public override IFlightBookingData[] GetList(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
         {
-            var getListRequest = BuildGetListRequest(args); 
+            var getListRequest = BuildGetListRequest(args, bookingDateRangeArg, flightDateRangeArg, maxResultsArg, isMaxResultActiveArg); 
             FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getListRequest);
             HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
             return BuildGetListResponse(sapResponse.BookingList);
         }
 
-        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args)
+        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
         {
-            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(args.BookingDateRange) };
-            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(bookingDateRangeArg) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(flightDateRangeArg) };
 
             return new FlightBookingGetList
             {
-                MaxRows = args.MaxResults,
-                MaxRowsSpecified = args.IsMaxResultsActive,
+                MaxRows = maxResultsArg,
+                MaxRowsSpecified = isMaxResultActiveArg,
                 Airline = args.FlightData.AirlineId,
                 TravelAgency = args.AgencyId,
                 CustomerNumber = args.CustomerId,

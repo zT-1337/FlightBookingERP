@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
     abstract class ProxyFlight : Proxy
     {
-        public abstract IFlightData[] GetList(IFlightData args);
+        public abstract IFlightData[] GetList(IFlightData args, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActive);
     }
 }

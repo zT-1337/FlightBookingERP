@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
@@ -62,9 +63,13 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         public ObservableCollection<IFlight> RetrievedFlights { get; }
 
         public IFlightData FlightArgs { get; }
+        public IDateRange FlightDateRange { get; }
+        public int MaxResults { get; set; }
+        public bool IsMaxResultsActive { get; set; }
+
         public IFlightBookingData FlightBookingArgs { get; }
 
-        public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
+        public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, IDateRange flightDateRange,
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
             ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
             IAirlineIdValidator airlineIdValidator, IDateRangeValidator flightDateRangeValidator, IMaxResultsValidator maxResultsDateValidator,
@@ -73,6 +78,9 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         {
             flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
+            FlightDateRange = flightDateRange;
+            MaxResults = 0;
+            IsMaxResultsActive = false;
 
             flightBookingFactory_ = flightBookingFactory;
             FlightBookingArgs = defaultFlightBookingArgs;
@@ -120,18 +128,18 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         private void ValidateFlightDateRange()
         {
-            flightDateRangeValidator_.LaterDateTime = FlightArgs.FlightDateRange.LaterDateTime;
-            flightDateRangeValidator_.IsValidElseThrowException(FlightArgs.FlightDateRange.EarlierDateTime);
+            flightDateRangeValidator_.LaterDateTime = FlightDateRange.LaterDateTime;
+            flightDateRangeValidator_.IsValidElseThrowException(FlightDateRange.EarlierDateTime);
         }
 
         private void ValidateMaxResults()
         {
-            maxResultsDateValidator_.IsValidElseThrowException(FlightArgs.MaxResults);
+            maxResultsDateValidator_.IsValidElseThrowException(MaxResults);
         }
 
         private void ExecuteFlightSearch()
         {
-            IFlight[] flights = flightFactory_.Retrieve(FlightArgs);
+            IFlight[] flights = flightFactory_.Retrieve(FlightArgs, FlightDateRange, MaxResults, IsMaxResultsActive);
             RetrievedFlights.Clear();
             foreach (var flight in flights)
             {

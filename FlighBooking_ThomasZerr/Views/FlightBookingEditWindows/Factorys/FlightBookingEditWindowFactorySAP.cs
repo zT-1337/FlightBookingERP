@@ -17,6 +17,7 @@ using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
 using FlighBooking_ThomasZerr.Models.Validators.Factorys;
 using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
 using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
+using FlighBooking_ThomasZerr.Utils.DateConverters;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
@@ -40,6 +41,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
         {
             var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingData = CreateDefaultFlightBookingArgs();
+            var bookingDateRange = CreateDateRange();
+            var flightDateRange = CreateDateRange();
+
             var operationResultFactory = CreateOperationResultFactory();
 
             var airlineIdValidator = validatorFactory_.CreateAirlineIdValidator();
@@ -49,7 +53,7 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
             var maxResultsValidator = validatorFactory_.CreateMaxResultsValidator();
 
             return new FlightBookingEditViewModelImpl(flightBookingFactory, 
-                defaultFlightBookingData, 
+                defaultFlightBookingData, bookingDateRange, flightDateRange,
                 new ObservableCollection<IFlightBooking>(),
                 operationResultFactory,
                 airlineIdValidator, travelAgencyIdValidator, customerIdValidator,
@@ -82,15 +86,19 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
                 Cancelled = false,
             };
 
-            flightBookingData.FlightDateRange.Option = DateRangeOption.Between;
-            flightBookingData.FlightDateRange.EarlierDateTime = DateTime.Now;
-            flightBookingData.FlightDateRange.LaterDateTime = DateTime.Now;
-
-            flightBookingData.BookingDateRange.Option = DateRangeOption.Between;
-            flightBookingData.BookingDateRange.EarlierDateTime = DateTime.Now;
-            flightBookingData.BookingDateRange.LaterDateTime = DateTime.Now;
-
             return flightBookingData;
+        }
+
+        private IDateRange CreateDateRange()
+        {
+            var dateConverter = new DateConverterSAP();
+            var flightDateRange = new DateRangeImpl(dateConverter);
+
+            flightDateRange.Option = DateRangeOption.Between;
+            flightDateRange.EarlierDateTime = DateTime.Now;
+            flightDateRange.LaterDateTime = DateTime.Now;
+
+            return flightDateRange;
         }
 
         private IOperationResultFactory CreateOperationResultFactory()

@@ -106,19 +106,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
+                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
                     ToolTip="{StaticResource Include}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightArgs.FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
+                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
                     ToolTip="{StaticResource Exclude}" />
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
-                    SelectedDate="{Binding Mode=TwoWay, Path=FlightArgs.FlightDateRange.EarlierDateTime, UpdateSourceTrigger=LostFocus}"
+                    SelectedDate="{Binding Mode=TwoWay, Path=FlightDateRange.EarlierDateTime, UpdateSourceTrigger=LostFocus}"
                     ToolTip="{StaticResource Startdate}" />
                 <Label
                     Content="Startdatum"
@@ -128,7 +128,7 @@
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
-                    SelectedDate="{Binding FlightArgs.FlightDateRange.LaterDateTime, Mode=TwoWay}"
+                    SelectedDate="{Binding FlightDateRange.LaterDateTime, Mode=TwoWay}"
                     ToolTip="{StaticResource Enddate}" />
                 <Label
                     Content="Enddatum"
@@ -143,13 +143,15 @@
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding Mode=TwoWay, Path=FlightArgs.MaxResults, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Mode=TwoWay, Path=MaxResults, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="{StaticResource SearchResults}" />
             <CheckBox
                 Grid.Row="5"
                 Grid.Column="1"
+                Width="198"
+                HorizontalAlignment="Right"
                 Content="Anzahl limitieren"
-                IsChecked="{Binding FlightArgs.IsMaxResultsActive, Mode=TwoWay}" />
+                IsChecked="{Binding IsMaxResultsActive, Mode=TwoWay}" />
             <Button
                 Grid.Row="6"
                 Grid.Column="1"

@@ -22,24 +22,24 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
             sapClient_ = new Z_FLIGHT_MTClient();
         }
 
-        public override IFlightData[] GetList(IFlightData args)
+        public override IFlightData[] GetList(IFlightData args, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActive)
         {
-            var getListRequest = BuildGetListRequest(args);
+            var getListRequest = BuildGetListRequest(args, flightDateRangeArg, maxResultsArg, isMaxResultActive);
             var sapResponse = sapClient_.FlightGetList(getListRequest);
             HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
             return BuildGetListResponse(sapResponse.FlightList);
         }
 
-        private FlightGetList BuildGetListRequest(IFlightData args)
+        private FlightGetList BuildGetListRequest(IFlightData args, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActive)
         {
-            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(flightDateRangeArg) };
 
             return new FlightGetList
             {
                 Airline = args.AirlineId,
                 DateRange = flightDateRange,
-                MaxRows = args.MaxResults,
-                MaxRowsSpecified = args.IsMaxResultsActive
+                MaxRows = maxResultsArg,
+                MaxRowsSpecified = isMaxResultActive
             };
 
         }
