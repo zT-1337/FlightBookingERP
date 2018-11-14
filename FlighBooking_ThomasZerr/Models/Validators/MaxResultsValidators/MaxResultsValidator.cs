@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace FlighBooking_ThomasZerr.Models.Validators
+namespace FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators
 {
-    class MaxResultsValidator : IValidator
+    class MaxResultsValidator : IMaxResultsValidator
     {
         public void IsValidElseThrowException(object value)
         {
             if (value is int maxResults)
             {
                 if(maxResults < 0)
-                    throw new Exception("MaxResults muss positiv sein");
+                    throw new Exception("Anzahl Suchergebnisse muss positiv sein");
 
                 return;
             }

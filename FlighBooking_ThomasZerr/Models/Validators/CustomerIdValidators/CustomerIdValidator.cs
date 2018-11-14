@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace FlighBooking_ThomasZerr.Models.Validators
+namespace FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators
 {
-    class CustomerIdValidator : IValidator
+    class CustomerIdValidator : ICustomerIdValidator
     {
         public int MaxLength { get; set; }
 
@@ -11,9 +11,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
         {
             if (value is string customerId)
             {
-                if (customerId.Length == 0)
-                    throw new Exception("Kundennummer darf nicht leer sein");
-
                 if (customerId.Length > MaxLength)
                     throw new Exception("Kundennummer darf nur maximal 8 Ziffern lang sein");
 

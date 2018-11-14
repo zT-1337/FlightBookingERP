@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FlighBooking_ThomasZerr.Models.Validators
+namespace FlighBooking_ThomasZerr.Models.Validators.FlightClassValidators
 {
-    class FlightClassValidator : IValidator
+    class FlightClassValidator : IFlightClassValidator
     {
         public string[] FlightClasses { get; set; }
 
@@ -24,9 +24,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
         {
             if (value is string flightClass)
             {
-                if(flightClass.Length == 0)
-                    throw new Exception("Klasse darf nicht leer sein");
-
                 if(!IsFlightClass(flightClass))
                     throw new Exception($"Flugklasse muss einen dieser Werte haben: {ListOfFlightClasses}");
 

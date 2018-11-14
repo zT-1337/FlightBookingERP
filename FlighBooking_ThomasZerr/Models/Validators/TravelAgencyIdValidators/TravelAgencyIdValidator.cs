@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace FlighBooking_ThomasZerr.Models.Validators
+namespace FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators
 {
-    class TravelAgencyIdValidator : IValidator
+    class TravelAgencyIdValidator : ITravelAgencyIdValidator
     {
         public int MaxLength { get; set; }
 
@@ -11,9 +11,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
         {
             if (value is string travelAgencyId)
             {
-                if(travelAgencyId.Length == 0)
-                    throw new Exception("Reisebüro darf nicht leer sein");
-
                 if(travelAgencyId.Length > MaxLength)
                     throw new Exception("Reisebüro darf nur maximal 8 Ziffern lang sein");
 

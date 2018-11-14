@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FlighBooking_ThomasZerr.Models.Validators.NotEmptyStringValidator
+namespace FlighBooking_ThomasZerr.Models.Validators.NotEmptyStringValidators
 {
     class NotEmptyStringValidatorImpl : INotEmptyStringValidator
     {

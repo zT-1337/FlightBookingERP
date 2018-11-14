@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FlighBooking_ThomasZerr.Models.Validators
+namespace FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators
 {
-    class AirlineIdValidator : IValidator
+    class AirlineIdValidator : IAirlineIdValidator
     {
         public int MaxLength { get; set; }
 

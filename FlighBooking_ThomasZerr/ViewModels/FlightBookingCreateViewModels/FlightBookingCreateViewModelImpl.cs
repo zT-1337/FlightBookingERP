@@ -13,6 +13,13 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Validators;
+using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
+using FlighBooking_ThomasZerr.Models.Validators.FlightClassValidators;
+using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
+using FlighBooking_ThomasZerr.Models.Validators.NotEmptyStringValidators;
+using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
@@ -22,13 +29,13 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private IFlightFactory flightFactory_;
         private IFlightBookingFactory flightBookingFactory_;
 
-        private IValidator airlineIdValidator_;
-        private IValidator flightDateRangeValidator_;
-        private IValidator maxResultsDateValidator_;
-
-        private IValidator travelAgencyIdValidator_;
-        private IValidator customerIdValidator_;
-        private IValidator flightClassValidator_;
+        private IAirlineIdValidator airlineIdValidator_;
+        private IDateRangeValidator flightDateRangeValidator_;
+        private IMaxResultsValidator maxResultsDateValidator_;
+        private ITravelAgencyIdValidator travelAgencyIdValidator_;
+        private ICustomerIdValidator customerIdValidator_;
+        private IFlightClassValidator flightClassValidator_;
+        private INotEmptyStringValidator notEmptyStringValidator_;
 
         private IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
@@ -60,8 +67,9 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
             ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
-            IValidator airlineIdValidator, IValidator flightDateRangeValidator, IValidator maxResultsDateValidator,
-            IValidator travelAgencyIdValidator, IValidator customerIdValidator, IValidator flightClassValidator)
+            IAirlineIdValidator airlineIdValidator, IDateRangeValidator flightDateRangeValidator, IMaxResultsValidator maxResultsDateValidator,
+            ITravelAgencyIdValidator travelAgencyIdValidator, ICustomerIdValidator customerIdValidator, IFlightClassValidator flightClassValidator,
+            INotEmptyStringValidator notEmptyStringValidator)
         {
             flightFactory_ = flightFactory;
             FlightArgs = defaultFlightArgs;
@@ -80,6 +88,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             travelAgencyIdValidator_ = travelAgencyIdValidator;
             customerIdValidator_ = customerIdValidator;
             flightClassValidator_ = flightClassValidator;
+
+            notEmptyStringValidator_ = notEmptyStringValidator;
         }
 
         public void DoFlightSearch()
@@ -110,7 +120,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         private void ValidateFlightDateRange()
         {
-            flightDateRangeValidator_.ExtraParam = FlightArgs.FlightDateRange.LaterDateTime;
+            flightDateRangeValidator_.LaterDateTime = FlightArgs.FlightDateRange.LaterDateTime;
             flightDateRangeValidator_.IsValidElseThrowException(FlightArgs.FlightDateRange.EarlierDateTime);
         }
 
@@ -156,16 +166,25 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         private void ValidateTravelAgencyId()
         {
+            notEmptyStringValidator_.PropertyName = "Reisebüro";
+            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.AgencyId);
+
             travelAgencyIdValidator_.IsValidElseThrowException(FlightBookingArgs.AgencyId);
         }
 
         private void ValidateCustomerId()
         {
+            notEmptyStringValidator_.PropertyName = "Kundennummer";
+            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.CustomerId);
+
             customerIdValidator_.IsValidElseThrowException(FlightBookingArgs.CustomerId);
         }
 
         private void ValidateClass()
         {
+            notEmptyStringValidator_.PropertyName = "Klasse";
+            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.Class);
+
             flightClassValidator_.IsValidElseThrowException(FlightBookingArgs.Class);
         }
 

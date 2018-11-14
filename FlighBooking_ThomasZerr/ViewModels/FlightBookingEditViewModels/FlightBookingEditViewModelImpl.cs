@@ -6,6 +6,11 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Validators;
+using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
+using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
+using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
@@ -14,11 +19,11 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
     {
         private IFlightBookingFactory flightBookingFactory_;
 
-        private IValidator airlinedIdValidator_;
-        private IValidator travelAgencyIdValidator_;
-        private IValidator customerIdValidator_;
-        private IValidator dateRangeValidator_;
-        private IValidator maxResultsValidator_;
+        private IAirlineIdValidator airlinedIdValidator_;
+        private ITravelAgencyIdValidator travelAgencyIdValidator_;
+        private ICustomerIdValidator customerIdValidator_;
+        private IDateRangeValidator dateRangeValidator_;
+        private IMaxResultsValidator maxResultsValidator_;
 
         private IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
@@ -50,8 +55,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
         public FlightBookingEditViewModelImpl(IFlightBookingFactory flightBookingFactory,
             IFlightBookingData defaultArgs, ObservableCollection<IFlightBooking> retrievedFlightBookings,
             IOperationResultFactory operationResultFactory, 
-            IValidator airlinedIdValidator, IValidator travelAgencyIdValidator, IValidator customerIdValidator,
-            IValidator dateRangeValidator, IValidator maxResultsValidator)
+            IAirlineIdValidator airlinedIdValidator, ITravelAgencyIdValidator travelAgencyIdValidator, ICustomerIdValidator customerIdValidator,
+            IDateRangeValidator dateRangeValidator, IMaxResultsValidator maxResultsValidator)
         {
             flightBookingFactory_ = flightBookingFactory;
             Args = defaultArgs;
@@ -106,13 +111,13 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels
 
         private void ValidateBookingDateRange()
         {
-            dateRangeValidator_.ExtraParam = Args.BookingDateRange.LaterDateTime;
+            dateRangeValidator_.LaterDateTime = Args.BookingDateRange.LaterDateTime;
             dateRangeValidator_.IsValidElseThrowException(Args.BookingDateRange.EarlierDateTime);
         }
 
         private void ValidateFlightDateRange()
         {
-            dateRangeValidator_.ExtraParam = Args.FlightDateRange.LaterDateTime;
+            dateRangeValidator_.LaterDateTime = Args.FlightDateRange.LaterDateTime;
             dateRangeValidator_.IsValidElseThrowException(Args.FlightDateRange.EarlierDateTime);
         }
 

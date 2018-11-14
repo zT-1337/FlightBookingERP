@@ -10,6 +10,13 @@ using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
+using FlighBooking_ThomasZerr.Models.Validators;
+using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
+using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
+using FlighBooking_ThomasZerr.Models.Validators.Factorys;
+using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
+using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingEditViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
@@ -19,8 +26,12 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
         public string Username { get; set; }
         public string Password { get; set; }
 
+        private IValidatorFactory validatorFactory_;
+
         public FlightBookingEditWindow Create()
         {
+            validatorFactory_ = new ValidatorFactorySAP();
+
             var editViewModel = CreateViewModel();
             return new FlightBookingEditWindow(editViewModel);
         }
@@ -31,10 +42,18 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
             var defaultFlightBookingData = CreateDefaultFlightBookingArgs();
             var operationResultFactory = CreateOperationResultFactory();
 
+            var airlineIdValidator = validatorFactory_.CreateAirlineIdValidator();
+            var travelAgencyIdValidator = validatorFactory_.CreateTravelAgencyIdValidator();
+            var customerIdValidator = validatorFactory_.CreateCustomerIdValidator();
+            var dateRangeValidator = validatorFactory_.CreateDateRangeValidator();
+            var maxResultsValidator = validatorFactory_.CreateMaxResultsValidator();
+
             return new FlightBookingEditViewModelImpl(flightBookingFactory, 
                 defaultFlightBookingData, 
                 new ObservableCollection<IFlightBooking>(),
-                operationResultFactory);
+                operationResultFactory,
+                airlineIdValidator, travelAgencyIdValidator, customerIdValidator,
+                dateRangeValidator, maxResultsValidator);
         }
 
         private IFlightBookingFactory CreateFlightBookingFactory()
