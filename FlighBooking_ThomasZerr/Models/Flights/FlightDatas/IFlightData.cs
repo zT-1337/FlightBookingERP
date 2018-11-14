@@ -10,6 +10,7 @@ namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas
 {
     public interface IFlightData
     {
+        //TODO FlightDateRange, MaxResults und IsMaxResultActive entfernen
         string AirlineId { get; set; }
         string ConnectId { get; set; }
         IDate Flightdate { get; }
