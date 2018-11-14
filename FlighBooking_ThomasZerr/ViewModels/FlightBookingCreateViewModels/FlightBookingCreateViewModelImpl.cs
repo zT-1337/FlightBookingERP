@@ -12,8 +12,8 @@ using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
+using FlighBooking_ThomasZerr.Models.Validators;
 using FlighBooking_ThomasZerr.Utils;
-using FlighBooking_ThomasZerr.Utils.Validators;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
@@ -105,18 +105,18 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         private void ValidateAirlineId()
         {
-            airlineIdValidator_.IsValid(FlightArgs.AirlineId);
+            airlineIdValidator_.IsValidElseThrowException(FlightArgs.AirlineId);
         }
 
         private void ValidateFlightDateRange()
         {
             flightDateRangeValidator_.ExtraParam = FlightArgs.FlightDateRange.LaterDateTime;
-            flightDateRangeValidator_.IsValid(FlightArgs.FlightDateRange.EarlierDateTime);
+            flightDateRangeValidator_.IsValidElseThrowException(FlightArgs.FlightDateRange.EarlierDateTime);
         }
 
         private void ValidateMaxResults()
         {
-            maxResultsDateValidator_.IsValid(FlightArgs.MaxResults);
+            maxResultsDateValidator_.IsValidElseThrowException(FlightArgs.MaxResults);
         }
 
         private void ExecuteFlightSearch()
@@ -156,17 +156,17 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 
         private void ValidateTravelAgencyId()
         {
-            travelAgencyIdValidator_.IsValid(FlightBookingArgs.AgencyId);
+            travelAgencyIdValidator_.IsValidElseThrowException(FlightBookingArgs.AgencyId);
         }
 
         private void ValidateCustomerId()
         {
-            customerIdValidator_.IsValid(FlightBookingArgs.CustomerId);
+            customerIdValidator_.IsValidElseThrowException(FlightBookingArgs.CustomerId);
         }
 
         private void ValidateClass()
         {
-            flightClassValidator_.IsValid(FlightBookingArgs.Class);
+            flightClassValidator_.IsValidElseThrowException(FlightBookingArgs.Class);
         }
 
         private void ExecuteCreateFlightBooking()
