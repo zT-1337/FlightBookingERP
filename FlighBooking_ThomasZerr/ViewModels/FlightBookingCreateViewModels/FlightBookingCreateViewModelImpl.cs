@@ -23,7 +23,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private IFlightBookingFactory flightBookingFactory_;
 
         private IValidator airlineIdValidator_;
-        private IValidator flightDateValidator_;
+        private IValidator flightDateRangeValidator_;
         private IValidator maxResultsDateValidator_;
 
         private IValidator travelAgencyIdValidator_;
@@ -60,7 +60,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, 
             IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
             ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
-            IValidator airlineIdValidator, IValidator flightDateValidator, IValidator maxResultsDateValidator,
+            IValidator airlineIdValidator, IValidator flightDateRangeValidator, IValidator maxResultsDateValidator,
             IValidator travelAgencyIdValidator, IValidator customerIdValidator, IValidator flightClassValidator)
         {
             flightFactory_ = flightFactory;
@@ -74,7 +74,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             operationResultFactory_ = operationResultFactory;
 
             airlineIdValidator_ = airlineIdValidator;
-            flightDateValidator_ = flightDateValidator;
+            flightDateRangeValidator_ = flightDateRangeValidator;
             maxResultsDateValidator_ = maxResultsDateValidator;
 
             travelAgencyIdValidator_ = travelAgencyIdValidator;
@@ -99,7 +99,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         private void ValidateSearchInput()
         {
             ValidateAirlineId();
-            ValidateFlightDate();
+            ValidateFlightDateRange();
             ValidateMaxResults();
         }
 
@@ -108,10 +108,10 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             airlineIdValidator_.IsValid(FlightArgs.AirlineId);
         }
 
-        private void ValidateFlightDate()
+        private void ValidateFlightDateRange()
         {
-            flightDateValidator_.ExtraParam = FlightArgs.FlightDateRange.LaterDateTime;
-            flightDateValidator_.IsValid(FlightArgs.FlightDateRange.EarlierDateTime);
+            flightDateRangeValidator_.ExtraParam = FlightArgs.FlightDateRange.LaterDateTime;
+            flightDateRangeValidator_.IsValid(FlightArgs.FlightDateRange.EarlierDateTime);
         }
 
         private void ValidateMaxResults()
