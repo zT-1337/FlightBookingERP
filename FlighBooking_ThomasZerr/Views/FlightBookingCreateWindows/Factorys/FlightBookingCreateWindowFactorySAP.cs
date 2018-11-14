@@ -13,7 +13,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
-using FlighBooking_ThomasZerr.Utils.Validators;
+using FlighBooking_ThomasZerr.Models.Validators;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
 namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
