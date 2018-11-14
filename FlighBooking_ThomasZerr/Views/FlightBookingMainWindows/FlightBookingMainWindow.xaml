@@ -6,7 +6,7 @@
     xmlns:components3="clr-namespace:FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="FlightBookingWindow"
+    Title="Hauptmenü"
     Width="375"
     Height="155"
     Closing="OnClosing"

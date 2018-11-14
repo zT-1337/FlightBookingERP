@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:utils="clr-namespace:FlighBooking_ThomasZerr.Utils"
     xmlns:viewModel="clr-namespace:FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels"
-    Title="FlightBookingCreateWindow"
+    Title="Flugbuchung erstellen"
     Width="750"
     Height="600"
     d:DataContext="{d:DesignInstance Type=viewModel:FlightBookingCreateViewModelImpl}"
