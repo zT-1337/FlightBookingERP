@@ -7,7 +7,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
     {
         public int MaxLength { get; set; }
 
-        public object ExtraParam { get; set; }
         public void IsValidElseThrowException(object value)
         {
             if (value is string travelAgencyId)

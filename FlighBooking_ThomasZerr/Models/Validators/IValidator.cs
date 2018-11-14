@@ -2,8 +2,6 @@
 {
     public interface IValidator
     {
-        object ExtraParam { get; set; }
-
         void IsValidElseThrowException(object value);
     }
 }

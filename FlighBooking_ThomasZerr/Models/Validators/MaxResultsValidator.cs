@@ -4,7 +4,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
 {
     class MaxResultsValidator : IValidator
     {
-        public object ExtraParam { get; set; }
         public void IsValidElseThrowException(object value)
         {
             if (value is int maxResults)

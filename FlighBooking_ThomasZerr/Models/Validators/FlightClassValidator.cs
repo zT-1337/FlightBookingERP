@@ -5,7 +5,6 @@ namespace FlighBooking_ThomasZerr.Models.Validators
     class FlightClassValidator : IValidator
     {
         public string[] FlightClasses { get; set; }
-        public object ExtraParam { get; set; }
 
         private string ListOfFlightClasses
         {
