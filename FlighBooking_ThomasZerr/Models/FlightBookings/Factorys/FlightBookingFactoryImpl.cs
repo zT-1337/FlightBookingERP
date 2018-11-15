@@ -1,6 +1,7 @@
 ﻿using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
+using FlighBooking_ThomasZerr.Models.SearchDatas;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
@@ -22,10 +23,9 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
             return new FlightBookingImpl(proxyFlightBooking_, args);
         }
 
-        public IFlightBooking[] Retrieve(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg,
-                                        int maxResultsArg, bool isMaxResultActiveArg)
+        public IFlightBooking[] Retrieve(IFlightBookingData args, ISearchData searchData)
         {
-            IFlightBookingData[] flightBookingDatas = proxyFlightBooking_.GetList(args, bookingDateRangeArg, flightDateRangeArg, maxResultsArg, isMaxResultActiveArg);
+            IFlightBookingData[] flightBookingDatas = proxyFlightBooking_.GetList(args, searchData);
 
             IFlightBooking[] flightBookings = new IFlightBooking[flightBookingDatas.Length];
             for (int i = 0; i < flightBookings.Length; ++i)

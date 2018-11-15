@@ -9,7 +9,7 @@ using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightProxys;
-using FlighBooking_ThomasZerr.Models.Validators.Factorys;
+using FlighBooking_ThomasZerr.Models.SearchDatas;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
 using FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels;
 
@@ -20,12 +20,8 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
         public string Username { get; set; }
         public string Password { get; set; }
 
-        private IValidatorFactory validatorFactory_;
-
         public FlightBookingCreateWindow Create()
         {
-            validatorFactory_ = new ValidatorFactorySAP();
-
             var createViewModel = CreateViewModel();
             return new FlightBookingCreateWindow(createViewModel);
         }
@@ -35,29 +31,20 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
             var flightFactory = CreateFlightFactory();
             var defaultFlightArgs = CreateDefaultFlightArgs();
-            var flightDateRange = CreateFlightDateRange();
 
             var flightBookingFactory = CreateFlightBookingFactory();
             var defaultFlightBookingArgs = CreateDefaultFlightBookingArgs();
 
+            var searchData = CreateSearchData();
+
             var operationResultFactory = CreateOperationResultFactory();
 
-            var airlineIdValidator = validatorFactory_.CreateAirlineIdValidator();
-            var flightDateValidator = validatorFactory_.CreateDateRangeValidator();
-            var maxResultsValidator = validatorFactory_.CreateMaxResultsValidator();
-
-            var travelAgencyIdValidator = validatorFactory_.CreateTravelAgencyIdValidator();
-            var customerIdValidator = validatorFactory_.CreateCustomerIdValidator();
-            var flightClassValidator = validatorFactory_.CreateFlightClassValidator();
-
-            var notEmptyStringValidator = validatorFactory_.CreateNotEmptyStringValidator();
-
-            return new FlightBookingCreateViewModelImpl(flightFactory, defaultFlightArgs, flightDateRange,
-                flightBookingFactory, defaultFlightBookingArgs, 
-                new ObservableCollection<IFlight>(), operationResultFactory,
-                airlineIdValidator, flightDateValidator, maxResultsValidator,
-                travelAgencyIdValidator, customerIdValidator, flightClassValidator,
-                notEmptyStringValidator);
+            return new FlightBookingCreateViewModelImpl(flightFactory, defaultFlightArgs,
+                                                        flightBookingFactory, defaultFlightBookingArgs,
+                                                        searchData, operationResultFactory)
+            {
+                RetrievedFlights = new ObservableCollection<IFlight>()
+            };
         }
 
         private IFlightFactory CreateFlightFactory()
@@ -84,20 +71,6 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
             return flighData;
         }
 
-        private IDateRange CreateFlightDateRange()
-        {
-            var dateConverter = new DateConverterSAP();
-            var flightDateRange = new DateRangeImpl(dateConverter)
-            {
-                Option = DateRangeOption.Between,
-                EarlierDateTime = DateTime.Now,
-                LaterDateTime = DateTime.Now
-            };
-
-
-            return flightDateRange;
-        }
-
         private IFlightBookingFactory CreateFlightBookingFactory()
         {
             var proxyFlightBooking = new ProxyFlightBookingSAP
@@ -122,6 +95,25 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
                 Reserved = false,
                 Cancelled = false,
             };
+        }
+
+        private ISearchData CreateSearchData()
+        {
+            IDateConverter dateConverter = new DateConverterSAP();
+
+            IDateRange flightDateRange = new DateRangeImpl(dateConverter);
+            flightDateRange.Option = DateRangeOption.Between;
+            flightDateRange.EarlierDateTime = DateTime.Now;
+            flightDateRange.LaterDateTime = DateTime.Now;
+
+            ISearchData searchData = new SearchDataSAP
+            {
+                FlightDateRange = flightDateRange,
+                MaxResults = 0,
+                IsMaxResultsActive = false
+            };
+
+            return searchData;
         }
 
         private IOperationResultFactory CreateOperationResultFactory()

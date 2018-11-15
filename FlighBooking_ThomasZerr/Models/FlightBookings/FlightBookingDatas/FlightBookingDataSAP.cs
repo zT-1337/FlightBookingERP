@@ -1,4 +1,6 @@
-﻿using FlighBooking_ThomasZerr.Models.Dates;
+﻿using System;
+using System.Text.RegularExpressions;
+using FlighBooking_ThomasZerr.Models.Dates;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Utils;
 using FlighBooking_ThomasZerr.Utils.DateConverters;
@@ -9,11 +11,71 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
     {
         public IFlightData FlightData { get; }
         public string BookingId { get; set; }
-        public string CustomerId { get; set; }
-        public string Class { get; set; }
+
+        private int maxLenghtCustomerId_;
+        private string customerId_;
+        public string CustomerId
+        {
+            get => customerId_;
+            set
+            {
+                if (customerId_.Length > maxLenghtCustomerId_)
+                    throw new Exception("Kundennummer darf nur maximal 8 Ziffern lang sein");
+
+                if (!Regex.IsMatch(customerId_, "^[0-9]*$"))
+                    throw new Exception("Kundennummer darf nur Ziffern enthalten");
+
+                customerId_ = value;
+            }
+        }
+
+        private string[] flightClasses_;
+        private string ListOfFlightClasses_
+        {
+            get
+            {
+                string listOfFlightClasses = "";
+                foreach (var flightClass in flightClasses_)
+                {
+                    listOfFlightClasses += flightClass + ", ";
+                }
+
+                return listOfFlightClasses;
+            }
+        }
+        private string class_;
+        public string Class
+        {
+            get => class_;
+            set
+            {
+                if (!IsFlightClass(class_))
+                    throw new Exception($"Flugklasse muss einen dieser Werte haben: {ListOfFlightClasses_}");
+
+                class_ = value;
+            }
+        }
+
         public IDate Bookdate { get; }
         public string Counter { get; set; }
-        public string AgencyId { get; set; }
+
+        private int maxLengthAgencyId_;
+        private string agencyId_;
+        public string AgencyId
+        {
+            get => agencyId_;
+            set
+            {
+                if (agencyId_.Length > maxLengthAgencyId_)
+                    throw new Exception("Reisebüro darf nur maximal 8 Ziffern lang sein");
+
+                if (!Regex.IsMatch(agencyId_, "^[0-9]*$"))
+                    throw new Exception("Reisebüro darf nur Ziffern enthalten");
+
+                agencyId_ = value;
+            }
+        }
+
         public string PassagierName { get; set; }
 
         private bool reserved_;
@@ -60,10 +122,25 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
 
         public FlightBookingDataSAP()
         {
+            maxLenghtCustomerId_ = 8;
+            flightClasses_ = new[] {"C", "F", "Y"};
+            maxLengthAgencyId_ = 8;
+
             FlightData = new FlightDataSAP();
 
             var dateConverter = new DateConverterSAP();
             Bookdate = new DateImpl(dateConverter);
+        }
+
+        private bool IsFlightClass(string maybeFlightClass)
+        {
+            foreach (var flightClass in flightClasses_)
+            {
+                if (flightClass.Equals(maybeFlightClass))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

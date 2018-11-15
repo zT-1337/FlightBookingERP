@@ -44,7 +44,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Args.FlightData.AirlineId, Mode=OneWayToSource}" />
+                Text="{Binding AirlineId, Mode=OneWayToSource}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
@@ -52,7 +52,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding Args.AgencyId, Mode=OneWayToSource}" />
+                Text="{Binding TravelAgencyId, Mode=OneWayToSource}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
@@ -60,7 +60,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding Args.CustomerId, Mode=OneWayToSource}" />
+                Text="{Binding CustomerId, Mode=OneWayToSource}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -70,19 +70,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding BookingDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
             </DockPanel>
             <DockPanel Grid.Row="4" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateRange.EarlierDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateEarlierDateTime, Mode=TwoWay}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="5" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateRange.LaterDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateLaterDateTime, Mode=TwoWay}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label
@@ -94,19 +94,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
             </DockPanel>
             <DockPanel Grid.Row="7" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateRange.EarlierDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateEarlierDateTime, Mode=TwoWay}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="8" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateRange.LaterDateTime, Mode=TwoWay}" />
+                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateLaterDateTime, Mode=TwoWay}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label

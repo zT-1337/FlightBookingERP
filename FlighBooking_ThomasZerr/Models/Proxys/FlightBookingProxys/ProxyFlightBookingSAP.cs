@@ -1,6 +1,8 @@
-﻿using FlighBooking_ThomasZerr.FlightBookingReference;
+﻿using System;
+using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
+using FlighBooking_ThomasZerr.Models.SearchDatas;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
@@ -76,20 +78,10 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private IFlightBookingData BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
-        {
-
-            IFlightBookingData flightBookingData = new FlightBookingDataSAP()
-            {
-                BookingId = sapResponse.BookingNumber
-            };
-            flightBookingData.FlightData.AirlineId = sapResponse.AirlineID;
-
-            return flightBookingData;
-        }
-
         private Bapisbonew ConvertFlightBookingDataToBapisbonew(IFlightBookingData args)
         {
+            CheckMandatoryCreateParams(args);
+
             return new Bapisbonew
             {
                 Agencynum = args.AgencyId,
@@ -103,23 +95,47 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        public override IFlightBookingData[] GetList(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
+        private void CheckMandatoryCreateParams(IFlightBookingData args)
         {
-            var getListRequest = BuildGetListRequest(args, bookingDateRangeArg, flightDateRangeArg, maxResultsArg, isMaxResultActiveArg);
+            if(args.AgencyId.Length == 0)
+                throw new Exception("Reisebüro darf nicht leer sein");
+
+            if(args.Class.Length == 0)
+                throw new Exception("Klasse darf nicht leer sein");
+
+            if(args.CustomerId.Length == 0)
+                throw new Exception("Kundennummer darf nicht leer sein");
+        }
+
+        private IFlightBookingData BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
+        {
+
+            IFlightBookingData flightBookingData = new FlightBookingDataSAP()
+            {
+                BookingId = sapResponse.BookingNumber
+            };
+            flightBookingData.FlightData.AirlineId = sapResponse.AirlineID;
+
+            return flightBookingData;
+        }
+
+        public override IFlightBookingData[] GetList(IFlightBookingData args, ISearchData searchData)
+        {
+            var getListRequest = BuildGetListRequest(args, searchData);
             FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getListRequest);
             HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
             return BuildGetListResponse(sapResponse.BookingList);
         }
 
-        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
+        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args, ISearchData searchData)
         {
-            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(bookingDateRangeArg) };
-            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(flightDateRangeArg) };
+            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(searchData.BookingDateRange) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(searchData.FlightDateRange) };
 
             return new FlightBookingGetList
             {
-                MaxRows = maxResultsArg,
-                MaxRowsSpecified = isMaxResultActiveArg,
+                MaxRows = searchData.MaxResults,
+                MaxRowsSpecified = searchData.IsMaxResultsActive,
                 Airline = args.FlightData.AirlineId,
                 TravelAgency = args.AgencyId,
                 CustomerNumber = args.CustomerId,

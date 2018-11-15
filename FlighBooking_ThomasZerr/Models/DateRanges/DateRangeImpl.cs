@@ -7,14 +7,38 @@ namespace FlighBooking_ThomasZerr.Models.DateRanges
     {
         private readonly IDateConverter dateConverter_;
 
-        public DateTime EarlierDateTime { get; set; }
+        private DateTime earlierDateTime_;
+        public DateTime EarlierDateTime
+        {
+            get => earlierDateTime_;
+            set
+            {
+                if (DateTime.Compare(value, LaterDateTime) > 0)
+                    throw new Exception("Startdatum darf nicht nach dem Enddatum liegen");
+
+                earlierDateTime_ = value;
+            }
+        }
+
         public string EarlierDate
         {
             get => dateConverter_.ConvertDateTimeToString(EarlierDateTime);
             set => EarlierDateTime = dateConverter_.ConvertStringToDateTime(value);
         }
 
-        public DateTime LaterDateTime { get; set; }
+        private DateTime laterDateTime_;
+        public DateTime LaterDateTime
+        {
+            get => laterDateTime_;
+            set
+            {
+                if(DateTime.Compare(EarlierDateTime, value) < 0)
+                    throw new Exception("Startdatum darf nicht nach dem Enddatum liegen");
+
+                laterDateTime_ = value;
+            }
+        }
+
         public string LaterDate
         {
             get => dateConverter_.ConvertDateTimeToString(LaterDateTime);

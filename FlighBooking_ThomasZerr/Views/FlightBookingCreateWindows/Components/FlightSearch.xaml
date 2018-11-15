@@ -93,7 +93,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Mode=OneWayToSource, Path=FlightArgs.AirlineId, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Mode=OneWayToSource, Path=AirlineIdForSearch, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="{StaticResource AirlineIdToolTip}" />
             <Label
                 Grid.Row="1"
@@ -105,19 +105,19 @@
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
                     ToolTip="{StaticResource Include}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRange.Option, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
                     ToolTip="{StaticResource Exclude}" />
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
-                    SelectedDate="{Binding Mode=TwoWay, Path=FlightDateRange.EarlierDateTime, UpdateSourceTrigger=LostFocus}"
+                    SelectedDate="{Binding FlightDateEarlierDateTime, Mode=TwoWay}"
                     ToolTip="{StaticResource Startdate}" />
                 <Label
                     Content="Startdatum"
@@ -127,7 +127,7 @@
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <DatePicker
                     DockPanel.Dock="Right"
-                    SelectedDate="{Binding FlightDateRange.LaterDateTime, Mode=TwoWay}"
+                    SelectedDate="{Binding FlightDateLaterDateTime, Mode=TwoWay}"
                     ToolTip="{StaticResource Enddate}" />
                 <Label
                     Content="Enddatum"

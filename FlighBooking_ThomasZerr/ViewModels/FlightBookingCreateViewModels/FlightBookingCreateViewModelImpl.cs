@@ -8,13 +8,7 @@ using FlighBooking_ThomasZerr.Models.Flights.Factorys;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 using FlighBooking_ThomasZerr.Models.OperationResult;
 using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
-using FlighBooking_ThomasZerr.Models.Validators.AirlineIdValidators;
-using FlighBooking_ThomasZerr.Models.Validators.CustomerIdValidators;
-using FlighBooking_ThomasZerr.Models.Validators.DateRangeValidators;
-using FlighBooking_ThomasZerr.Models.Validators.FlightClassValidators;
-using FlighBooking_ThomasZerr.Models.Validators.MaxResultsValidators;
-using FlighBooking_ThomasZerr.Models.Validators.NotEmptyStringValidators;
-using FlighBooking_ThomasZerr.Models.Validators.TravelAgencyIdValidators;
+using FlighBooking_ThomasZerr.Models.SearchDatas;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
@@ -23,14 +17,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
     {
         private readonly IFlightFactory flightFactory_;
         private readonly IFlightBookingFactory flightBookingFactory_;
-
-        private readonly IAirlineIdValidator airlineIdValidator_;
-        private readonly IDateRangeValidator flightDateRangeValidator_;
-        private readonly IMaxResultsValidator maxResultsDateValidator_;
-        private readonly ITravelAgencyIdValidator travelAgencyIdValidator_;
-        private readonly ICustomerIdValidator customerIdValidator_;
-        private readonly IFlightClassValidator flightClassValidator_;
-        private readonly INotEmptyStringValidator notEmptyStringValidator_;
 
         private readonly IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
@@ -44,6 +30,8 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             }
         }
 
+        public ObservableCollection<IFlight> RetrievedFlights { get; set; }
+
         private IFlight chosenFlight_;
         public IFlight ChosenFlight
         {
@@ -54,51 +42,224 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
                 RaisePropertyChanged();
             }
         }
-        public ObservableCollection<IFlight> RetrievedFlights { get; }
 
-        public IFlightData FlightArgs { get; }
-        public IDateRange FlightDateRange { get; }
-        public int MaxResults { get; set; }
-        public bool IsMaxResultsActive { get; set; }
+        private IFlightData flightArgs_;
+        public string AirlineIdForSearch
+        {
+            get => flightArgs_.AirlineId;
+            set
+            {
+                try
+                {
+                    flightArgs_.AirlineId = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
 
-        public IFlightBookingData FlightBookingArgs { get; }
+        private ISearchData searchData_;
+        public DateRangeOption FlightDateRangeOption
+        {
+            get => searchData_.FlightDateRange.Option;
+            set
+            {
+                try
+                {
+                    searchData_.FlightDateRange.Option = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public DateTime FlightDateEarlierDateTime
+        {
+            get => searchData_.FlightDateRange.EarlierDateTime;
+            set
+            {
+                try
+                {
+                    searchData_.FlightDateRange.EarlierDateTime = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public DateTime FlightDateLaterDateTime
+        {
+            get => searchData_.FlightDateRange.LaterDateTime;
+            set
+            {
+                try
+                {
+                    searchData_.FlightDateRange.LaterDateTime = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public int MaxResults
+        {
+            get => searchData_.MaxResults;
+            set
+            {
+                try
+                {
+                    searchData_.MaxResults = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public bool IsMaxResultsActive
+        {
+            get => searchData_.IsMaxResultsActive;
+            set
+            {
+                try
+                {
+                    searchData_.IsMaxResultsActive = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
 
-        public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs, IDateRange flightDateRange,
-            IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
-            ObservableCollection<IFlight> retrievedFlights, IOperationResultFactory operationResultFactory,
-            IAirlineIdValidator airlineIdValidator, IDateRangeValidator flightDateRangeValidator, IMaxResultsValidator maxResultsDateValidator,
-            ITravelAgencyIdValidator travelAgencyIdValidator, ICustomerIdValidator customerIdValidator, IFlightClassValidator flightClassValidator,
-            INotEmptyStringValidator notEmptyStringValidator)
+        private IFlightBookingData flightBookingArgs_;
+        public string AirlineIdForCreate
+        {
+            get => flightBookingArgs_.FlightData.AirlineId;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.FlightData.AirlineId = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public string TravelAgencyId
+        {
+            get => flightBookingArgs_.AgencyId;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.AgencyId = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public string FlightClass
+        {
+            get => flightBookingArgs_.Class;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.Class = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public string CustomerId
+        {
+            get => flightBookingArgs_.CustomerId;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.CustomerId = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public string PassagierName
+        {
+            get => flightBookingArgs_.PassagierName;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.PassagierName = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+        public bool IsReserved
+        {
+            get => flightBookingArgs_.Reserved;
+            set
+            {
+                try
+                {
+                    flightBookingArgs_.Reserved = value;
+                    RaisePropertyChanged();
+                }
+                catch (Exception e)
+                {
+                    OperationResult = operationResultFactory_.CreateException(e);
+                }
+            }
+        }
+
+        public FlightBookingCreateViewModelImpl(IFlightFactory flightFactory, IFlightData defaultFlightArgs,
+                                                IFlightBookingFactory flightBookingFactory, IFlightBookingData defaultFlightBookingArgs,
+                                                ISearchData searchData, IOperationResultFactory operationResultFactory)
         {
             flightFactory_ = flightFactory;
-            FlightArgs = defaultFlightArgs;
-            FlightDateRange = flightDateRange;
-            MaxResults = 0;
-            IsMaxResultsActive = false;
+            flightArgs_ = defaultFlightArgs;
 
             flightBookingFactory_ = flightBookingFactory;
-            FlightBookingArgs = defaultFlightBookingArgs;
+            flightBookingArgs_ = defaultFlightBookingArgs;
 
-            RetrievedFlights = retrievedFlights;
+            searchData_ = searchData;
 
             operationResultFactory_ = operationResultFactory;
-
-            airlineIdValidator_ = airlineIdValidator;
-            flightDateRangeValidator_ = flightDateRangeValidator;
-            maxResultsDateValidator_ = maxResultsDateValidator;
-
-            travelAgencyIdValidator_ = travelAgencyIdValidator;
-            customerIdValidator_ = customerIdValidator;
-            flightClassValidator_ = flightClassValidator;
-
-            notEmptyStringValidator_ = notEmptyStringValidator;
         }
 
         public void DoFlightSearch()
         {
             try
             {
-                ValidateSearchInput();
                 ExecuteFlightSearch();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
@@ -108,32 +269,9 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             }
         }
 
-        private void ValidateSearchInput()
-        {
-            ValidateAirlineId();
-            ValidateFlightDateRange();
-            ValidateMaxResults();
-        }
-
-        private void ValidateAirlineId()
-        {
-            airlineIdValidator_.IsValidElseThrowException(FlightArgs.AirlineId);
-        }
-
-        private void ValidateFlightDateRange()
-        {
-            flightDateRangeValidator_.LaterDateTime = FlightDateRange.LaterDateTime;
-            flightDateRangeValidator_.IsValidElseThrowException(FlightDateRange.EarlierDateTime);
-        }
-
-        private void ValidateMaxResults()
-        {
-            maxResultsDateValidator_.IsValidElseThrowException(MaxResults);
-        }
-
         private void ExecuteFlightSearch()
         {
-            IFlight[] flights = flightFactory_.Retrieve(FlightArgs, FlightDateRange, MaxResults, IsMaxResultsActive);
+            IFlight[] flights = flightFactory_.Retrieve(flightArgs_, searchData_);
             RetrievedFlights.Clear();
             foreach (var flight in flights)
             {
@@ -145,7 +283,6 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
         {
             try
             {
-                ValidateCreateInput();
                 ExecuteCreateFlightBooking();
                 OperationResult = operationResultFactory_.CreateSuccess();
             }
@@ -159,48 +296,17 @@ namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
             }
         }
 
-        private void ValidateCreateInput()
-        {
-            ValidateTravelAgencyId();
-            ValidateCustomerId();
-            ValidateClass();
-        }
-
-        private void ValidateTravelAgencyId()
-        {
-            notEmptyStringValidator_.PropertyName = "Reisebüro";
-            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.AgencyId);
-
-            travelAgencyIdValidator_.IsValidElseThrowException(FlightBookingArgs.AgencyId);
-        }
-
-        private void ValidateCustomerId()
-        {
-            notEmptyStringValidator_.PropertyName = "Kundennummer";
-            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.CustomerId);
-
-            customerIdValidator_.IsValidElseThrowException(FlightBookingArgs.CustomerId);
-        }
-
-        private void ValidateClass()
-        {
-            notEmptyStringValidator_.PropertyName = "Klasse";
-            notEmptyStringValidator_.IsValidElseThrowException(FlightBookingArgs.Class);
-
-            flightClassValidator_.IsValidElseThrowException(FlightBookingArgs.Class);
-        }
-
         private void ExecuteCreateFlightBooking()
         {
             UpdateFlightDataOfFlightBookingArgs();
-            flightBookingFactory_.Create(FlightBookingArgs);
+            flightBookingFactory_.Create(flightBookingArgs_);
         }
 
         private void UpdateFlightDataOfFlightBookingArgs()
         {
-            FlightBookingArgs.FlightData.AirlineId = ChosenFlight.FlightData.AirlineId;
-            FlightBookingArgs.FlightData.ConnectId = ChosenFlight.FlightData.ConnectId;
-            FlightBookingArgs.FlightData.Flightdate.DateString = ChosenFlight.FlightData.Flightdate.DateString;
+            flightBookingArgs_.FlightData.AirlineId = ChosenFlight.FlightData.AirlineId;
+            flightBookingArgs_.FlightData.ConnectId = ChosenFlight.FlightData.ConnectId;
+            flightBookingArgs_.FlightData.Flightdate.DateString = ChosenFlight.FlightData.Flightdate.DateString;
         }
     }
 }
