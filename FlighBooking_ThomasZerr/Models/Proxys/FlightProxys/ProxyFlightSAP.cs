@@ -1,63 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlighBooking_ThomasZerr.Flight;
+﻿using FlighBooking_ThomasZerr.Flight;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
-using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 {
-    class ProxyFlightSAP : IProxyFlight
+    class ProxyFlightSAP : ProxyFlight
     {
-        private Z_FLIGHT_MTClient sapClient_;
+        private readonly Z_FLIGHT_MTClient sapClient_;
 
-        public string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
-        public string Password { get => sapClient_.ClientCredentials.UserName.Password; set => sapClient_.ClientCredentials.UserName.Password = value; }
+        public override string Username { get => sapClient_.ClientCredentials.UserName.UserName; set => sapClient_.ClientCredentials.UserName.UserName = value; }
+        public override string Password { set => sapClient_.ClientCredentials.UserName.Password = value; }
 
         public ProxyFlightSAP()
         {
             sapClient_ = new Z_FLIGHT_MTClient();
         }
 
-        public ProxyFlightResponse GetList(IFlightData args)
+        public override IFlightData[] GetList(IFlightData args, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActive)
         {
-            var getListRequest = BuildGetListRequest(args);
+            var getListRequest = BuildGetListRequest(args, flightDateRangeArg, maxResultsArg, isMaxResultActive);
             var sapResponse = sapClient_.FlightGetList(getListRequest);
-            return BuildGetListResponse(sapResponse);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
+            return BuildGetListResponse(sapResponse.FlightList);
         }
 
-        private FlightGetList BuildGetListRequest(IFlightData args)
+        private FlightGetList BuildGetListRequest(IFlightData args, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActive)
         {
-            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(flightDateRangeArg) };
 
             return new FlightGetList
             {
                 Airline = args.AirlineId,
                 DateRange = flightDateRange,
-                MaxRows = args.MaxResults,
-                MaxRowsSpecified = args.IsMaxResultsActive
+                MaxRows = maxResultsArg,
+                MaxRowsSpecified = isMaxResultActive
             };
 
         }
 
-        private ProxyFlightResponse BuildGetListResponse(FlightGetListResponse sapResponse)
-        {
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-            IFlightData[] flightDatas = ConvertFlightListToFlightData(sapResponse.FlightList);
-
-            return new ProxyFlightResponse
-            {
-                ReturnCode = returnCode,
-                Message = message,
-                FlightDatas = flightDatas
-            };
-        }
-
-        private IFlightData[] ConvertFlightListToFlightData(Bapisfldat[] flightList)
+        private IFlightData[] BuildGetListResponse(Bapisfldat[] flightList)
         {
             IFlightData[] flightDatas = new IFlightData[flightList.Length];
 
@@ -81,7 +62,7 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightProxys
 
         private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
         {
-            string option = SAPConverter.ConvertDateRangeOptionToString(dateRange.Option);
+            string option = ConvertDateRangeOptionToString(dateRange.Option);
 
             Bapisfldra result = new Bapisfldra
             {

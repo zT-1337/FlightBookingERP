@@ -1,40 +1,34 @@
-﻿using System;
-using FlighBooking_ThomasZerr.FlightBookingReference;
+﻿using FlighBooking_ThomasZerr.FlightBookingReference;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
-using FlighBooking_ThomasZerr.Utils.SAP;
 
 namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
 {
-    class ProxyFlightBookingSAP : IProxyFlightBooking
+    class ProxyFlightBookingSAP : ProxyFlightBooking
     {
-        private Z_HH_FlightBooking_MT_01Client sapClient_;
-        private BapiServiceTransactionCommit sapTransactionCommit_;
+        private readonly Z_HH_FlightBooking_MT_01Client sapClient_;
 
-        public string Username
+        public override string Username
         {
             get => sapClient_.ClientCredentials.UserName.UserName;
             set { sapClient_.ClientCredentials.UserName.UserName = value; }
         }
 
-        public string Password
+        public override string Password
         {
-            get => sapClient_.ClientCredentials.UserName.Password;
             set { sapClient_.ClientCredentials.UserName.Password = value; }
         }
 
         public ProxyFlightBookingSAP()
         {
             sapClient_ = new Z_HH_FlightBooking_MT_01Client();
-            sapTransactionCommit_ = new BapiServiceTransactionCommit{WAIT = " "};
         }
 
-        public ProxyFlightBookingResponse Confirm(IFlightBookingData args)
+        public override void Confirm(IFlightBookingData args)
         {
             var confirmRequest = BuildConfirmRequest(args);
             FlightBookingConfirmResponse sapResponse = sapClient_.FlightBookingConfirm(confirmRequest);
-            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
-            return BuildConfirmResponse(sapResponse);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
         }
 
         private FlightBookingConfirm BuildConfirmRequest(IFlightBookingData args)
@@ -46,25 +40,11 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private ProxyFlightBookingResponse BuildConfirmResponse(FlightBookingConfirmResponse sapResponse)
-        {
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-            ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
-            {
-                ReturnCode = returnCode,
-                Message = message
-            };
-
-            return result;
-        }
-
-        public ProxyFlightBookingResponse Cancel(IFlightBookingData args)
+        public override void Cancel(IFlightBookingData args)
         {
             var cancelRequest = BuildCancelRequest(args);
             FlightBookingCancelResponse sapResponse = sapClient_.FlightBookingCancel(cancelRequest);
-            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
-            return BuildCancelResponse(sapResponse);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
         }
 
         private FlightBookingCancel BuildCancelRequest(IFlightBookingData args)
@@ -76,31 +56,18 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private ProxyFlightBookingResponse BuildCancelResponse(FlightBookingCancelResponse sapResponse)
-        {
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
-            ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
-            {
-                ReturnCode = returnCode,
-                Message = message
-            };
-
-            return result;
-        }
-
-        public ProxyFlightBookingResponse Create(IFlightBookingData args)
+        public override IFlightBookingData Create(IFlightBookingData args)
         {
             var createRequest = BuildCreateFromDataRequest(args);
             FlightBookingCreateFromDataResponse sapResponse = sapClient_.FlightBookingCreateFromData(createRequest);
-            sapClient_.BapiServiceTransactionCommit(sapTransactionCommit_);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
             return BuildCreateFromDataResponse(sapResponse);
         }
 
         private FlightBookingCreateFromData BuildCreateFromDataRequest(IFlightBookingData args)
         {
             Bapisbonew bookingData = ConvertFlightBookingDataToBapisbonew(args);
-            string reserved = SAPConverter.ConvertBoolToStringForSAP(args.Reserved);
+            string reserved = ConvertBoolToStringForSAP(args.Reserved);
 
             return new FlightBookingCreateFromData
             {
@@ -109,25 +76,16 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private ProxyFlightBookingResponse BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
+        private IFlightBookingData BuildCreateFromDataResponse(FlightBookingCreateFromDataResponse sapResponse)
         {
 
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            string message = sapResponse.Return[0].Message;
             IFlightBookingData flightBookingData = new FlightBookingDataSAP()
             {
                 BookingId = sapResponse.BookingNumber
             };
             flightBookingData.FlightData.AirlineId = sapResponse.AirlineID;
 
-            ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
-            {
-                ReturnCode = returnCode,
-                Message = message,
-                FlightBookingData = flightBookingData
-            };
-
-            return result;
+            return flightBookingData;
         }
 
         private Bapisbonew ConvertFlightBookingDataToBapisbonew(IFlightBookingData args)
@@ -145,22 +103,23 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        public ProxyFlightBookingResponse GetList(IFlightBookingData args)
+        public override IFlightBookingData[] GetList(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
         {
-            var getListRequest = BuildGetListRequest(args); 
+            var getListRequest = BuildGetListRequest(args, bookingDateRangeArg, flightDateRangeArg, maxResultsArg, isMaxResultActiveArg);
             FlightBookingGetListResponse sapResponse = sapClient_.FlightBookingGetList(getListRequest);
-            return BuildGetListResponse(sapResponse);
+            HandleIsError(TypeToReturnCode(sapResponse.Return[0].Type), sapResponse.Return[0].Message, sapResponse.Return[0].Number);
+            return BuildGetListResponse(sapResponse.BookingList);
         }
 
-        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args)
+        private FlightBookingGetList BuildGetListRequest(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg, int maxResultsArg, bool isMaxResultActiveArg)
         {
-            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(args.BookingDateRange) };
-            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(args.FlightDateRange) };
+            Bapisfldra[] bookingDateRange = { ConvertFromDateRangeToBapisfldra(bookingDateRangeArg) };
+            Bapisfldra[] flightDateRange = { ConvertFromDateRangeToBapisfldra(flightDateRangeArg) };
 
             return new FlightBookingGetList
             {
-                MaxRows = args.MaxResults,
-                MaxRowsSpecified = args.IsMaxResultsActive,
+                MaxRows = maxResultsArg,
+                MaxRowsSpecified = isMaxResultActiveArg,
                 Airline = args.FlightData.AirlineId,
                 TravelAgency = args.AgencyId,
                 CustomerNumber = args.CustomerId,
@@ -169,43 +128,11 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             };
         }
 
-        private ProxyFlightBookingResponse BuildGetListResponse(FlightBookingGetListResponse sapResponse)
-        {
-            ReturnCodeProxys returnCode = SAPConverter.TypeToReturnCode(sapResponse.Return[0].Type);
-            IFlightBookingData[] flightBookingDatas = ConvertBookingListToFlightBookingData(sapResponse.BookingList);
-            string message = sapResponse.Return[0].Message;
-
-            ProxyFlightBookingResponse result = new ProxyFlightBookingResponse
-            {
-                ReturnCode = returnCode,
-                FlightBookingDatas = flightBookingDatas,
-                Message = message,
-            };
-
-            return result;
-        }
-
-        private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
-        {
-            string option = SAPConverter.ConvertDateRangeOptionToString(dateRange.Option);
-
-            Bapisfldra result = new Bapisfldra
-            {
-                Sign = "I",
-                Option = option,
-                Low = dateRange.EarlierDate,
-                High = dateRange.LaterDate
-
-            };
-
-            return result;
-        }
-
-        private IFlightBookingData[] ConvertBookingListToFlightBookingData(Bapisbodat[] bookingList)
+        private IFlightBookingData[] BuildGetListResponse(Bapisbodat[] bookingList)
         {
             IFlightBookingData[] flightBookingDatas = new IFlightBookingData[bookingList.Length];
 
-            for(int i = 0; i < bookingList.Length; ++i)
+            for (int i = 0; i < bookingList.Length; ++i)
             {
                 var booking = bookingList[i];
                 var flightBookingData = new FlightBookingDataSAP()
@@ -215,8 +142,8 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
                     Class = booking.Class,
                     Counter = booking.Counter,
                     AgencyId = booking.Agencynum,
-                    Reserved = SAPConverter.ConvertStringOfSAPToBool(booking.Reserved),
-                    Cancelled = SAPConverter.ConvertStringOfSAPToBool(booking.Cancelled),
+                    Reserved = ConvertStringOfSAPToBool(booking.Reserved),
+                    Cancelled = ConvertStringOfSAPToBool(booking.Cancelled),
                     PassagierName = booking.Passname
                 };
                 flightBookingData.FlightData.AirlineId = booking.Airlineid;
@@ -228,6 +155,22 @@ namespace FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys
             }
 
             return flightBookingDatas;
+        }
+
+        private Bapisfldra ConvertFromDateRangeToBapisfldra(IDateRange dateRange)
+        {
+            string option = ConvertDateRangeOptionToString(dateRange.Option);
+
+            Bapisfldra result = new Bapisfldra
+            {
+                Sign = "I",
+                Option = option,
+                Low = dateRange.EarlierDate,
+                High = dateRange.LaterDate
+
+            };
+
+            return result;
         }
     }
 }

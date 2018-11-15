@@ -1,5 +1,4 @@
-﻿using FlighBooking_ThomasZerr.Models.DateRanges;
-using FlighBooking_ThomasZerr.Models.Dates;
+﻿using FlighBooking_ThomasZerr.Models.Dates;
 using FlighBooking_ThomasZerr.Models.Flights.FlightDatas;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
@@ -17,11 +16,5 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         bool Reserved { get; set; }
         bool Cancelled { get; set; }
         bool Confirmed { get; set; }
-
-        IDateRange BookingDateRange { get; }
-        IDateRange FlightDateRange { get; }
-
-        int MaxResults { get; set; }
-        bool IsMaxResultsActive { get; set; }
     }
 }

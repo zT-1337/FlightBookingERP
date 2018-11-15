@@ -1,48 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
-using FlighBooking_ThomasZerr.Models.Proxys;
 using FlighBooking_ThomasZerr.Models.Proxys.FlightBookingProxys;
 
 namespace FlighBooking_ThomasZerr.Models.FlightBookings.Factorys
 {
     class FlightBookingFactoryImpl : IFlightBookingFactory
     {
-        private IProxyFlightBooking proxyFlightBooking_;
+        private readonly ProxyFlightBooking proxyFlightBooking_;
 
-        public FlightBookingFactoryImpl(IProxyFlightBooking proxyFlightBooking)
+        public FlightBookingFactoryImpl(ProxyFlightBooking proxyFlightBooking)
         {
             proxyFlightBooking_ = proxyFlightBooking;
         }
 
         public IFlightBooking Create(IFlightBookingData args)
         {
-            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.Create(args);
+            IFlightBookingData flightBookingData = proxyFlightBooking_.Create(args);
 
-            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
-
-            args.FlightData.AirlineId = proxyResponse.FlightBookingData.FlightData.AirlineId;
-            args.BookingId = proxyResponse.FlightBookingData.BookingId;
+            args.FlightData.AirlineId = flightBookingData.FlightData.AirlineId;
+            args.BookingId = flightBookingData.BookingId;
             return new FlightBookingImpl(proxyFlightBooking_, args);
         }
 
-        private void HandleIsError(ReturnCodeProxys returnCode, string message)
+        public IFlightBooking[] Retrieve(IFlightBookingData args, IDateRange bookingDateRangeArg, IDateRange flightDateRangeArg,
+                                        int maxResultsArg, bool isMaxResultActiveArg)
         {
-            if (returnCode == ReturnCodeProxys.Error || returnCode == ReturnCodeProxys.Abort)
-                throw new InvalidOperationException(message);
-        }
+            IFlightBookingData[] flightBookingDatas = proxyFlightBooking_.GetList(args, bookingDateRangeArg, flightDateRangeArg, maxResultsArg, isMaxResultActiveArg);
 
-        public IFlightBooking[] Retrieve(IFlightBookingData args)
-        {
-            ProxyFlightBookingResponse proxyResponse = proxyFlightBooking_.GetList(args);
-
-            HandleIsError(proxyResponse.ReturnCode, proxyResponse.Message);
-
-            IFlightBooking[] flightBookings = new IFlightBooking[proxyResponse.FlightBookingDatas.Length];
+            IFlightBooking[] flightBookings = new IFlightBooking[flightBookingDatas.Length];
             for (int i = 0; i < flightBookings.Length; ++i)
             {
-                flightBookings[i] = new FlightBookingImpl(proxyFlightBooking_, proxyResponse.FlightBookingDatas[i]);
+                flightBookings[i] = new FlightBookingImpl(proxyFlightBooking_, flightBookingDatas[i]);
             }
 
             return flightBookings;

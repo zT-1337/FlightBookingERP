@@ -5,7 +5,7 @@ namespace FlighBooking_ThomasZerr.Models.DateRanges
 {
     class DateRangeImpl : IDateRange
     {
-        private IDateConverter dateConverter_;
+        private readonly IDateConverter dateConverter_;
 
         public DateTime EarlierDateTime { get; set; }
         public string EarlierDate

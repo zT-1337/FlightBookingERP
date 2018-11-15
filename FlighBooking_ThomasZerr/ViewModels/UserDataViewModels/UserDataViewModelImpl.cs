@@ -10,7 +10,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
         public string Username { get; set; }
         public string Password { get; set; }
 
-        private IOperationResultFactory operationResultFactory_;
+        private readonly IOperationResultFactory operationResultFactory_;
         private IOperationResult operationResult_;
         public IOperationResult OperationResult
         {
@@ -24,7 +24,7 @@ namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
 
         public UserDataViewModelImpl()
         {
-            operationResultFactory_ = new OperationResultFactoryLogin();
+            operationResultFactory_ = new OperationResultFactoryImpl();
         }
 
         public bool IsLoginValid()

@@ -5,7 +5,7 @@ namespace FlighBooking_ThomasZerr.Models.Dates
 {
     class DateImpl : IDate
     {
-        private IDateConverter dateConverter_;
+        private readonly IDateConverter dateConverter_;
 
         public DateTime Date { get; set; }
         public string DateString
