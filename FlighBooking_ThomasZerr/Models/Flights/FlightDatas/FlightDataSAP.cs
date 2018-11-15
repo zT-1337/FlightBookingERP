@@ -6,14 +6,14 @@ namespace FlighBooking_ThomasZerr.Models.Flights.FlightDatas
 {
     class FlightDataSAP : IFlightData
     {
-        private int maxAirlineIdLength_ = 8;
+        private int maxAirlineIdLength_ = 3;
         private string airlineId_;
         public string AirlineId
         {
             get => airlineId_;
             set
             {
-                if (airlineId_.Length > maxAirlineIdLength_)
+                if (value.Length > maxAirlineIdLength_)
                     throw new Exception("Fluggesellschaft darf maximal aus drei Zeichen bestehen");
 
                 airlineId_ = value;

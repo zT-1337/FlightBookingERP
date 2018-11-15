@@ -93,7 +93,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Mode=OneWayToSource, Path=AirlineIdForSearch, UpdateSourceTrigger=PropertyChanged}"
+                Text="{Binding Mode=TwoWay, Path=AirlineIdForSearch, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="{StaticResource AirlineIdToolTip}" />
             <Label
                 Grid.Row="1"

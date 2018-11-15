@@ -19,10 +19,10 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
             get => customerId_;
             set
             {
-                if (customerId_.Length > maxLenghtCustomerId_)
+                if (value.Length > maxLenghtCustomerId_)
                     throw new Exception("Kundennummer darf nur maximal 8 Ziffern lang sein");
 
-                if (!Regex.IsMatch(customerId_, "^[0-9]*$"))
+                if (!Regex.IsMatch(value, "^[0-9]*$"))
                     throw new Exception("Kundennummer darf nur Ziffern enthalten");
 
                 customerId_ = value;
@@ -49,7 +49,13 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
             get => class_;
             set
             {
-                if (!IsFlightClass(class_))
+                if (value.Length == 0)
+                {
+                    class_ = value;
+                    return;
+                }
+
+                if (!IsFlightClass(value))
                     throw new Exception($"Flugklasse muss einen dieser Werte haben: {ListOfFlightClasses_}");
 
                 class_ = value;
@@ -66,10 +72,10 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
             get => agencyId_;
             set
             {
-                if (agencyId_.Length > maxLengthAgencyId_)
+                if (value.Length > maxLengthAgencyId_)
                     throw new Exception("Reisebüro darf nur maximal 8 Ziffern lang sein");
 
-                if (!Regex.IsMatch(agencyId_, "^[0-9]*$"))
+                if (!Regex.IsMatch(value, "^[0-9]*$"))
                     throw new Exception("Reisebüro darf nur Ziffern enthalten");
 
                 agencyId_ = value;

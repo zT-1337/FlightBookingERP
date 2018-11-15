@@ -103,8 +103,9 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingCreateWindows.Factorys
 
             IDateRange flightDateRange = new DateRangeImpl(dateConverter);
             flightDateRange.Option = DateRangeOption.Between;
-            flightDateRange.EarlierDateTime = DateTime.Now;
-            flightDateRange.LaterDateTime = DateTime.Now;
+            var now = DateTime.Now;
+            flightDateRange.LaterDateTime = now;
+            flightDateRange.EarlierDateTime = now;
 
             ISearchData searchData = new SearchDataSAP
             {

@@ -44,7 +44,7 @@
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding AirlineId, Mode=OneWayToSource}" />
+                Text="{Binding AirlineId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
@@ -52,7 +52,7 @@
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding TravelAgencyId, Mode=OneWayToSource}" />
+                Text="{Binding TravelAgencyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
@@ -60,7 +60,7 @@
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding CustomerId, Mode=OneWayToSource}" />
+                Text="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
@@ -116,12 +116,12 @@
             <TextBox
                 Grid.Row="9"
                 Grid.Column="1"
-                Text="{Binding MaxResults, Mode=TwoWay}" />
+                Text="{Binding MaxResults, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <CheckBox
                 Grid.Row="10"
                 Grid.Column="1"
                 Content="Anzahl limitieren"
-                IsChecked="{Binding IsMaxResultsActive, Mode=TwoWay}" />
+                IsChecked="{Binding IsMaxResultsActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <Button
                 Grid.Row="11"
                 Grid.Column="1"

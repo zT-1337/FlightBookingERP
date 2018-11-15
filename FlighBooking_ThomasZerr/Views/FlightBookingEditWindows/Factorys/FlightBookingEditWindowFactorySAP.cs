@@ -73,16 +73,17 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
         private ISearchData CreateSearchData()
         {
             IDateConverter dateConverter = new DateConverterSAP();
+            var now = DateTime.Now;
 
             IDateRange flightDateRange = new DateRangeImpl(dateConverter);
             flightDateRange.Option = DateRangeOption.Between;
-            flightDateRange.EarlierDateTime = DateTime.Now;
-            flightDateRange.LaterDateTime = DateTime.Now;
+            flightDateRange.LaterDateTime = now;
+            flightDateRange.EarlierDateTime = now;
 
             IDateRange bookingDateRange = new DateRangeImpl(dateConverter);
             bookingDateRange.Option = DateRangeOption.Between;
-            bookingDateRange.EarlierDateTime = DateTime.Now;
-            bookingDateRange.LaterDateTime = DateTime.Now;
+            bookingDateRange.LaterDateTime = now;
+            bookingDateRange.EarlierDateTime = now;
 
             ISearchData searchData = new SearchDataSAP
             {

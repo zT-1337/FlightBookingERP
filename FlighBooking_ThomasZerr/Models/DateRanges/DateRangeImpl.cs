@@ -32,7 +32,7 @@ namespace FlighBooking_ThomasZerr.Models.DateRanges
             get => laterDateTime_;
             set
             {
-                if(DateTime.Compare(EarlierDateTime, value) < 0)
+                if(DateTime.Compare(EarlierDateTime, value) > 0)
                     throw new Exception("Startdatum darf nicht nach dem Enddatum liegen");
 
                 laterDateTime_ = value;
