@@ -9,21 +9,67 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <ToolTip x:Key="TravelAgencyId">
+            <StackPanel>
+                <TextBlock>
+                    Id des Reisebüros, über den der Flug gebucht wurde.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Darf nur aus Ziffern bestehen und maximal acht Zeichen lang sein.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="FlightClass">
+            <StackPanel>
+                <TextBlock>
+                    Klasse für die der Flug gebucht wurde.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Muss den Wert C, Y oder F haben.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="CustomerId">
+            <StackPanel>
+                <TextBlock>
+                    Die Kundennummer vom Reisebüro für diese Flug buchung.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Darf nur aus Ziffern bestehen und maximal acht Zeichen lang sein.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="PassagierName">
+            <StackPanel>
+                <TextBlock>
+                    Name des Passagiers für den Flug.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="Reserve">
+            <StackPanel>
+                <TextBlock>
+                    Flugbuchung zunächst nur Reservieren.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+    </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="17*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26*" />
+                <RowDefinition Height="26" />
+                <RowDefinition Height="23*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -59,7 +105,7 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Content="Währung" />
+                Content="Währung:" />
             <TextBox
                 Grid.Row="3"
                 Grid.Column="1"
@@ -68,7 +114,7 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Content="Preis" />
+                Content="Preis:" />
             <TextBox
                 Grid.Row="4"
                 Grid.Column="1"
@@ -77,39 +123,48 @@
             <Label
                 Grid.Row="6"
                 Grid.Column="0"
-                Content="Reisebüro" />
+                Content="Reisebüro: *"
+                ToolTip="{StaticResource TravelAgencyId}" />
             <TextBox
                 Grid.Row="6"
                 Grid.Column="1"
-                Text="{Binding TravelAgencyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding TravelAgencyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource TravelAgencyId}" />
             <Label
                 Grid.Row="7"
                 Grid.Column="0"
-                Content="Klasse" />
+                Content="Klasse: *"
+                ToolTip="{StaticResource FlightClass}" />
             <TextBox
                 Grid.Row="7"
                 Grid.Column="1"
-                Text="{Binding FlightClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding FlightClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource FlightClass}" />
             <Label
                 Grid.Row="8"
                 Grid.Column="0"
-                Content="Kundennummer" />
+                Content="Kundennummer: *"
+                ToolTip="{StaticResource CustomerId}" />
             <TextBox
                 Grid.Row="8"
                 Grid.Column="1"
-                Text="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource CustomerId}" />
             <Label
                 Grid.Row="9"
                 Grid.Column="0"
-                Content="Passagiername" />
+                Content="Passagiername:"
+                ToolTip="{StaticResource PassagierName}" />
             <TextBox
                 Grid.Row="9"
                 Grid.Column="1"
-                Text="{Binding PassagierName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding PassagierName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource PassagierName}" />
             <Label
                 Grid.Row="10"
                 Grid.Column="0"
-                Content="Nur Reservieren" />
+                Content="Nur Reservieren"
+                ToolTip="{StaticResource Reserve}" />
             <CheckBox
                 Grid.Row="10"
                 Grid.Column="1"
