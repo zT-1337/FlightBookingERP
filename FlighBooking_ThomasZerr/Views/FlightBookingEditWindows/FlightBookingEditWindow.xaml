@@ -17,6 +17,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -24,13 +25,33 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <components:FlightBookingSearch Grid.Row="0" Grid.Column="0" />
-        <components:FlightBookingChoosen Grid.Row="0" Grid.Column="1" />
-        <TextBox
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Flugbuchung suchen: " />
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Flugbuchung bearbeiten" />
+        <components:FlightBookingSearch
             Grid.Row="1"
+            Grid.Column="0"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1" />
+        <components:FlightBookingChoosen
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5"
+            BorderBrush="Black"
+            BorderThickness="1" />
+        <TextBox
+            Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="{Binding OperationResult.ReturnCode, Converter={StaticResource ReturnCodeToColorConverter}, Mode=OneWay}"
+            BorderBrush="Black"
+            BorderThickness="1"
             IsReadOnly="True"
             Text="{Binding OperationResult.Message, Mode=OneWay}" />
     </Grid>

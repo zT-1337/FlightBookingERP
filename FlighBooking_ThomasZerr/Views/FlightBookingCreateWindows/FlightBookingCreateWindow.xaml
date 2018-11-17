@@ -28,11 +28,11 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Content="Flugbuchung suchen:" />
+            Content="Flug suchen:" />
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Content="Flugbuchung bearbeiten:" />
+            Content="Flugbuchung erstellen:" />
         <components:FlightSearch
             Grid.Row="1"
             Grid.Column="0"

@@ -15,6 +15,84 @@
         <Utils:EnumBooleanConverter x:Key="EnumBooleanConverter" />
         <dateRanges:DateRangeOption x:Key="Between">Between</dateRanges:DateRangeOption>
         <dateRanges:DateRangeOption x:Key="NotBetween">NotBetween</dateRanges:DateRangeOption>
+        <ToolTip x:Key="TravelAgencyId">
+            <StackPanel>
+                <TextBlock>
+                    Id des Reisebüros, über den der Flug gebucht wurde.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Darf nur aus Ziffern bestehen und maximal acht Zeichen lang sein.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="CustomerId">
+            <StackPanel>
+                <TextBlock>
+                    Die Kundennummer vom Reisebüro für diese Flug buchung.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Darf nur aus Ziffern bestehen und maximal acht Zeichen lang sein.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="AirlineId">
+            <StackPanel>
+                <TextBlock>
+                    Id der Fluggesellschaft. Beispiel: Lufthansa -&gt; LH
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Darf maximal drei Zeichen lang sein
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="Include">
+            <StackPanel>
+                <TextBlock>
+                    Alle Flüge innerhalb vom Start- und Enddatum werden zurück geliefert
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="Exclude">
+            <StackPanel>
+                <TextBlock>
+                    Alle Flüge außerhalb vom Start- und Enddatum werden zurück geliefert
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="Startdate">
+            <StackPanel>
+                <TextBlock Foreground="Red">
+                    Muss ein gültiges Datum enthalten (DD.MM.YYYY), darf nicht leer sein und darf nicht nach dem Enddatum liegen
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="Enddate">
+            <StackPanel>
+                <TextBlock Foreground="Red">
+                    Muss ein gültiges Datum enthalten (DD.MM.YYYY), darf nicht leer sein und darf nicht vor dem Startdatum liegen
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="SearchResults">
+            <StackPanel>
+                <TextBlock>
+                    Anzahl der Flugbuchungen die maximal angezeigt werden sollen. Falls 0 werden alle Ergebnisse angezeigt.
+                </TextBlock>
+                <TextBlock Foreground="Red">
+                    Muss eine positive ganze Zahl sein.
+                </TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="FlightDateLabel">
+            <StackPanel>
+                <TextBlock>Definiert Flugzeitraum nachdem die Flüge gefilter werden sollen.</TextBlock>
+            </StackPanel>
+        </ToolTip>
+        <ToolTip x:Key="BookingDateLabel">
+            <StackPanel>
+                <TextBlock>Definiert Buchungszeitraum nachdem die Flüge gefilter werden sollen.</TextBlock>
+            </StackPanel>
+        </ToolTip>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
@@ -40,83 +118,109 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                Content="Fluggesellschaft:" />
+                Content="Fluggesellschaft:"
+                ToolTip="{StaticResource AirlineId}" />
             <TextBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding AirlineId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding AirlineId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource AirlineId}" />
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                Content="Reisebüro:" />
+                Content="Reisebüro:"
+                ToolTip="{StaticResource TravelAgencyId}" />
             <TextBox
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding TravelAgencyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding TravelAgencyId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource TravelAgencyId}" />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Content="Kundennummer:" />
+                Content="Kundennummer:"
+                ToolTip="{StaticResource CustomerId}" />
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource CustomerId}" />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Content="Buchungsdatum:" />
+                Content="Buchungsdatum:"
+                ToolTip="{StaticResource BookingDateLabel}" />
             <DockPanel Grid.Row="3" Grid.Column="1">
                 <RadioButton
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
+                    ToolTip="{StaticResource Include}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionBuchungsdatum"
-                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding BookingDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
+                    ToolTip="{StaticResource Exclude}" />
             </DockPanel>
             <DockPanel Grid.Row="4" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateEarlierDateTime, Mode=TwoWay}" />
+                <DatePicker
+                    DockPanel.Dock="Right"
+                    SelectedDate="{Binding BookingDateEarlierDateTime, Mode=TwoWay}"
+                    ToolTip="{StaticResource Startdate}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="5" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding BookingDateLaterDateTime, Mode=TwoWay}" />
+                <DatePicker
+                    DockPanel.Dock="Right"
+                    SelectedDate="{Binding BookingDateLaterDateTime, Mode=TwoWay}"
+                    ToolTip="{StaticResource Enddate}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label
                 Grid.Row="6"
                 Grid.Column="0"
-                Content="Flugdatum:" />
+                Content="Flugdatum:"
+                ToolTip="{StaticResource FlightDateLabel}" />
             <DockPanel Grid.Row="6" Grid.Column="1">
                 <RadioButton
                     Content="Einschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource Between}, Mode=TwoWay}"
+                    ToolTip="{StaticResource Include}" />
                 <RadioButton
                     Content="Ausschließen"
                     DockPanel.Dock="Top"
                     GroupName="OptionFlugdatum"
-                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}" />
+                    IsChecked="{Binding FlightDateRangeOption, Converter={StaticResource EnumBooleanConverter}, ConverterParameter={StaticResource NotBetween}, Mode=TwoWay}"
+                    ToolTip="{StaticResource Exclude}" />
             </DockPanel>
             <DockPanel Grid.Row="7" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateEarlierDateTime, Mode=TwoWay}" />
+                <DatePicker
+                    DockPanel.Dock="Right"
+                    SelectedDate="{Binding FlightDateEarlierDateTime, Mode=TwoWay}"
+                    ToolTip="{StaticResource Startdate}" />
                 <Label Content="Startdatum" DockPanel.Dock="Right" />
             </DockPanel>
             <DockPanel Grid.Row="8" Grid.Column="1">
-                <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding FlightDateLaterDateTime, Mode=TwoWay}" />
+                <DatePicker
+                    DockPanel.Dock="Right"
+                    SelectedDate="{Binding FlightDateLaterDateTime, Mode=TwoWay}"
+                    ToolTip="{StaticResource Enddate}" />
                 <Label Content="Enddatum" DockPanel.Dock="Right" />
             </DockPanel>
             <Label
                 Grid.Row="9"
                 Grid.Column="0"
-                Content="Anzahl Suchergebnisse: " />
+                Content="Anzahl Suchergebnisse: "
+                ToolTip="{StaticResource SearchResults}" />
             <TextBox
                 Grid.Row="9"
                 Grid.Column="1"
-                Text="{Binding MaxResults, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding MaxResults, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{StaticResource SearchResults}" />
             <CheckBox
                 Grid.Row="10"
                 Grid.Column="1"
