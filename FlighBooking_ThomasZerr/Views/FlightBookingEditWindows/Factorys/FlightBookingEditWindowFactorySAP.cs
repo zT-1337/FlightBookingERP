@@ -85,10 +85,8 @@ namespace FlighBooking_ThomasZerr.Views.FlightBookingEditWindows.Factorys
             bookingDateRange.LaterDateTime = now;
             bookingDateRange.EarlierDateTime = now;
 
-            ISearchData searchData = new SearchDataSAP
+            ISearchData searchData = new SearchDataImpl(flightDateRange, bookingDateRange)
             {
-                BookingDateRange = bookingDateRange,
-                FlightDateRange = flightDateRange,
                 MaxResults = 0,
                 IsMaxResultsActive = false
             };

@@ -4,8 +4,8 @@ namespace FlighBooking_ThomasZerr.Models.SearchDatas
 {
     public interface ISearchData
     {
-        IDateRange FlightDateRange { get; set; }
-        IDateRange BookingDateRange { get; set; }
+        IDateRange FlightDateRange { get; }
+        IDateRange BookingDateRange { get; }
         int MaxResults { get; set; }
         bool IsMaxResultsActive { get; set; }
     }

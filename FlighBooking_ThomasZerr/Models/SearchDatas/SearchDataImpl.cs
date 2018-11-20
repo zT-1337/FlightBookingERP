@@ -7,10 +7,10 @@ using FlighBooking_ThomasZerr.Models.DateRanges;
 
 namespace FlighBooking_ThomasZerr.Models.SearchDatas
 {
-    class SearchDataSAP : ISearchData
+    class SearchDataImpl : ISearchData
     {
-        public IDateRange FlightDateRange { get; set; }
-        public IDateRange BookingDateRange { get; set; }
+        public IDateRange FlightDateRange { get; }
+        public IDateRange BookingDateRange { get; }
 
         private int maxResults_;
         public int MaxResults
@@ -26,5 +26,11 @@ namespace FlighBooking_ThomasZerr.Models.SearchDatas
         }
 
         public bool IsMaxResultsActive { get; set; }
+
+        public SearchDataImpl(IDateRange flightDateRange, IDateRange bookingDateRange)
+        {
+            FlightDateRange = flightDateRange;
+            BookingDateRange = bookingDateRange;
+        }
     }
 }
