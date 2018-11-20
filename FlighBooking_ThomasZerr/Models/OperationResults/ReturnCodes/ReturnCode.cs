@@ -1,5 +1,5 @@
 ﻿
-namespace FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes
+namespace FlighBooking_ThomasZerr.Models.OperationResults.ReturnCodes
 {
     public enum ReturnCode
     {

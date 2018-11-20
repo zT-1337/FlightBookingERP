@@ -1,7 +1,7 @@
 ﻿using System;
-using FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes;
+using FlighBooking_ThomasZerr.Models.OperationResults.ReturnCodes;
 
-namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
+namespace FlighBooking_ThomasZerr.Models.OperationResults.Factory
 {
     class OperationResultFactoryImpl : IOperationResultFactory
     {

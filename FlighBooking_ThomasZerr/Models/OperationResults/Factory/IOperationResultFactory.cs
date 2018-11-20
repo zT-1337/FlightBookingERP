@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FlighBooking_ThomasZerr.Models.OperationResult.Factory
+namespace FlighBooking_ThomasZerr.Models.OperationResults.Factory
 {
     interface IOperationResultFactory
     {

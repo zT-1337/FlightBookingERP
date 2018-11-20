@@ -1,6 +1,6 @@
 ﻿using System;
-using FlighBooking_ThomasZerr.Models.OperationResult;
-using FlighBooking_ThomasZerr.Models.OperationResult.Factory;
+using FlighBooking_ThomasZerr.Models.OperationResults;
+using FlighBooking_ThomasZerr.Models.OperationResults.Factory;
 using FlighBooking_ThomasZerr.Utils;
 
 namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels

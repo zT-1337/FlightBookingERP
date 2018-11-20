@@ -1,6 +1,6 @@
-﻿using FlighBooking_ThomasZerr.Models.OperationResult.ReturnCodes;
+﻿using FlighBooking_ThomasZerr.Models.OperationResults.ReturnCodes;
 
-namespace FlighBooking_ThomasZerr.Models.OperationResult
+namespace FlighBooking_ThomasZerr.Models.OperationResults
 {
     class OperationResultImpl : IOperationResult
     {

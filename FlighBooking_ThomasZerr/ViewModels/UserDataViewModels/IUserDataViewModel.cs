@@ -1,4 +1,4 @@
-﻿using FlighBooking_ThomasZerr.Models.OperationResult;
+﻿using FlighBooking_ThomasZerr.Models.OperationResults;
 
 namespace FlighBooking_ThomasZerr.ViewModels.UserDataViewModels
 {

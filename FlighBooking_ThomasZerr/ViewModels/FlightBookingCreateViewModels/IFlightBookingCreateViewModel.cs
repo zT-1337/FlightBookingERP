@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using FlighBooking_ThomasZerr.Models.DateRanges;
 using FlighBooking_ThomasZerr.Models.Flights;
-using FlighBooking_ThomasZerr.Models.OperationResult;
+using FlighBooking_ThomasZerr.Models.OperationResults;
 
 namespace FlighBooking_ThomasZerr.ViewModels.FlightBookingCreateViewModels
 {
