@@ -5,7 +5,7 @@ using FlighBooking_ThomasZerr.Models.FlightBookings;
 using FlighBooking_ThomasZerr.Models.FlightBookings.Factorys;
 using FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas;
 using FlighBooking_ThomasZerr.Models.OperationResults;
-using FlighBooking_ThomasZerr.Models.OperationResults.Factory;
+using FlighBooking_ThomasZerr.Models.OperationResults.Factorys;
 using FlighBooking_ThomasZerr.Models.SearchDatas;
 using FlighBooking_ThomasZerr.Utils;
 
