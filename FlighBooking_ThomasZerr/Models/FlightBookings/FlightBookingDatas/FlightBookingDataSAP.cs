@@ -30,7 +30,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
         }
 
         private string[] flightClasses_;
-        private string listOfFlightClasses_
+        private string listOfFlightClassesAsString_
         {
             get
             {
@@ -56,7 +56,7 @@ namespace FlighBooking_ThomasZerr.Models.FlightBookings.FlightBookingDatas
                 }
 
                 if (!IsFlightClass(value))
-                    throw new Exception($"Flugklasse muss einen dieser Werte haben: {listOfFlightClasses_}");
+                    throw new Exception($"Flugklasse muss einen dieser Werte haben: {listOfFlightClassesAsString_}");
 
                 class_ = value;
             }
